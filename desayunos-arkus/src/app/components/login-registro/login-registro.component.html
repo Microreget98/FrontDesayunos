@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>desayunos</title>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.css'>
+  <link rel="stylesheet" href="./login-registro.component.scss">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+</head> 
+<body>  
+<!-- Registro y login -->
+<div class="container">
+
+  
+  <div class="tab-wrap">
+
+    
+<!-- la pestaña activa en la carga de la página obtiene el atributo marcado -->
+    <input type="radio" id="tab1" name="tabGrupo1" class="tab" checked>
+    <label for="tab1">Inicio De Sesión</label>
+
+
+    <input type="radio" id="tab2" name="tabGrupo1" class="tab">
+    <label for="tab2">Registro</label>
+      
+      <!-- Login -->
+      <div class="contenido_tab">
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Correo</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="arkus@example.com">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+          </div>
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+      </div>
+  
+      <!-- Registro -->
+      <div class="contenido_tab">
+        <form>
+          <div class="form-group">
+            <label for="InputName">Nombre</label>
+            <input type="text" class="form-control" id="InputName" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="InputUsername">Apellido</label>
+            <input type="text" class="form-control" id="InputUsername" placeholder="Apellido">
+          </div>
+      
+          <div class="form-group">
+            <label for="InputFecha">Fecha de Nacimiento</label><br>
+            <input type="text" id="dia" placeholder="DD"/>
+               
+            <input type="text" id="mes" placeholder="MM"/>
+        
+            <input type="text" id="año" placeholder="AAAA"/>
+          </div>
+
+          <div class="form-group">
+            <label for="sel1">Sede</label>
+            <select class="form-control" id="sede">
+              <option>Selecciona tu Ubicación</option>
+              <option>Monterrey</option>
+            </select>
+                    
+          </div>
+      
+          <div class="form-group">
+            <label for="exampleFormControlInput2">Correo</label>
+            <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="arkus@example.com">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword2">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Contraseña">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPasswordVer">Confirmar Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPasswordVer" placeholder="Contraseña">
+          </div>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+      </div>
+
+
+
+  </div>
+
+
+
+</div>
+
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script src='https://cdn.jsdelivr.net/sweetalert2/5.3.5/sweetalert2.js'></script><script  src="./inicio-sesion.component.js"></script>
+</body>
+</html>
