@@ -6,9 +6,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
 </head>
 <body>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg></button>
+        
+        </div>
+        
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="100" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Bienvendido</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+                <div class="perfilpos">
+                    <div class="perfil">A</div>
+                </div>
+        
+        
+        
+                    <form class="panel ">
+                    
+                    <input type="text"  value="Jose Andres Morales Reyes" [disabled]="editname" class="usuario">
+                    <input (click)="enablebutton()" type="button" value="Lapizito" class="usuario" id="btnusername">
+        
+                    <input type="text" value=" Monterrey, Nuevo Leon" [disabled]="editdob" class="usuario">
+                    
+                    <svg (click)="enablebutton1()" type="button" value="Lapizito"  xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="usuario" id="btnusername" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+        
+                    <input type="text" value="15/03/2001" disabled class="usuario" >
+        
+        
+                </form>  
+               
+          </div>
+        </div>
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">First name</label>
+              <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+            </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Submit form</button>
+          </div>  
+        </form>
     <!--
     <nav class="nave">
         
@@ -16,40 +67,9 @@
 
     </nav>
 
-    <div class="perfilpos">
-        <div class="perfil">A</div>
-    </div>
-
-
-
-        <form class="panel ">
-            
-            <input type="text"  value="Jose Andres Morales Reyes" [disabled]="editname" class="usuario">
-            <input (click)="enablebutton()" type="button" value="Lapizito" class="usuario" id="btnusername">
-
-            <input type="text" value=" Monterrey, Nuevo Leon" [disabled]="editdob" class="usuario">
-            
-            <svg (click)="enablebutton1()" type="button" value="Lapizito"  xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="usuario" id="btnusername" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-              </svg>
-
-            <input type="text" value="15/03/2001" disabled class="usuario" >
-
-
-        </form>  
+    
     -->
-    <mat-sidenav-container
-    class="example-container" (backdropClick)="close('backdrop')" *ngIf="shouldRun">
-  <mat-sidenav #sidenav (keydown.escape)="close('escape')" disableClose>
-    <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.open()">Open</button></p>
-    <p>Closed due to: {{reason}}</p>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+ 
 
      
 </body>
