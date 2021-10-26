@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import './app/evo-calendar.min.css';
+@import './app/evo-calendar.orange-coral.min.css';
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+}

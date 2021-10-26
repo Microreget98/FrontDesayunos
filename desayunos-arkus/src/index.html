@@ -1,24 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>DesayunosArkus</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root>
-  </app-root>
+  <head>
+    <meta charset="utf-8" />
+    <title>DesayunosArkus</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    />
+  </head>
+  <body>
+    <app-root> </app-root>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
     <script>
       // initialize your calendar, once the page's DOM is ready
-      $(document).ready(function($) {
-          $('#calendar').evoCalendar({
-            
-          })
-      })
-      </script>
-</body>
+      $(document).ready(function ($) {
+        $("#calendar").evoCalendar({
+          theme: "Orange Coral",
+          firstDayOfWeek: 1,
+          language: "es",
+          todayHighlight: true,
+          // sidebarDisplayDefault: false,
+          // sidebarToggler: false,
+
+          calendarEvents: [
+            {
+              id: 'bHay68s', // Event's ID (required)
+              name: "Ivan Garcia", // Event name (required)
+              date: "October/26/2021", // Event date (required)
+              type: "holiday", // Event type 'birthday, event, holiday' (required)
+              description: "Aqui puede ir el puesto del empleado"
+            }
+          ],
+        });
+      });
+    </script>
+  </body>
 </html>
