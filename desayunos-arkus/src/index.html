@@ -12,24 +12,5 @@
   </head>
   <body>
     <app-root></app-root>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="./assets/evo-calendar.js"></script>
-    <script>
-      // initialize your calendar, once the page's DOM is ready
-      $(document).ready(function ($) {
-        $("#calendar").evoCalendar({
-          firstDayOfWeek: 1,
-          language: "es",
-          calendarEvents: [
-            {
-              id: "bHay68s", // Event's ID (required)
-              name: "Ivan Garcia", // Event name (required)
-              date: "October/26/2021", // Event date (required)
-              type: "holiday", // Event type 'birthday, event, holiday' (required)
-            },
-          ],
-        });
-      });
-    </script>
   </body>
 </html>
