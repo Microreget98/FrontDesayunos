@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
         title: "Evento1",
         start: new Date(),
         description: "Evento1",
-        allDay: true
+        allDay: true,
       },
       {
         title: "Evento2",
