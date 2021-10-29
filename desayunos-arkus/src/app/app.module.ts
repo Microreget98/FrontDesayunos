@@ -8,7 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRadioModule} from '@angular/material/radio';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 //INICIO Servicios
@@ -45,7 +45,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSelectModule,
     MatSidenavModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   exports:[
   

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-newcomp',
@@ -7,11 +7,10 @@ import { FormControl, FormGroup, FormsModule } from '@angular/forms';
   styleUrls: ['./newcomp.component.scss']
 })
 export class NewcompComponent implements OnInit {
-  fnameandlas:boolean = true;
-  colorControl = new FormControl('primary');
-  
  
-  
+
+
+ 
   constructor() 
   {
     
@@ -21,16 +20,7 @@ export class NewcompComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  buttonD(){
-    if (this.fnameandlas === true){
-      this.fnameandlas = false
-    }else{
-      this.fnameandlas = true
-    }
-  }
-
-  SaveData(form:any){
-    console.log(form)
-  }
+ 
+  
 
 }
