@@ -23,6 +23,7 @@
     "@fullcalendar/interaction": "^4.4.2",
     "@fullcalendar/timegrid": "^4.4.2",
     "jquery": "^3.6.0",
+    "primeicons": "^4.1.0",
     "primeng": "^12.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
