@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HomeComponent } from './components/home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FullCalendarModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
