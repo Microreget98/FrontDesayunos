@@ -43,7 +43,6 @@
               "node_modules/@fullcalendar/timegrid/main.min.css"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
