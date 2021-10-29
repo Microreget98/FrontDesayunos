@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public events: any[];
+  public options: any;
   constructor() { }
 
   ngOnInit(): void {
+
+    this.options = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      defaultDate: new Date(),
+      header:{
+        left: 'prev,next',
+        center: 'title',
+        right: ''
+      },
+      editable: false
+    }
+
+    this.events = [
+      {
+        title: "Evento1",
+        start: new Date(),
+        description: "Evento1",
+        allDay: true,
+      },
+      {
+        title: "Evento2",
+        start: new Date,
+        description: "Evento2",
+        allDay: true
+      },
+      {
+        title: "Evento3",
+        start: new Date,
+        description: "Evento3",
+        allDay: true
+      }
+    ]
   }
 
 }
