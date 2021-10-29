@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       defaultDate: new Date(),
       header:{
-        left: 'prev, next',
+        left: 'prev,next',
         center: 'title',
-        right: 'dayGridMonth, timeGridweek, timeGridDay'
+        right: ''
       },
       editable: false
     }
@@ -32,18 +32,20 @@ export class HomeComponent implements OnInit {
       {
         title: "Evento1",
         start: new Date(),
-        description: "Evento1"
+        description: "Evento1",
+        allDay: true
       },
       {
         title: "Evento2",
-        start: new Date( new Date().getTime() + 86400000 ),
-        description: "Evento2"
+        start: new Date,
+        description: "Evento2",
+        allDay: true
       },
       {
         title: "Evento3",
-        start: new Date( new Date().getTime() + (86400000 * 2) ),
-        end: new Date( new Date().getTime() + (86400000 * 3) ),
-        description: "Evento3"
+        start: new Date,
+        description: "Evento3",
+        allDay: true
       }
     ]
   }
