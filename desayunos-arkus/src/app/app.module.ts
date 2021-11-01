@@ -7,6 +7,8 @@ import { LoginRegistroComponent } from './components/login-registro/login-regist
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
 import { FullCalendarModule } from 'primeng/fullcalendar';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { FullCalendarModule } from 'primeng/fullcalendar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
