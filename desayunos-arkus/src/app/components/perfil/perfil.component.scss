@@ -35,24 +35,21 @@ body{
   
 }
 
-
+.formulario{
+  display: flex;
+  
+  justify-content: space-evenly;
+}
 
 .offcanvas-end {
 
-width: 500px;
+width: 50%;
 
 }
 
-.FirtsLast{
-  display: flex;
-  justify-content: center;
+
  
-}
-.lugarsede{
-  display: flex;
-  justify-content: center;
- 
-}
+
 .lugarTrab{
   
  width: 50%;
@@ -61,11 +58,15 @@ width: 500px;
   display: flex;
   justify-content: center;
 }
-.EditPos{
+.alert-danger{
+  margin-bottom: 5px;
+font-size: 10px;
+  width: 20%;
   display: flex;
-  justify-content: center;
-  
+ flex-direction: column-reverse;
 }
+  
+
 .Editar{
   position: relative;
   left: 15%;

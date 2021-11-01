@@ -11,6 +11,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 
 
+
 //INICIO Servicios
 import { ReactiveFormsModule } from '@angular/forms';
 //FIN Servicios
@@ -22,6 +23,7 @@ import { NewcompComponent } from './components/newcomp/newcomp.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatSidenavModule,
     MatRadioModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    
+    
+  
   ],
   exports:[
   

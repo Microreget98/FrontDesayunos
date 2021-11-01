@@ -1,41 +1,11 @@
-.FirtsLast{
-  display: flex;
-  justify-content: center;
- 
+.alert-danger{
+margin-bottom: 5px;
+
+width: 20%;
+
 }
-.lugarsede{
-  display: flex;
-  justify-content: center;
- 
-}
-.lugarTrab{
- width: 35%;
-}
-.dma{
-  display: flex;
-  justify-content: center;
-}
-.EditPos{
-  display: flex;
-  justify-content: center;
-  
-}
-.Editar{
-  position: relative;
-  left: 15%;
-  background: none;
-  font-size: 15px;
-  height: 35px;
-  width: 100px;
- border-radius: 2px 2px 0px 0px;
-  color: rgb(3, 3, 182);
-  font-weight: normal;
-  border: 1px solid rgb(187, 186, 186);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.945);
-  transition: 0.20s;
-}
-.Editar:hover{
-  background-color: rgba(0, 0, 255, 0.075);
-  border-bottom: 1.5px solid rgba(3, 3, 128, 0.945);
- 
+.container-error-message{
+padding: 3px;
+
+
 }
