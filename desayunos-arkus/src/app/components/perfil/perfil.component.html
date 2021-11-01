@@ -31,88 +31,34 @@
         <div class="perfil">A</div>
       </div>
 
-
-<form [formGroup]="perfilForm" (ngSubmit)="onSubmit()"  novalidate>
-
-  <div [formGroup]="ValiMessa" style="background: royalblue;" >
-  <mat-form-field appearance="outline"  > 
-      <mat-label>First Name</mat-label>
-        <input matInput   formControlName="firstName" required >
-        <mat-error  *ngIf="ValiMessa.controls['firstName'].hasError('required')">
-          First Name is Required!
-        </mat-error>
-      </mat-form-field>  
-        <div class="alert-danger" *ngIf="ValiMessa.invalid && (ValiMessa.dirty || ValiMessa.touched)">
-          
-            <mat-error *ngIf="ValiMessa.controls['firstName'].hasError('minlength')">
-              First Name should be atleast 4 characters long!
-            </mat-error> 
-            <mat-error *ngIf="ValiMessa.controls['firstName'].hasError('maxlength')">
-              First Name should be atleast 20 characters long!
-            </mat-error> 
-           
-        </div>
-  
-    
-        <mat-form-field appearance="outline" style="left: 100%; position: relative;" > 
-          <mat-label>Last Name</mat-label>
-          <input matInput  type="text" placeholder="Last Name" formControlName="lastname" required  >
-          <mat-error *ngIf="ValiMessa.controls['lastname'].hasError('required')" >
-            First Name is Required!
-          </mat-error>
-          
-        </mat-form-field>  
-        
-          <div class="" *ngIf="ValiMessa.invalid && (ValiMessa.dirty || ValiMessa.touched)">
-            
-              <mat-error *ngIf="ValiMessa.controls['lastname'].hasError('minlength')">
-                First Name should be atleast 4 characters long!
-              </mat-error> 
-              <mat-error *ngIf="ValiMessa.controls['lastname'].hasError('maxlength')">
-                First Name should be atleast 20 characters long!
-              </mat-error> 
-          </div>
-         
+      <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+       <div class="Firstlast">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" formControlName="firstName"><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" formControlName="lastName"><br>
       </div>
-      <button mat-raised-button type="submit" [disabled]="!ValiMessa.valid" >
-          submit
-          </button>
-  
-      
-         
- 
-  <br><br><br>
-
-        <div class="lugarsede">
-          <mat-form-field appearance="fill" class="lugarTrab">
-            <mat-label>Sedes</mat-label>
-            <select matNativeControl [disabled]="fnameandlas">
-              <option value="primary">Monterrey</option>
-              <option value="accent">Chihuahua</option>
-              <option value="warn">Durango</option>
-              <option value="warn">Durango</option>
-            </select>
-          </mat-form-field>
-        </div>    
-
-        <div class="dma">
-          <mat-form-field appearance="fill">
-            <input matInput type="date" disabled>
-          </mat-form-field>
-          <tr></tr>
-        </div>
-
-        <div class="EditPos">
-          <input (click)="buttonD()" type="submit" value="Editar" class="Editar">
-          
-        </div>
+        <label for="">Sedes:</label><br>
+        <select name="curso" formControlName="sedes">
+       
+          <option value="" disabled>Elige una opción</option>
+    
+          <option >Monterrey</option>
+              <option >Chihuahua</option>
+              <option >Durango</option>
+              <option >Durango</option>
+    
+        </select><br><br>
+        <input type="date" max="maxdate" ><br>
+        <button type="submit"  [disabled]="!perfilForm.valid">submit</button>
       </form>
 
+     
 
     </div>
   </div>
 
-  
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroupDirective, NgForm, FormGroup, Validators } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 
 @Component({
@@ -9,42 +9,39 @@ import {ErrorStateMatcher} from '@angular/material/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  disabled:boolean =true;
+
   fnameandlas: boolean = true;
+  
   perfilForm = new FormGroup({
-    firstName: new FormControl('' ),
-    lastname: new FormControl(''),
-   })
-    ValiMessa: FormGroup;
-    //ValiMessa2: FormGroup;
-   
-   
-    constructor(private fb: FormBuilder) 
-    { 
-      this.ValiMessa = this.fb.group({
-        firstName: ['', [ Validators.required, Validators.minLength(4), Validators.maxLength(20), Validators.pattern('[a-zA-Z]+')]],
-        lastname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20), Validators.pattern('[a-zA-Z]+')]]
-      });
-      
-      
-     }
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    sedes: new FormControl(''),
+  })
+
+  constructor(private fb: FormBuilder) {
+    this.perfilForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      sedes:['']
+    });
+
+
+  }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    console.warn(this.ValiMessa.value);
-   // console.warn(this.ValiMessa2.value);
-  }
-
-  get firstName(){ return this.ValiMessa.get('firstName');}
-  get lastName(){ return this.ValiMessa.get('lastname');}
-
   updateProfile() {
-    
-console.log('perfilForm');
-    
+
+    console.log('perfilForm');
+
   }
+
+  onSubmit() {
+    console.warn(this.perfilForm.value);
+  }
+
+ 
 
   buttonD() {
     if (this.fnameandlas === true) {
