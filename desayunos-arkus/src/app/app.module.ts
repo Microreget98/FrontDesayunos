@@ -19,21 +19,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NewcompComponent } from './components/newcomp/newcomp.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
+import { ApiService } from './core/api.service';
+import { HomeComponent } from './components/home/home.component';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewcompComponent,
     CalendarioComponent,
     PerfilComponent,
-    
-  
-    
+    LoginRegistroComponent,
+    HomeComponent,
+    FullCalendarModule
   ],
   imports: [
     BrowserModule,
@@ -49,15 +50,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatRadioModule,
     FormsModule,
     MatIconModule,
-    
+    FullCalendarModule
     
   
   ],
-  exports:[
-  
-  ],
-  
-  providers: [],
+  exports:[],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
