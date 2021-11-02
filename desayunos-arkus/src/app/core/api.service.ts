@@ -10,8 +10,6 @@ export class ApiService {
   constructor(public http: HttpClient) {}
 
   GetData(apiURL: string,headers?: any): Observable<any> {
-    console.log(apiURL);
-    console.log(headers)
     return this.http.get<any>(apiURL,headers);
   }
 
