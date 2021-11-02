@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Menu</h1>
+<div class="containerDialog">
+    <div class="col-6 columnDishes">
+    <mat-selection-list #dish (selectionChange)="getSelectedDish(dish.selectedOptions.selected)">
+        <mat-list-option *ngFor="let dish of dishesList" value="{{dish.id_dish}}">
+          {{dish.name_dish}}
+        </mat-list-option>
+      </mat-selection-list>
+      <button mat-stroked-button color="primary" (click)="handleSaveButton()">Save</button>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="col-6 columnUsers">
+        <mat-expansion-panel *ngFor="let user of UserListPerDay" (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{user.first_name + " " + user.last_name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{user.name_dish}}</p>
+      </mat-expansion-panel>
+    </div>
+</div>
