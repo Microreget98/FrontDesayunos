@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -43,6 +44,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     LoginRegistroComponent,
     HomeComponent,
     DialogMenu
+    PerfilComponent,
+
+
+
   ],
   imports: [
     BrowserModule,

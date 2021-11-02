@@ -32,28 +32,42 @@
       </div>
 
       <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
-       <div class="Firstlast">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" formControlName="firstName"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" formControlName="lastName"><br>
-      </div>
-        <label for="">Sedes:</label><br>
-        <select name="curso" formControlName="sedes">
-       
+
+        <div class="Firstlast">
+          <mat-form-field appearance="outline">
+          <mat-label for="fname">First name:</mat-label>
+          <input matInput type="text" id="fname" name="fname" formControlName="firstName" [(ngModel)]="fname"><br>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+          <mat-label for="lname">Last name:</mat-label>
+          <input matInput type="text" id="lname" name="lname" formControlName="lastName" [(ngModel)]="lname"><br>
+          <mat-error>
+            First Name is Required!
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <div class="Firstlast">
+        <mat-form-field appearance="outline">
+        <mat-label for="">Sedes:</mat-label>
+        <select matNativeControl name="curso" formControlName="sedes">
+
           <option value="" disabled>Elige una opción</option>
-    
-          <option >Monterrey</option>
-              <option >Chihuahua</option>
-              <option >Durango</option>
-              <option >Durango</option>
-    
-        </select><br><br>
-        <input type="date" max="maxdate" ><br>
-        <button type="submit"  [disabled]="!perfilForm.valid">submit</button>
+
+          <option>Monterrey</option>
+          <option>Chihuahua</option>
+          <option>Durango</option>
+          <option>Durango</option>
+
+        </select>
+      </mat-form-field>
+   
+        <input type="date" disabled><br>
+      </div>
+        <button type="submit" [disabled]="!perfilForm.valid">submit</button>
+
       </form>
 
-     
+
 
     </div>
   </div>
