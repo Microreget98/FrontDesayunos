@@ -11,12 +11,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 export class PerfilComponent implements OnInit {
   fnameandlas: boolean = true;
 
-<<<<<<< Updated upstream
-=======
   fname: string = "Angel";
   lname: string = "Quiñones";
   
->>>>>>> Stashed changes
   perfilForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -28,12 +25,8 @@ export class PerfilComponent implements OnInit {
     this.perfilForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-<<<<<<< Updated upstream
-      sedes: ['']
-=======
       sedes:['',Validators.required]
       //datehapp:['',[Validators.required]]
->>>>>>> Stashed changes
     });
 
 
@@ -53,11 +46,6 @@ export class PerfilComponent implements OnInit {
     console.warn(this.perfilForm.value);
   }
 
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
   buttonD() {
     if (this.fnameandlas === true) {
       this.fnameandlas = false

@@ -43,11 +43,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppComponent,
     LoginRegistroComponent,
     HomeComponent,
-    DialogMenu
-    PerfilComponent,
-
-
-
+    DialogMenu,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
