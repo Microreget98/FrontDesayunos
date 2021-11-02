@@ -1,23 +1,41 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+
+
+
+//INICIO Servicios
+import { ReactiveFormsModule } from '@angular/forms';
+//FIN Servicios
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatListModule} from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ConfigService } from './core/config.service';
-import {MatButtonModule} from '@angular/material/button';
+
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -34,6 +52,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [
     AppComponent,
+    PerfilComponent,
     LoginRegistroComponent,
     HomeComponent,
     DialogMenu
@@ -48,7 +67,17 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatListModule,
     MatDividerModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatRadioModule,
+    FormsModule,
+    MatIconModule,
+    
   ],
   providers: [
     {
@@ -57,7 +86,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
       multi: true,
       deps: [ConfigService]
     },
-    ApiService, 
+    ApiService,
     ConfigService
   ],
   bootstrap: [AppComponent],
