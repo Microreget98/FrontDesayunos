@@ -6,18 +6,18 @@ import { AppComponent } from './app.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatListModule} from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ConfigService } from './core/config.service';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -57,7 +57,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
       multi: true,
       deps: [ConfigService]
     },
-    ApiService, 
+    ApiService,
     ConfigService
   ],
   bootstrap: [AppComponent],
