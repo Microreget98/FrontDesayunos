@@ -15,6 +15,7 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{user.first_name + " " + user.last_name}}
+            <div class="deleteIcon"><i class="fa fa-times" aria-hidden="true" (click)="handleDeleteUser(user.id_user)"> </i></div>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>{{user.name_dish}}</p>
