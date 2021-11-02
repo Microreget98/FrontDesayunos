@@ -6,18 +6,24 @@ import { AppComponent } from './app.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
-import dayGridPlugin from '@fullcalendar/daygrid'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatListModule} from '@angular/material/list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ConfigService } from './core/config.service';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
+
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -48,7 +54,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatListModule,
     MatDividerModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [
     {
@@ -57,7 +68,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
       multi: true,
       deps: [ConfigService]
     },
-    ApiService, 
+    ApiService,
     ConfigService
   ],
   bootstrap: [AppComponent],
