@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/api.service';
 
@@ -10,24 +9,11 @@ import { ApiService } from '../../core/api.service';
 export class LoginRegistroComponent implements OnInit {
   ufname: string = "";
   ulname: string = "";
-  uday: number;
-  umonth:number;
-  uyear: number;
-  udob: Date = new Date();
+  udob: Date = null;
   uemail: string = "";
   ulocation: string = "";
   upass: string = "";
   upassconf: string = "";
-  
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json',
-      'Accept': '*/*',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS'
-    })
-  }
 
   constructor(private APIservices: ApiService) { }
 
@@ -36,22 +22,23 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   onClickRegister(){
-    this.udob.setDate(this.uday);
-    this.udob.setMonth(this.umonth);
-    this.udob.setFullYear(this.uyear);
-    let userData:object = {
-      first_name: this.ufname,
-      last_name: this.ulname,
-      dob: this.udob,
-      email: this.uemail,
-      location: this.ulocation,
-      pass: this.upass,
-      id_user_type: 1,
-      is_active: true
-    } 
+    let userData:object
+    if (this.upass == this.upassconf){
+      userData = {
+        first_name: this.ufname,
+        last_name: this.ulname,
+        dob: this.udob,
+        email: this.uemail,
+        location: this.ulocation,
+        pass: this.upass,
+        id_user_type: 1,
+        is_active: true
+      }
+    }
+     
     // Object.values(userData).forEach(obj => alert(obj));
-    // alert("boton presionado")
-    this.APIservices.PostData('https://localhost:44361/api/users', userData,this.httpOptions).subscribe(
+    // alert(userData)
+    this.APIservices.PostData('https://localhost:44361/api/users', userData).subscribe(
       (response: object)=>{
         console.log(response);
       }
