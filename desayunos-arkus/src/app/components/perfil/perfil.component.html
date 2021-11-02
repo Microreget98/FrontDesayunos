@@ -17,9 +17,7 @@
         <path fill-rule="evenodd"
           d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
       </svg></button>
-
   </div>
-
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="100"
     id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
     <div class="offcanvas-header">
@@ -30,35 +28,25 @@
       <div class="perfilpos">
         <div class="perfil">A</div>
       </div>
-
       <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
-       <div class="Firstlast">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" formControlName="firstName"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" formControlName="lastName"><br>
-      </div>
+        <div class="Firstlast">
+          <label for="fname">First name:</label><br>
+          <input type="text" id="fname" name="fname" formControlName="firstName"><br>
+          <label for="lname">Last name:</label><br>
+          <input type="text" id="lname" name="lname" formControlName="lastName"><br>
+        </div>
         <label for="">Sedes:</label><br>
         <select name="curso" formControlName="sedes">
-       
           <option value="" disabled>Elige una opción</option>
-    
-          <option >Monterrey</option>
-              <option >Chihuahua</option>
-              <option >Durango</option>
-              <option >Durango</option>
-    
+          <option>Monterrey</option>
+          <option>Chihuahua</option>
+          <option>Durango</option>
+          <option>Durango</option>
         </select><br><br>
-        <input type="date" max="maxdate" ><br>
-        <button type="submit"  [disabled]="!perfilForm.valid">submit</button>
+        <input type="date" max="maxdate"><br>
+        <button type="submit" [disabled]="!perfilForm.valid">submit</button>
       </form>
-
-     
-
     </div>
   </div>
-
-
 </body>
-
 </html>

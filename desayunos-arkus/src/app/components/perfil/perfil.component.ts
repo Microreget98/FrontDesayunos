@@ -9,9 +9,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-
   fnameandlas: boolean = true;
-  
   perfilForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -22,7 +20,7 @@ export class PerfilComponent implements OnInit {
     this.perfilForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      sedes:['']
+      sedes: ['']
     });
 
 
@@ -40,8 +38,6 @@ export class PerfilComponent implements OnInit {
   onSubmit() {
     console.warn(this.perfilForm.value);
   }
-
- 
 
   buttonD() {
     if (this.fnameandlas === true) {
