@@ -1,22 +1,9 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatIconModule } from '@angular/material/icon';
 
-//INICIO Servicios
-import { ReactiveFormsModule } from '@angular/forms';
-//FIN Servicios
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
 import { HomeComponent } from './components/home/home.component';
@@ -53,44 +40,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [
     AppComponent,
-    PerfilComponent,
     LoginRegistroComponent,
-    HomeComponent,
-    DialogMenu
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FullCalendarModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatListModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatRadioModule,
-    FormsModule,
-    MatIconModule,
-    MatNativeDateModule
+    FullCalendarModule
   ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFn,
-      multi: true,
-      deps: [ConfigService]
-    },
-    ApiService,
-    ConfigService
-  ],
-  bootstrap: [AppComponent],
-  entryComponents: [DialogMenu]
+  providers: [ApiService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
