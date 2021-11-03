@@ -16,17 +16,17 @@
       
       <!-- Login -->
       <div class="contenido_tab">
-        <form>
+        <!-- <form> -->
           <div class="form-group">
             <label for="exampleFormControlInput1">Correo</label>
-            <input type="email" class="form-control" id="correo1" placeholder="arkus@example.com" required>
+            <input type="email" class="form-control" id="correo1" placeholder="arkus@example.com" [(ngModel)]="uemailL" required>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="contraseña1" placeholder="Contraseña" required>
+            <input type="password" class="form-control" id="contraseña1" placeholder="Contraseña" [(ngModel)]="upassL" required>
           </div>
-          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-        </form>
+          <button (click)="getLogin()" type="button" class="btn btn-primary">Iniciar Sesión</button>
+        <!-- </form> -->
       </div>
   
       <!-- Registro -->
@@ -62,11 +62,11 @@
       
           <div class="form-group">
             <label for="exampleFormControlInput2">Correo</label>
-            <input type="email" class="form-control" id="correo2" placeholder="arkus@example.com" [(ngModel)]="uemail" required>
+            <input type="email" class="form-control" id="correo2" placeholder="arkus@example.com" [(ngModel)]="uemailR" required>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword2">Contraseña</label>
-            <input type="password"  class="form-control" id="contraseña2" placeholder="Contraseña" [(ngModel)]="upass" required>
+            <input type="password"  class="form-control" id="contraseña2" placeholder="Contraseña" [(ngModel)]="upassR" required>
           </div>
           <div class="form-group">
             <label for="exampleInputPasswordVer">Confirmar Contraseña</label>
