@@ -18,6 +18,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ConfigService } from './core/config.service';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -48,7 +54,12 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatListModule,
     MatDividerModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [
     {
