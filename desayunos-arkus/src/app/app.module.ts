@@ -24,6 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -61,7 +63,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSidenavModule
   ],
   providers: [
     {

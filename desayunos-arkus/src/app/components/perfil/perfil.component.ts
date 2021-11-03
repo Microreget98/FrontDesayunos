@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl,FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 
@@ -10,7 +10,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class PerfilComponent implements OnInit {
   fnameandlas: boolean = true;
-
+  showFiller = false;
   fname: string = "Angel";
   lname: string = "Quiñones";
   
