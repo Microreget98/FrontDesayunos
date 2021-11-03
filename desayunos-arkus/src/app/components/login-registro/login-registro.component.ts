@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/api.service';
+import { Router, RouterEvent } from '@angular/router';
 
 @Component({
   selector: 'app-login-registro',
@@ -10,27 +11,48 @@ export class LoginRegistroComponent implements OnInit {
   ufname: string = "";
   ulname: string = "";
   udob: Date = null;
-  uemail: string = "";
+  uemailR: string = "";
   ulocation: string = "";
-  upass: string = "";
+  upassR: string = "";
   upassconf: string = "";
 
-  constructor(private APIservices: ApiService) { }
+  uemailL: string = "";
+  upassL: string = "";
+
+  constructor(private APIservices: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     
   }
 
+  getLogin(){
+    let userData:object = {
+      email:this.uemailL,
+      pass: this.upassL
+    }
+    this.APIservices.GetDataWBody('https://localhost:44361/api/login', {...userData}).subscribe(
+      (response: object) => {
+        if (response){
+          console.log(response)
+          this.router.navigate(['/home'])
+        }
+        else{
+          console.log("FAVOR DE INTENTAR DE NUEVO")
+        }
+      }
+    )
+  }
+
   onClickRegister(){
     let userData:object
-    if (this.upass == this.upassconf){
+    if (this.upassR == this.upassconf){
       userData = {
         first_name: this.ufname,
         last_name: this.ulname,
         dob: this.udob,
-        email: this.uemail,
+        email: this.uemailR,
         location: this.ulocation,
-        pass: this.upass,
+        pass: this.upassR,
         id_user_type: 1,
         is_active: true
       }
@@ -38,7 +60,7 @@ export class LoginRegistroComponent implements OnInit {
      
     // Object.values(userData).forEach(obj => alert(obj));
     // alert(userData)
-    this.APIservices.PostData('https://localhost:44361/api/users', userData).subscribe(
+    this.APIservices.PostData('http://localhost:57397/api/users', userData).subscribe(
       (response: object)=>{
         console.log(response);
       }
