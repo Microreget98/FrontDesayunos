@@ -66,6 +66,20 @@ import { ConfigService } from '../../../core/config.service';
         })
       ).subscribe();
     }
+
+    handleDeleteUser(id_user){
+      const deleteParams = {
+        id_user: id_user,
+        date: this.data.dateStr
+      }
+      
+      this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`,{},{params: deleteParams}).pipe(
+        map((res) => {
+          this.loadData();
+        })
+      ).subscribe();
+
+    }
   
     onNoClick(): void {
       this.dialogRef.close();
