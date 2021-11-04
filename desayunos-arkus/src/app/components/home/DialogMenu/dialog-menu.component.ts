@@ -33,6 +33,7 @@ import { ConfigService } from '../../../core/config.service';
     }
 
     loadData(){
+      console.log(this.data.dateStr)
       this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`).pipe(
         switchMap((res: CalendarUsers[]) => {
           this.UserListPerDay = res;

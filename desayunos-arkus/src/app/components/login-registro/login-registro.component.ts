@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/api.service';
+import { HomeComponent } from '../home/home.component';
 import { Router, RouterEvent } from '@angular/router';
 
 @Component({
@@ -33,7 +34,6 @@ export class LoginRegistroComponent implements OnInit {
     this.APIservices.GetDataWBody('https://localhost:44361/api/login', {...userData}).subscribe(
       (response: object) => {
         if (response){
-          console.log(response)
           this.router.navigate(['/home'])
         }
         else{
@@ -60,7 +60,7 @@ export class LoginRegistroComponent implements OnInit {
      
     // Object.values(userData).forEach(obj => alert(obj));
     // alert(userData)
-    this.APIservices.PostData('http://localhost:57397/api/users', userData).subscribe(
+    this.APIservices.PostData('https://localhost:44361/api/users', userData).subscribe(
       (response: object)=>{
         console.log(response);
       }
