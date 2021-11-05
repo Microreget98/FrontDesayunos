@@ -9,10 +9,11 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+  hide = true;
   fnameandlas: boolean = true;
   showFiller = false;
-  fname: string = "Angel";
-  lname: string = "Quiñones";
+  fname: string = "Jose";
+  lname: string = "Andres";
   
   perfilForm = new FormGroup({
     firstName: new FormControl(''),
@@ -20,6 +21,9 @@ export class PerfilComponent implements OnInit {
     sedes: new FormControl('')
     //datehapp: new FormControl('')
   })
+  
+firtchar: string = "";
+
 //Valida Todo Los inputs
   constructor(private fb: FormBuilder) {
     this.perfilForm = this.fb.group({
@@ -29,7 +33,7 @@ export class PerfilComponent implements OnInit {
       //datehapp:['',[Validators.required]]
     });
 
-
+    this.firtchar = this.fname.charAt(0);
     
   }
 
@@ -57,6 +61,7 @@ export class PerfilComponent implements OnInit {
   userData:object = {
     "id_user": 1,
     "firstname": this.fname,
+    "lastname": this.lname,
 
   } 
 

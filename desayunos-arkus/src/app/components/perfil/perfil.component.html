@@ -46,26 +46,32 @@
       <mat-drawer-container class="example-container" autosize>
         <mat-drawer #drawer class="example-sidenav" mode="side" position="end" >
           <div class="perfilpos">
-            <div class="perfil">A</div>
+            <div class="perfil">{{firtchar}}</div>
           </div>
+          <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()" >
     
-          <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
-    
-            <div class="Firstlast">
-              <mat-form-field appearance="outline">
+            <div class="Firstlast" disabled>
+              <mat-form-field appearance="outline" >
               <mat-label for="fname">First name:</mat-label>
               <input matInput type="text" id="fname" name="fname" formControlName="firstName" [(ngModel)]= "fname"><br>
               </mat-form-field>
               <mat-form-field appearance="outline">
               <mat-label for="lname">Last name:</mat-label>
-              <input matInput type="text" id="lname" name="lname" formControlName="lastName" [(ngModel)]= "fname"><br>
+              <input matInput type="text" id="lname" name="lname" formControlName="lastName" [(ngModel)]= "lname"><br>
               <mat-error>
                <!-- {{mensajerror}}-->
                 First Name is Required!
               </mat-error>
             </mat-form-field>
-            </div>
-            <div class="Firstlast2">
+           
+            <mat-form-field appearance="outline">
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+
             <mat-form-field appearance="outline">
             <mat-label for="">Sedes:</mat-label>
             <select matNativeControl name="curso" formControlName="sedes">
@@ -76,26 +82,26 @@
               <option>Durango</option>
             </select>
           </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+          <mat-form-field appearance="outline">
+            <mat-label>Input disabled</mat-label>
+            <input matInput [matDatepicker]="dp3" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
           </mat-form-field>
           </div>
     
     
-            <button type="submit" [disabled]="!perfilForm.valid">submit</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
     
           </form>
         </mat-drawer>
       
         <div class="example-sidenav-content">
-          <button type="button" mat-button (click)="drawer.toggle()">
+          <button class="menuH" type="button" mat-button (click)="drawer.toggle()">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-            width="50" height="50"
+            width="40" height="40"
             viewBox="0 0 50 50"
-            style=" fill:#000000;"><path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path></svg>
+            style=" fill:#120b80;"><path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path></svg>
           </button>
         </div>
       

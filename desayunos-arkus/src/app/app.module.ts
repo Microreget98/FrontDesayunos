@@ -26,6 +26,7 @@ import {MatInputModule} from '@angular/material/input';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -65,7 +66,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatNativeDateModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule
   ],
   providers: [
     {
