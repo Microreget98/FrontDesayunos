@@ -1,13 +1,20 @@
 .containerDialog{
     display: flex;
 }
-.columnDishes {
-    padding-right: 10px;
-}
 .columnUsers {
     padding-left: 10px;
     padding-right: 10px;
 }
 .deleteIcon {
     padding-left: 5px;
+}
+.mat-card{
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+button{
+    margin-bottom: 1rem;
+}
+h1{
+    margin-bottom: 0rem;
 }

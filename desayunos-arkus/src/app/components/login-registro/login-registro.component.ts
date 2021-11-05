@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/api.service';
-import { HomeComponent } from '../home/home.component';
-import { Router, RouterEvent } from '@angular/router';
+import { ConfigService } from '../../core/config.service';
+import { Router } from '@angular/router';
+import { UserDataService } from './user-data.service';
 
 @Component({
   selector: 'app-login-registro',
@@ -20,7 +21,12 @@ export class LoginRegistroComponent implements OnInit {
   uemailL: string = "";
   upassL: string = "";
 
-  constructor(private APIservices: ApiService, private router: Router) { }
+  userdata: UserDataService
+
+  constructor(private APIservices: ApiService, 
+    private router: Router, 
+    private configService: ConfigService,
+    private userData: UserDataService) { }
 
   ngOnInit(): void {
     
@@ -31,9 +37,10 @@ export class LoginRegistroComponent implements OnInit {
       email:this.uemailL,
       pass: this.upassL
     }
-    this.APIservices.GetDataWBody('https://localhost:44361/api/login', {...userData}).subscribe(
+    this.APIservices.GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {...userData}).subscribe(
       (response: object) => {
         if (response){
+          this.userData.addUserInfo(response)
           this.router.navigate(['/home'])
         }
         else{
@@ -60,7 +67,7 @@ export class LoginRegistroComponent implements OnInit {
      
     // Object.values(userData).forEach(obj => alert(obj));
     // alert(userData)
-    this.APIservices.PostData('https://localhost:44361/api/users', userData).subscribe(
+    this.APIservices.PostData(`${this.configService.config.apiUrl}/api/users`, userData).subscribe(
       (response: object)=>{
         console.log(response);
       }

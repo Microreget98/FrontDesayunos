@@ -3,7 +3,7 @@ import { CalendarOptions } from '@fullcalendar/angular';
 import { ApiService } from '../../core/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMenu } from './DialogMenu/dialog-menu.component';
-import { LoginRegistroComponent } from '../login-registro/login-registro.component';
+import { UserDataService } from '../login-registro/user-data.service';
 
 
 @Component({
@@ -12,19 +12,17 @@ import { LoginRegistroComponent } from '../login-registro/login-registro.compone
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  // @Input() userdata: LoginRegistroComponent;
-
   userInfo = {
-    id_user: 18,
-    first_name: "",
-    last_name: ""
+    id_user: this.userData.userData[0].id_user,
+    first_name: this.userData.userData[0].first_name,
+    last_name: this.userData.userData[0].last_name
   }
 
   options: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'dayGridMonth',
     weekends: true,
@@ -35,19 +33,10 @@ export class HomeComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this)
   };
 
-  constructor(private apiService: ApiService,public dialog: MatDialog) {  }
+  constructor(public dialog: MatDialog, private userData: UserDataService) {  }
 
   ngOnInit(): void {
     // console.log(this.userdata)
-  }
-
-  getUserInfo(userData){
-    this.userInfo = {
-      id_user: userData.id_user,
-      first_name: userData.first_name,
-      last_name: userData.last_name,
-    }
-    console.log()
   }
 
   handleDateClick(info){
