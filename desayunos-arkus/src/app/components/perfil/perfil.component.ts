@@ -10,15 +10,21 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class PerfilComponent implements OnInit {
   hide = true;
+  disprop: boolean = true;
   fnameandlas: boolean = true;
   showFiller = false;
-  fname: string = "Jose";
+  fname: string = "Andres";
   lname: string = "Andres";
+  passw: string = "1234";
+  dateP: string= "";
+  sedes: string = "";
   
   perfilForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    sedes: new FormControl('')
+    sedes: new FormControl(''),
+    passw: new FormControl('') ,
+    dateP: new FormControl('')
     //datehapp: new FormControl('')
   })
   
@@ -29,8 +35,10 @@ firtchar: string = "";
     this.perfilForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      sedes:['',Validators.required]
-      //datehapp:['',[Validators.required]]
+      sedes:['',[Validators.required]],
+      passw:['',[Validators.required]],
+      datePo: ['', [Validators.required]]
+      
     });
 
     this.firtchar = this.fname.charAt(0);
@@ -38,6 +46,9 @@ firtchar: string = "";
   }
 
   ngOnInit(): void {
+    for (const iterator of Object.keys(this.perfilForm.controls)) {
+      this.perfilForm.get(`${iterator}`).disable();      
+    }
   }
 
   updateProfile() {
@@ -51,18 +62,29 @@ firtchar: string = "";
   }
 
   buttonD() {
-    if (this.fnameandlas === true) {
-      this.fnameandlas = false
-    } else {
-      this.fnameandlas = true
+    for (const iterator of Object.keys(this.perfilForm.controls)) {
+      if (this.perfilForm.get(`${iterator}`).disabled){
+        this.perfilForm.get(`${iterator}`).enable();
+      }else{
+        this.perfilForm.get(`${iterator}`).disable();
+      }
+      
     }
+    
+    // if (this.fnameandlas === true) {
+    //   this.fnameandlas = false
+    // } else {
+    //   this.fnameandlas = true
+    // }
   }
 
   userData:object = {
     "id_user": 1,
     "firstname": this.fname,
     "lastname": this.lname,
-
+    "passwerd": this.passw,
+    "date": this.dateP,
+    "sedes": this.sedes
   } 
 
 }
