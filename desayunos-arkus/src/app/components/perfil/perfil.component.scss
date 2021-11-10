@@ -1,17 +1,5 @@
-
-/*El Apartado De en Nav De Arriba*/
-
-// .cajon2 {
-//   display: flex;
-//   flex-direction: row;
-// }
-
-// .caja {
-//   display: block;
-// }
-
 /*El Apartado De La  Letra Del Ususario y su vista*/
-.perfilpos{
+.perfilpos {
   display: flex;
   justify-content: center;
 }
@@ -19,7 +7,7 @@
 .perfil {
   width: 10rem;
   height: 10rem;
-  
+
   border-radius: 50%;
   background: red;
   display: flex;
@@ -29,92 +17,74 @@
   font-size: 600%;
 }
 
-.Firstlast{
+.Firstlast {
   display: flex;
   justify-content: center;
   flex-direction: column;
- justify-content: space-around;
+  justify-content: space-around;
   width: 100%;
- 
+
   margin-top: 20px;
 }
 
 .example-container {
+  position: fixed;
   width: 100%;
   height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  
-  
 }
 
 .example-sidenav-content {
   display: flex;
   height: 100%;
-  align-items:flex-start;
-  justify-content:flex-end;
-  
-  
+  align-items: flex-start;
+  justify-content: flex-end;
 }
-.menuH{
-  top: 15px;
+//Dise;o del Menu
+.menuH {
+  display: flex;
+  justify-content: flex-end;
+  top: 30px;
+  margin: auto;
+}
+.menuH button {
+  position: fixed;
+  top: 20px;
   right: 20px;
+  background: none;
+  border: none;
+}
+.menuH button svg {
+  fill: rgb(0, 0, 0);
+  transition: 0.2s;
+}
+
+.menuH button svg:hover {
   
+  background-color: rgba(73, 72, 72, 0.247);
+  border-radius: 10px;
+}
+.menuH button svg:active{
+  fill: red;
 }
 
 .example-sidenav {
-  padding: 50px;
-  width: 20%;
-  
+  padding: 90px;
+  width: 25%;
 }
 
-.EnvEdi{
-display: flex;
-justify-content: space-between;
+//Separacion De Botones Del Perfil
+.EnvEdi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-//todo esto es la animacion de el menu de burger
-#toggle {
+.cerraSe{
   position: relative;
-  width: 30px;
-  height: 26px;
-  top: 20px;
-  left: 97%;
+ text-align: center; 
+ top: 40px;
+ 
 }
-#toggle input {
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  cursor: pointer;
-}
-#toggle input:checked + span {
-  background: transparent;
-}
-#toggle input:checked + span:after {
-  transform: rotate(45deg) translate(-1px, -8px);
-}
-#toggle input:checked + span:before {
-  transform: rotate(-45deg) translate(-4px, 12px);
-}
-#toggle span {
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  background: rgb(19, 12, 12);
-  margin-top: 10px;
-}
-#toggle span:before, #toggle span:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 5px;
-  background: rgb(22, 18, 18);
-  top: -9px;
-  transition: 0.3s;
-}
-#toggle span:after {
-  top: 9px;
+.cerraSe a{
+  color: gray;
 }
