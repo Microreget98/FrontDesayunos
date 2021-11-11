@@ -18,6 +18,10 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
+isAdmin=this.userData.getUserType();
+
+
+
   options: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
@@ -37,6 +41,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.userdata)
+    console.log(this.isAdmin);
   }
 
   handleDateClick(info){
