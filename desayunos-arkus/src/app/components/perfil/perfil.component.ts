@@ -33,7 +33,7 @@ export class PerfilComponent implements OnInit {
   //Valida Todo Los inputs
   constructor(private fb: FormBuilder) {
     this.perfilForm = this.fb.group({
-      firstName: ['', [Validators.required]],
+      firstName: [{value:null, disabled: true}, [Validators.required]],
       lastName: ['', [Validators.required]],
       sedes: ['', [Validators.required]],
       passw: ['', [Validators.required]],
@@ -68,14 +68,7 @@ export class PerfilComponent implements OnInit {
       } else {
         this.perfilForm.get(`${iterator}`).disable();
       }
-
     }
-
-    // if (this.fnameandlas === true) {
-    //   this.fnameandlas = false
-    // } else {
-    //   this.fnameandlas = true
-    // }
   }
 
   userData: object = {
@@ -88,3 +81,4 @@ export class PerfilComponent implements OnInit {
   }
 
 }
+// Hay que modificar la forma en la que se envian los datos, para enviarlos a la base de datos

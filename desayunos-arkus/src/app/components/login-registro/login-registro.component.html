@@ -1,79 +1,84 @@
-
-<!-- Registro y login -->
-<div class="container">
-
-  
-  <div class="tab-wrap">
-
-    
-<!-- la pestaña activa en la carga de la página obtiene el atributo marcado -->
-    <input type="radio" id="tab1" name="tabGrupo1" class="tab" checked>
-    <label for="tab1">Inicio De Sesión</label>
-
-
-    <input type="radio" id="tab2" name="tabGrupo1" class="tab">
-    <label for="tab2">Registro</label>
-      
-      <!-- Login -->
-      <div class="contenido_tab">
-        <form>
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Correo</label>
-            <input type="email" class="form-control" id="correo1" placeholder="arkus@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Contraseña</label>
-            <input type="password" class="form-control" id="contraseña1" placeholder="Contraseña" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-        </form>
-      </div>
-  
-      <!-- Registro -->
-      <div class="contenido_tab">
-        <!-- <form> -->
-          <div class="form-group">
-            <label for="InputName">Nombre</label>
-            <input type="text" id="nombre" placeholder="Nombre" [(ngModel)]="ufname" >
-          </div>
-          <div class="form-group">
-            <label for="InputUsername">Apellido</label>
-            <input type="text" id="apellido" placeholder="Apellido" [(ngModel)]="ulname" >
-          </div>
-      
+<mat-tab-group>
+  <mat-tab label="Inicio de Sesión">
+      <form [formGroup]="fLogin" (submit)="sendLogin()">
           <div>
-            <mat-form-field appearance="fill">
-              <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker" [(ngModel)]="udob">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker startView="year"></mat-datepicker>
-            </mat-form-field>
-            
+              <mat-form-field appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <input matInput type="text" formControlName="loginEmail">
+                  <mat-error *ngIf="loginEmail.invalid">{{loginEmailErrorMessage()}}</mat-error>
+              </mat-form-field>
           </div>
 
-          <div class="form-group">
-            <label for="sel1">Sede</label>
-            <select class="form-control" id="sede" [(ngModel)]="ulocation">
-              <option value="default">Selecciona tu Ubicación</option>
-              <option value="Monterrey">Monterrey</option>
-            </select>
-                    
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput  type="password" formControlName="loginPassword">
+                  <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
+              </mat-form-field>
           </div>
       
-          <div class="form-group">
-            <label for="exampleFormControlInput2">Correo</label>
-            <input type="email" class="form-control" id="correo2" placeholder="arkus@example.com" [(ngModel)]="uemail" required>
+          <button mat-raised-button color="primary" [disabled]="fLogin.invalid">Ingresar</button>
+      </form>
+  </mat-tab>
+
+  <mat-tab label="Registro">
+      <form [formGroup]="fRegister" (submit)="sendRegister()">
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput type="text" formControlName="name">
+              </mat-form-field>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPassword2">Contraseña</label>
-            <input type="password"  class="form-control" id="contraseña2" placeholder="Contraseña" [(ngModel)]="upass" required>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Apellido</mat-label>
+                  <input matInput type="text" formControlName="lastName">
+              </mat-form-field>
           </div>
-          <div class="form-group">
-            <label for="exampleInputPasswordVer">Confirmar Contraseña</label>
-            <input type="password" class="form-control" id="contraseñaVer" placeholder="Contraseña" [(ngModel)]="upassconf" required>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Fecha de Nacimiento</mat-label>
+                  <input matInput [matDatepicker]="datepicker" formControlName="dob">
+                  <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+              </mat-form-field>
           </div>
-          <button (click)="onClickRegister()" type="button" class="btn btn-primary">Registrar</button>
-        <!-- </form> -->
-      </div>
-  </div>
-</div>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Selecciona tu Sede</mat-label>
+                  <mat-select [formGroup]="fRegister" name="sede" formControlName="sede">
+                  <mat-option *ngFor="let sede of sedes" [value]="sede.value">{{sede.viewValue}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </div>
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <input matInput type="text" formControlName="registerEmail">
+                  <mat-error *ngIf="registerEmail.invalid">{{registerEmailErrorMessage()}}</mat-error>
+              </mat-form-field>
+          </div>
+
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input matInput type="password" formControlName="registerPassword">
+                  <mat-error *ngIf="registerPassword.invalid">{{registerPasswordErrorMessage()}}</mat-error>
+              </mat-form-field>
+          </div>
+
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Confirmar Contraseña</mat-label>
+                  <input matInput type="password" formControlName="confirmPassword">
+                  <mat-error *ngIf="confirmPassword.invalid">{{confirmPasswordErrorMessage()}}</mat-error>
+              </mat-form-field>
+          </div>
+          
+          <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">Registrarme</button>
+
+      </form>
+  </mat-tab>
+</mat-tab-group>
+<div>Valido: {{fLogin.valid | json}} </div>
+<div>Valido: {{fRegister.valid | json}} </div>

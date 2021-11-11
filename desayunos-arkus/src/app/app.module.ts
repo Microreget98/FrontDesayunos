@@ -18,15 +18,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ConfigService } from './core/config.service';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs'
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -65,9 +67,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    ReactiveFormsModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   providers: [
     {

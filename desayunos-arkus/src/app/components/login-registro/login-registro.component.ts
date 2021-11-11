@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../core/api.service';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+  
+interface Sede{
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-login-registro',
@@ -7,42 +12,75 @@ import { ApiService } from '../../core/api.service';
   styleUrls: ['./login-registro.component.scss']
 })
 export class LoginRegistroComponent implements OnInit {
-  ufname: string = "";
-  ulname: string = "";
-  udob: Date = null;
-  uemail: string = "";
-  ulocation: string = "";
-  upass: string = "";
-  upassconf: string = "";
 
-  constructor(private APIservices: ApiService) { }
+  public fLogin: FormGroup;
+  public fRegister: FormGroup; 
+  
+  selectedValue: string;
+  sedes: Sede[] = [
+    {value: 'mty', viewValue: 'Monterrey'},
+    {value: 'gdl', viewValue: 'Guadalajara'},
+    {value: 'col', viewValue: 'Colima'}
+  ];
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    
-  }
+    this.fLogin = this.formBuilder.group({
+      loginEmail: ['', [Validators.required, Validators.email]],
+      loginPassword: ['',[Validators.required, Validators.minLength(8)]]
+    });
 
-  onClickRegister(){
-    let userData:object
-    if (this.upass == this.upassconf){
-      userData = {
-        first_name: this.ufname,
-        last_name: this.ulname,
-        dob: this.udob,
-        email: this.uemail,
-        location: this.ulocation,
-        pass: this.upass,
-        id_user_type: 1,
-        is_active: true
-      }
+    this.fRegister = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      registerEmail: ['', [Validators.required, Validators.email]],
+      registerPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
+      sede: ['',[Validators.required]],
+      dob: ['',[Validators.required]]
+    })
+
+  }
+  sendLogin(): any{
+    console.log(this.fLogin.value);
+  }
+  sendRegister(): any{
+    console.log(this.fRegister.value);
+  }
+  loginEmailErrorMessage(){
+    if (this.loginEmail.hasError('required')) {
+      return 'El correo es requerido';
     }
-     
-    // Object.values(userData).forEach(obj => alert(obj));
-    // alert(userData)
-    this.APIservices.PostData('https://localhost:44361/api/users', userData).subscribe(
-      (response: object)=>{
-        console.log(response);
-      }
-    )
+    return this.loginEmail.hasError('email') ? 'El correo no es válido' : '';
   }
-
+  loginPasswordErrorMessage(){
+    if (this.loginPassword.hasError('required')) {
+      return 'La contraseña es requerida';
+    }
+    return this.loginPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+  }
+  registerEmailErrorMessage(){
+    if (this.registerEmail.hasError('required')) {
+      return 'El correo es requerido';
+    }
+    return this.registerEmail.hasError('email') ? 'El correo no es válido' : '';
+  }
+  registerPasswordErrorMessage(){
+    if (this.registerPassword.hasError('required')) {
+      return 'La contraseña es requerida';
+    }
+    return this.registerPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+  }
+  confirmPasswordErrorMessage(){
+    if (this.confirmPassword.hasError('required')) {
+      return 'La contraseña debe confirmarse';
+    }
+    return this.confirmPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+  }
+  get loginEmail() { return this.fLogin.get('loginEmail');}
+  get loginPassword() { return this.fLogin.get('loginPassword');}
+  get registerEmail() { return this.fRegister.get('registerEmail');}
+  get registerPassword() { return this.fRegister.get('registerPassword');}
+  get confirmPassword() { return this.fRegister.get('confirmPassword');}
 }

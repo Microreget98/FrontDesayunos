@@ -33,16 +33,11 @@ import { ConfigService } from '../../../core/config.service';
     }
 
     loadData(){
-      this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`).pipe(
-        switchMap((res: CalendarUsers[]) => {
-          this.UserListPerDay = res;
-          console.log(this.UserListPerDay);
-          return this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/GetDishes`);
-        }))
+      // console.log(this.data.dateStr)
+      this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`)
       .subscribe(
-        {next: (res: Dishes[]) => {
-          this.dishesList = res;
-          console.log(this.dishesList);
+        {next: (res: CalendarUsers[]) => {
+          this.UserListPerDay = res;
         }}
       );
     }
@@ -53,10 +48,10 @@ import { ConfigService } from '../../../core/config.service';
 
     handleSaveButton(){
       const dataToPost = {
-        id_register_day: 0,
+        // id_register_day: 0,
         id_user: this.data.userId,
         date: new Date(this.data.dateStr),
-        id_dish: parseInt(this.selectedDishId[0].value),
+        // id_dish: parseInt(this.selectedDishId[0].value),
         is_active: true
       }
 
@@ -65,6 +60,20 @@ import { ConfigService } from '../../../core/config.service';
           this.loadData();
         })
       ).subscribe();
+    }
+
+    handleDeleteUser(id_user){
+      const deleteParams = {
+        id_user: id_user,
+        date: this.data.dateStr
+      }
+      
+      this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`,{},{params: deleteParams}).pipe(
+        map((res) => {
+          this.loadData();
+        })
+      ).subscribe();
+
     }
   
     onNoClick(): void {
