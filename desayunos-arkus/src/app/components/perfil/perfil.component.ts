@@ -20,7 +20,7 @@ export class PerfilComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.perfilForm = this.fb.group({
-      firstName: ['', [Validators.required]],
+      firstName: [{value:null, disabled: true}, [Validators.required]],
       lastName: ['', [Validators.required]],
       sedes: ['']
     });
@@ -44,10 +44,15 @@ export class PerfilComponent implements OnInit {
 
 
   buttonD() {
-    if (this.fnameandlas === true) {
-      this.fnameandlas = false
-    } else {
-      this.fnameandlas = true
+    // this.perfilForm.get('firstName').enable();
+    let controls = this.perfilForm.controls
+    for (const iterator of Object.keys(controls)) {
+      if (this.perfilForm.get(`${iterator}`).disabled) {
+        this.perfilForm.get(`${iterator}`).enable();
+      } else {
+        this.perfilForm.get(`${iterator}`).disable();
+      }
     }
+    
   }
 }
