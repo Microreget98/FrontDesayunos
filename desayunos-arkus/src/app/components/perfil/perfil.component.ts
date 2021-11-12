@@ -13,27 +13,15 @@ export class PerfilComponent implements OnInit {
   disprop: boolean = true;
   fnameandlas: boolean = true;
   showFiller = false;
-  fname: string = "Andres";
-  lname: string = "Andres";
-  passw: string = "1234";
-  dateP: string = "";
-  sedes: string = "";
 
-  perfilForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    sedes: new FormControl(''),
-    passw: new FormControl(''),
-    dateP: new FormControl('')
-    //datehapp: new FormControl('')
-  })
+  perfilForm = new FormGroup({})
 
-  firtchar: string = "";
+  firstchar: string = "";
 
   //Valida Todo Los inputs
   constructor(private fb: FormBuilder) {
     this.perfilForm = this.fb.group({
-      firstName: ['', [Validators.required]],
+      firstName: ['Angel', [Validators.required]],
       lastName: ['', [Validators.required]],
       sedes: ['', [Validators.required]],
       passw: ['', [Validators.required]],
@@ -41,14 +29,16 @@ export class PerfilComponent implements OnInit {
 
     });
 
-    this.firtchar = this.fname.charAt(0);
+    // this.firstchar = this.fname.charAt(0);
 
   }
 
   ngOnInit(): void {
+    this.firstchar = String(this.perfilForm.get("firstName").value).charAt(0);
     for (const iterator of Object.keys(this.perfilForm.controls)) {
       this.perfilForm.get(`${iterator}`).disable();
     }
+    console.log(this.perfilForm.controls)
   }
 
   updateProfile() {
@@ -58,10 +48,14 @@ export class PerfilComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.perfilForm.value);
+    let PerfilData = {
+      
+    }
+    console.log(this.perfilForm.value);
   }
 
   buttonD() {
+    
     for (const iterator of Object.keys(this.perfilForm.controls)) {
       if (this.perfilForm.get(`${iterator}`).disabled) {
         this.perfilForm.get(`${iterator}`).enable();
@@ -76,15 +70,6 @@ export class PerfilComponent implements OnInit {
     // } else {
     //   this.fnameandlas = true
     // }
-  }
-
-  userData: object = {
-    "id_user": 1,
-    "firstname": this.fname,
-    "lastname": this.lname,
-    "passwerd": this.passw,
-    "date": this.dateP,
-    "sedes": this.sedes
   }
 
 }

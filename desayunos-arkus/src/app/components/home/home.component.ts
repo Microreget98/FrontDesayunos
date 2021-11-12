@@ -30,7 +30,8 @@ export class HomeComponent implements OnInit {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
-    dateClick: this.handleDateClick.bind(this)
+    dateClick: this.handleDateClick.bind(this),
+    height: "100%"
   };
 
   constructor(private apiService: ApiService,public dialog: MatDialog) {  }

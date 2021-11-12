@@ -1,5 +1,5 @@
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="over" position="end">
+<mat-drawer-container class="example-container" autosize >
+  <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
     <div class="menuH">
       <button (click)="drawer.toggle()">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
@@ -12,18 +12,18 @@
     </div>
 
     <div class="perfilpos">
-      <div class="perfil">{{firtchar}}</div>
+      <div class="perfil">{{firstchar}}</div>
     </div>
-    <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <form  action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
       <div class="Firstlast" disabled>
         <mat-form-field appearance="outline">
           <mat-label for="fname">First name:</mat-label>
-          <input matInput type="text" id="fname" name="fname" formControlName="firstName" [(ngModel)]="fname"><br>
+          <input matInput type="text" id="fname" name="fname" formControlName="firstName"><br>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label for="lname">Last name:</mat-label>
-          <input matInput type="text" id="lname" name="lname" formControlName="lastName" [(ngModel)]="lname"><br>
+          <input matInput type="text" id="lname" name="lname" formControlName="lastName"><br>
           <mat-error>
             <!-- {{mensajerror}}-->
             First Name is Required!
@@ -32,7 +32,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Enter your password</mat-label>
-          <input id="passw" name="passw" [(ngModel)]="passw" matInput [type]="hide ? 'password' : 'text'"
+          <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'"
             formControlName="passw">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
@@ -52,8 +52,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>birthday date</mat-label>
-          <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" [(ngModel)]="dateP"
-            readonly>
+          <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" readonly>
           <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
           <mat-datepicker #dp3></mat-datepicker>
         </mat-form-field>
@@ -81,3 +80,5 @@ viewBox="0 0 50 50"
   </div>
 
 </mat-drawer-container>
+
+
