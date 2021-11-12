@@ -27,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -68,7 +69,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatCardModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    FontAwesomeModule
   ],
   providers: [
     {
