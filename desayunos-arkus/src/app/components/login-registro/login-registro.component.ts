@@ -14,7 +14,10 @@ interface Sede{
 export class LoginRegistroComponent implements OnInit {
 
   public fLogin: FormGroup;
-  public fRegister: FormGroup; 
+  public fRegister: FormGroup;
+
+  minDate: Date;
+  maxDate: Date;
   
   selectedValue: string;
   sedes: Sede[] = [
@@ -23,7 +26,13 @@ export class LoginRegistroComponent implements OnInit {
     {value: 'col', viewValue: 'Colima'}
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+
+    const currentYear = new Date().getFullYear();
+    this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
+    this.maxDate = new Date(currentYear - 18, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 18 años
+
+  }
 
   ngOnInit(): void {
     this.fLogin = this.formBuilder.group({
@@ -60,6 +69,30 @@ export class LoginRegistroComponent implements OnInit {
     }
     return this.loginPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
   }
+  registerNameErrorMessage(){
+    if(this.name.hasError('required')) {
+      return 'Tu Nombre es requerido';
+    }
+    return '';
+  }
+  registerLastnameErrorMessage(){
+    if(this.lastName.hasError('required')) {
+      return 'Tu Apellido es requerido';
+    }
+    return '';
+  }
+  registerDobErrorMessage(){
+    if(this.dob.hasError('required')) {
+      return 'Selecciona tu fecha de Nacimiento';
+    }
+    return '';
+  }
+  registerSedeErrorMessage(){
+    if(this.dob.hasError('required')) {
+      return 'Selecciona tu Sede';
+    }
+    return '';
+  }
   registerEmailErrorMessage(){
     if (this.registerEmail.hasError('required')) {
       return 'El correo es requerido';
@@ -80,6 +113,10 @@ export class LoginRegistroComponent implements OnInit {
   }
   get loginEmail() { return this.fLogin.get('loginEmail');}
   get loginPassword() { return this.fLogin.get('loginPassword');}
+  get name() { return this.fRegister.get('name');}
+  get lastName() { return this.fRegister.get('lastName');}
+  get dob() { return this.fRegister.get('dob');}
+  get sede() { return this.fRegister.get('sede');}
   get registerEmail() { return this.fRegister.get('registerEmail');}
   get registerPassword() { return this.fRegister.get('registerPassword');}
   get confirmPassword() { return this.fRegister.get('confirmPassword');}
