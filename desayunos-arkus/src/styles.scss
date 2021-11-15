@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $desayunos-arkus-primary: mat.define-palette(mat.$red-palette);
-$desayunos-arkus-accent: mat.define-palette(mat.$light-green-palette, 900, A700, A400);
+$desayunos-arkus-accent: mat.define-palette(mat.$gray-palette, 900, 900, A400);
 
 // The warn palette is optional (defaults to red).
 $desayunos-arkus-warn: mat.define-palette(mat.$red-palette);
