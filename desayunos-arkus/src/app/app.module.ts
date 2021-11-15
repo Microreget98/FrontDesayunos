@@ -27,6 +27,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -68,7 +70,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatCardModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatToolbarModule
   ],
   providers: [
     {
