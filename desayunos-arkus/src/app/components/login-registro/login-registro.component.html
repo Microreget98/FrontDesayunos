@@ -1,12 +1,12 @@
 <mat-toolbar>
-    <img class="logo" src="assets/img/logoArkus.png" width="400" height="70">
+    <img src="https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613c50e0018116747c3bc5bc_ArkusNexus_MainLogo.svg" width="400" height="70">
   </mat-toolbar>
 
 <mat-tab-group>
   <mat-tab label="Inicio de Sesión">
       <form [formGroup]="fLogin" (submit)="sendLogin()">
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Correo</mat-label>
                   <input matInput type="text" formControlName="loginEmail">
                   <mat-error *ngIf="loginEmail.invalid">{{loginEmailErrorMessage()}}</mat-error>
@@ -14,7 +14,7 @@
           </div>
 
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Contraseña</mat-label>
                   <input matInput  type="password" formControlName="loginPassword">
                   <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
@@ -28,19 +28,19 @@
   <mat-tab label="Registro">
       <form [formGroup]="fRegister" (submit)="sendRegister()">
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Nombre</mat-label>
                   <input matInput type="text" formControlName="name">
               </mat-form-field>
           </div>
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Apellido</mat-label>
                   <input matInput type="text" formControlName="lastName">
               </mat-form-field>
           </div>
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Fecha de Nacimiento</mat-label>
                   <input matInput [matDatepicker]="datepicker" formControlName="dob">
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
@@ -48,7 +48,7 @@
               </mat-form-field>
           </div>
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Selecciona tu Sede</mat-label>
                   <mat-select [formGroup]="fRegister" name="sede" formControlName="sede">
                   <mat-option *ngFor="let sede of sedes" [value]="sede.value">{{sede.viewValue}}</mat-option>
@@ -56,7 +56,7 @@
               </mat-form-field>
           </div>
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Correo</mat-label>
                   <input matInput type="text" formControlName="registerEmail">
                   <mat-error *ngIf="registerEmail.invalid">{{registerEmailErrorMessage()}}</mat-error>
@@ -64,7 +64,7 @@
           </div>
 
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Contraseña</mat-label>
                   <input matInput type="password" formControlName="registerPassword">
                   <mat-error *ngIf="registerPassword.invalid">{{registerPasswordErrorMessage()}}</mat-error>
@@ -72,7 +72,7 @@
           </div>
 
           <div>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" color="accent">
                   <mat-label>Confirmar Contraseña</mat-label>
                   <input matInput type="password" formControlName="confirmPassword">
                   <mat-error *ngIf="confirmPassword.invalid">{{confirmPasswordErrorMessage()}}</mat-error>
