@@ -24,6 +24,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
@@ -49,7 +51,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppComponent,
     LoginRegistroComponent,
     HomeComponent,
-    DialogMenu
+    DialogMenu,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatSidenavModule,
+    MatIconModule,
     MatFormFieldModule,
     MatCardModule,
     MatSelectModule,
