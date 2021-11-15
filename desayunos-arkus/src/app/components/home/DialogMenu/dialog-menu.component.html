@@ -1,11 +1,14 @@
-<h1 mat-dialog-title>Menu {{data.dateStr}}</h1> 
-<button mat-stroked-button color="primary" (click)="handleSaveButton()">Register</button>
-
+<div class="title">
+  <h1 mat-dialog-title>Registro {{data.dateStr}}</h1>
+  <button mat-stroked-button color="primary" (click)="handleSaveButton()">Register</button>
+</div>
 <div class="containerDialog">
   <div class="col-12 columnUsers">
     <mat-card *ngFor="let user of UserListPerDay">
       {{user.first_name + " " + user.last_name}}
-      <button mat-button color="primary"><fa-icon [icon]="faTimes" ></fa-icon></button>
+      <button mat-button color="primary">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
     </mat-card>
   </div>
 </div>
