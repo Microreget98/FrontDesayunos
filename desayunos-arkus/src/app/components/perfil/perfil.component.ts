@@ -65,18 +65,4 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
-  userData: object = {
-    "id_user": 1,
-    "firstname": this.fname,
-    "lastname": this.lname,
-    "passwerd": this.passw,
-    "date": this.dateP,
-    "sedes": this.sedes
-  }
-
 }
-// Hay que modificar la forma en la que se envian los datos, para enviarlos a la base de datos
-=======
-}
->>>>>>> 7329c4c7135e0ffbe7a4371226ea506a060f0e8b

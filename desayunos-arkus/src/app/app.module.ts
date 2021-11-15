@@ -1,6 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
@@ -29,6 +30,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -55,7 +58,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     BrowserModule,
     AppRoutingModule,
     FullCalendarModule,
-    HttpClientModule,
+    HttpClientModule  ,
     BrowserAnimationsModule,
     MatDialogModule,
     MatListModule,
@@ -73,7 +76,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatCardModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    FontAwesomeModule
   ],
   providers: [
     {
