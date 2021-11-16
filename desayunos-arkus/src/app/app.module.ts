@@ -32,6 +32,7 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -77,7 +78,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatSelectModule,
     ReactiveFormsModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FontAwesomeModule
   ],
   providers: [
     {

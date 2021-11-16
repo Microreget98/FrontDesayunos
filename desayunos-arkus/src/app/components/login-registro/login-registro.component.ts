@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
+import { UserDataService } from './user-data.service';
   
 interface Sede{
   value: string;
@@ -29,7 +31,11 @@ export class LoginRegistroComponent implements OnInit {
     // {value: 'col', viewValue: 'Colima'}
   ];
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private configService: ConfigService) {
+  constructor(private formBuilder: FormBuilder, 
+    private apiService: ApiService, 
+    private configService: ConfigService,
+    private userData: UserDataService,
+    private router: Router) {
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
@@ -56,7 +62,22 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   sendLogin(): any{
-    console.log(this.fLogin.value);
+    let userData:object = {
+      email:this.fLogin.get('loginEmail').value,
+      pass: this.fLogin.get('loginPassword').value
+    }
+    this.apiService.GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {...userData}).subscribe(
+      (response: object) => {
+        if (response){
+          console.log(response)
+          this.userData.addUserInfo(response)
+          this.router.navigate(['/home'])
+        }
+        else{
+          console.log("FAVOR DE INTENTAR DE NUEVO")
+        }
+      }
+    )
   }
   sendRegister(): any{
     this.fRegister.controls['name'].setValue(this.normalize(this.fRegister.value.name))
