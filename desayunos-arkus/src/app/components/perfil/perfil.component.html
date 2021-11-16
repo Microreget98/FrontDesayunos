@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize >
+<mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
     <div class="menuH">
       <button (click)="drawer.toggle()">
@@ -14,7 +14,7 @@
     <div class="perfilpos">
       <div class="perfil">{{firstchar}}</div>
     </div>
-    <form  action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
       <div class="Firstlast" disabled>
         <mat-form-field appearance="outline">
@@ -32,8 +32,7 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Enter your password</mat-label>
-          <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'"
-            formControlName="passw">
+          <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -74,5 +73,3 @@
   </div>
 
 </mat-drawer-container>
-
-

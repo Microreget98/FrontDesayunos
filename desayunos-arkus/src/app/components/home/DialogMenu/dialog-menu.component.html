@@ -6,7 +6,7 @@
   <div class="col-12 columnUsers">
     <mat-card *ngFor="let user of UserListPerDay">
       {{user.first_name + " " + user.last_name}}
-      <button mat-button color="primary">
+      <button mat-button color="primary" (click)="handleDeleteUser(user.id_user)">
         <fa-icon [icon]="faTimes"></fa-icon>
       </button>
     </mat-card>

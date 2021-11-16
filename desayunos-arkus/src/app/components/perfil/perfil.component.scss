@@ -1,3 +1,7 @@
+// .mat-drawer-container{
+//   z-index: 2;
+// }
+
 /*El Apartado De La  Letra Del Ususario y su vista*/
 .perfilpos {
   display: flex;
@@ -39,7 +43,6 @@
   height: 100%;
   align-items: flex-start;
   justify-content: flex-end;
-  
 }
 //Dise;o del Menu
 .menuH {
@@ -61,11 +64,10 @@
 }
 
 .menuH button svg:hover {
-  
   background-color: rgba(73, 72, 72, 0.247);
   border-radius: 10px;
 }
-.menuH button svg:active{
+.menuH button svg:active {
   fill: red;
 }
 
@@ -81,12 +83,11 @@
   align-items: center;
 }
 
-.cerraSe{
+.cerraSe {
   position: relative;
- text-align: center; 
- top: 40px;
- 
+  text-align: center;
+  top: 40px;
 }
-.cerraSe a{
+.cerraSe a {
   color: gray;
 }

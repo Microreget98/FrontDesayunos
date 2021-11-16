@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
   options: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
-      center: 'title',
-      // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      center: '',
+      right: 'title'
     },
     initialView: 'dayGridMonth',
     weekends: true,
@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
     selectMirror: true,
     dayMaxEvents: true,
     dateClick: this.handleDateClick.bind(this),
-    height: "100%"
   };
 
   constructor(public dialog: MatDialog, private userData: UserDataService) {  }

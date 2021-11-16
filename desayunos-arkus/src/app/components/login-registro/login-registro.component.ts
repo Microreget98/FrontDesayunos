@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
+import { ApiService } from '../../core/api.service'
+import { ConfigService } from '../../core/config.service';
   
 interface Sede{
   value: string;
@@ -22,11 +25,11 @@ export class LoginRegistroComponent implements OnInit {
   selectedValue: string;
   sedes: Sede[] = [
     {value: 'mty', viewValue: 'Monterrey'},
-    {value: 'gdl', viewValue: 'Guadalajara'},
-    {value: 'col', viewValue: 'Colima'}
+    // {value: 'gdl', viewValue: 'Tijuana'},
+    // {value: 'col', viewValue: 'Colima'}
   ];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService, private configService: ConfigService) {
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
@@ -51,11 +54,48 @@ export class LoginRegistroComponent implements OnInit {
     })
 
   }
+
   sendLogin(): any{
     console.log(this.fLogin.value);
   }
   sendRegister(): any{
-    console.log(this.fRegister.value);
+    this.fRegister.controls['name'].setValue(this.normalize(this.fRegister.value.name))
+    this.fRegister.controls['lastName'].setValue(this.normalize(this.fRegister.value.lastName))
+    let userData = {
+      id_user_type: 2,
+      first_name: this.fRegister.value.name,
+      last_name:  this.fRegister.value.lastName,
+      dob: this.fRegister.value.dob,
+      email: this.fRegister.value.registerEmail,
+      pass: this.fRegister.value.registerPassword,
+      location: this.fRegister.value.sede,
+      is_active: true
+    }
+    this.apiService.PostData(`${this.configService.config.apiUrl}/api/users`, {...userData}).subscribe(
+      (response) => {
+        console.log(response)
+      },
+      (err) => {
+        // ERROR QUE VIENE DESDE BASE DE DATOS
+        err.error
+      }
+    )
+    // console.log(this.fRegister.value);
+  }
+  normalize(str:string):string{
+    let normstr = str.split(' ');
+    for (const iterator of normstr) {
+      normstr[normstr.indexOf(iterator)] = iterator.charAt(0).toUpperCase() + iterator.slice(1).toLowerCase()
+    }
+    str = '';
+    for(const iterator of normstr){
+      str += iterator;
+      str += ' ';
+    }
+    try {
+      str = str.trim();
+    } catch (error) { }
+    return str
   }
   loginEmailErrorMessage(){
     if (this.loginEmail.hasError('required')) {
