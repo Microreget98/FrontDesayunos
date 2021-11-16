@@ -1,33 +1,13 @@
-body {
-  background-color: darken(white, 6%);
-  font-family: "Roboto", sans-serif;
-  position: relative;
-}
-/*El Apartado De en Nav De Arriba*/
-
-// .cajon2 {
-//   display: flex;
-//   flex-direction: row;
-// }
-
-// .caja {
-//   display: block;
-// }
-
 /*El Apartado De La  Letra Del Ususario y su vista*/
 .perfilpos {
   display: flex;
   justify-content: center;
 }
-.Botonhamb {
-  margin-top: 15px;
-  margin-right: 5px;
-  border: none;
-}
+
 .perfil {
   width: 10rem;
   height: 10rem;
-  margin-top: 1%;
+
   border-radius: 50%;
   background: red;
   display: flex;
@@ -36,11 +16,77 @@ body {
   text-align: center;
   font-size: 600%;
 }
-.offcanvas-end {
-  width: 50%;
+
+.Firstlast {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+
+  margin-top: 20px;
 }
 
-.Firstlast{
+.example-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.example-sidenav-content {
   display: flex;
-  flex-direction: row;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: flex-end;
+  
+}
+//Dise;o del Menu
+.menuH {
+  display: flex;
+  justify-content: flex-end;
+  top: 30px;
+  margin: auto;
+}
+.menuH button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+}
+.menuH button svg {
+  fill: rgb(0, 0, 0);
+  transition: 0.2s;
+}
+
+.menuH button svg:hover {
+  
+  background-color: rgba(73, 72, 72, 0.247);
+  border-radius: 10px;
+}
+.menuH button svg:active{
+  fill: red;
+}
+
+.example-sidenav {
+  padding: 90px;
+  width: 25%;
+}
+
+//Separacion De Botones Del Perfil
+.EnvEdi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cerraSe{
+  position: relative;
+ text-align: center; 
+ top: 40px;
+ 
+}
+.cerraSe a{
+  color: gray;
 }

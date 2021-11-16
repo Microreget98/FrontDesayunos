@@ -8,7 +8,7 @@
           <div>
               <mat-form-field appearance="outline" color="accent">
                   <mat-label>Correo</mat-label>
-                  <input matInput type="text" formControlName="loginEmail">
+                  <input matInput type="email" placeholder="usuario@arkus.com" formControlName="loginEmail">
                   <mat-error *ngIf="loginEmail.invalid">{{loginEmailErrorMessage()}}</mat-error>
               </mat-form-field>
           </div>
@@ -31,20 +31,26 @@
               <mat-form-field appearance="outline" color="accent">
                   <mat-label>Nombre</mat-label>
                   <input matInput type="text" formControlName="name">
+                  <mat-error *ngIf="name.invalid">{{registerNameErrorMessage()}}</mat-error>
               </mat-form-field>
           </div>
           <div>
               <mat-form-field appearance="outline" color="accent">
                   <mat-label>Apellido</mat-label>
                   <input matInput type="text" formControlName="lastName">
+                  <mat-error *ngIf="lastName.invalid">{{registerLastnameErrorMessage()}}</mat-error>
               </mat-form-field>
           </div>
           <div>
               <mat-form-field appearance="outline" color="accent">
                   <mat-label>Fecha de Nacimiento</mat-label>
                   <input matInput [matDatepicker]="datepicker" formControlName="dob">
+              <mat-form-field appearance="outline">
+                  <mat-label>Fecha de Nacimiento >>></mat-label>
+                  <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" [disabled]="true" formControlName="dob">
+                  <mat-error *ngIf="dob.invalid">{{registerDobErrorMessage()}}</mat-error>
                   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-                  <mat-datepicker #datepicker disabled="false"></mat-datepicker>
+                  <mat-datepicker #datepicker startView="multi-year" disabled="false"></mat-datepicker>
               </mat-form-field>
           </div>
           <div>
@@ -53,12 +59,13 @@
                   <mat-select [formGroup]="fRegister" name="sede" formControlName="sede">
                   <mat-option *ngFor="let sede of sedes" [value]="sede.value">{{sede.viewValue}}</mat-option>
                   </mat-select>
+                  <mat-error *ngIf="sede.invalid">{{registerSedeErrorMessage()}}</mat-error>
               </mat-form-field>
           </div>
           <div>
               <mat-form-field appearance="outline" color="accent">
                   <mat-label>Correo</mat-label>
-                  <input matInput type="text" formControlName="registerEmail">
+                  <input matInput type="email" placeholder="usuario@arkus.com" formControlName="registerEmail">
                   <mat-error *ngIf="registerEmail.invalid">{{registerEmailErrorMessage()}}</mat-error>
               </mat-form-field>
           </div>

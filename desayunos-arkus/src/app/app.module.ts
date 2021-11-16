@@ -1,6 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
@@ -23,12 +24,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -48,13 +51,14 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppComponent,
     LoginRegistroComponent,
     HomeComponent,
-    DialogMenu
+    DialogMenu,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FullCalendarModule,
-    HttpClientModule,
+    HttpClientModule  ,
     BrowserAnimationsModule,
     MatDialogModule,
     MatListModule,
@@ -66,6 +70,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
+    MatSidenavModule,
+    MatIconModule,
     MatFormFieldModule,
     MatCardModule,
     MatSelectModule,

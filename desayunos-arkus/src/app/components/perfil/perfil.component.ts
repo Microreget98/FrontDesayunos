@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 
@@ -9,26 +9,36 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-
+  hide = true;
+  disprop: boolean = true;
   fnameandlas: boolean = true;
+  showFiller = false;
 
-  perfilForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    sedes: new FormControl(''),
-  })
+  perfilForm = new FormGroup({})
 
+  firstchar: string = "";
+
+  //Valida Todo Los inputs
   constructor(private fb: FormBuilder) {
     this.perfilForm = this.fb.group({
       firstName: [{value:null, disabled: true}, [Validators.required]],
       lastName: ['', [Validators.required]],
-      sedes: ['']
+      sedes: ['', [Validators.required]],
+      passw: ['', [Validators.required]],
+      datePo: ['', [Validators.required]]
+
     });
 
+    // this.firstchar = this.fname.charAt(0);
 
   }
 
   ngOnInit(): void {
+    this.firstchar = String(this.perfilForm.get("firstName").value).charAt(0);
+    for (const iterator of Object.keys(this.perfilForm.controls)) {
+      this.perfilForm.get(`${iterator}`).disable();
+    }
+    console.log(this.perfilForm.controls)
   }
 
   updateProfile() {
@@ -38,21 +48,21 @@ export class PerfilComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.perfilForm.value);
+    let PerfilData = {
+      
+    }
+    console.log(this.perfilForm.value);
   }
 
-
-
   buttonD() {
-    // this.perfilForm.get('firstName').enable();
-    let controls = this.perfilForm.controls
-    for (const iterator of Object.keys(controls)) {
+    
+    for (const iterator of Object.keys(this.perfilForm.controls)) {
       if (this.perfilForm.get(`${iterator}`).disabled) {
         this.perfilForm.get(`${iterator}`).enable();
       } else {
         this.perfilForm.get(`${iterator}`).disable();
       }
     }
-    
   }
+
 }

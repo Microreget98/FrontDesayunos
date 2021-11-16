@@ -6,6 +6,7 @@ import { CalendarUsers } from '../models/CalendarUsers';
 import { DialogData } from '../models/DialogData';
 import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'dialog-menu',
@@ -13,6 +14,7 @@ import { ConfigService } from '../../../core/config.service';
     styleUrls: ['./dialog-menu.component.scss']
   })
   export class DialogMenu implements OnInit{
+    faTimes = faTimes
 
     panelOpenState = false;
 
@@ -48,13 +50,12 @@ import { ConfigService } from '../../../core/config.service';
 
     handleSaveButton(){
       const dataToPost = {
-        // id_register_day: 0,
         id_user: this.data.userId,
         date: new Date(this.data.dateStr),
-        // id_dish: parseInt(this.selectedDishId[0].value),
-        is_active: true
+        is_active: true,
+        was_deleted: false
       }
-
+      console.log(dataToPost)
       this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar`,dataToPost).pipe(
         map((res) => {
           this.loadData();
