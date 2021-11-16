@@ -2,13 +2,11 @@
     height: 100%;
 }
 .fc{
-    position: relative;
+    // position: relative;
     padding: 1em;
-    // padding-top: 2em;
     height: 100%;
-    // width: 95%;
-    // z-index: -1;
+    // padding-right: 2em;
 }
-.fc-toolbar-title{
-    padding-right: 5rem;
+.fc .fc-toolbar.fc-header-toolbar{
+    padding-right: 2em;
 }

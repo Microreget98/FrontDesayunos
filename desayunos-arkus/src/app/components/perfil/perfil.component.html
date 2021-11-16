@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="nav-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
     <div class="menuH">
       <button (click)="drawer.toggle()">
@@ -64,12 +64,11 @@
       </div>
     </form>
   </mat-drawer>
-  <div class="menuH">
-    <button (click)="drawer.toggle()">
-      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
-        <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path>
-      </svg>
-    </button>
-  </div>
-
 </mat-drawer-container>
+<div class="menuH">
+  <button (click)="drawer.toggle()">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
+      <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path>
+    </svg>
+  </button>
+</div>

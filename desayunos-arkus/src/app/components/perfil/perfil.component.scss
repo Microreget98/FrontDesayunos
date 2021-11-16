@@ -1,6 +1,11 @@
-// .mat-drawer-container{
-//   z-index: 2;
+// .mat-drawer-opened{
+//   z-index: 1;
 // }
+
+.mat-drawer-container {
+  visibility: hidden;
+  // z-index: 1;
+}
 
 /*El Apartado De La  Letra Del Ususario y su vista*/
 .perfilpos {
@@ -31,8 +36,9 @@
   margin-top: 20px;
 }
 
-.example-container {
+.nav-container {
   position: fixed;
+  z-index: 4;
   width: 100%;
   height: 100%;
   background-color: transparent;
