@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
+  isAdmin=this.userData.getUserType();
+
   // userInfo = {
   //   id_user: 2,
   //   first_name: 'Angel Servando',
@@ -43,7 +45,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // console.log(this.userdata)
   }
 
   handleDateClick(info){
