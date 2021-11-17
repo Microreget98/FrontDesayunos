@@ -12,19 +12,19 @@ import { UserDataService } from '../login-registro/user-data.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  userInfo = {
-    id_user: this.userData.userData[0].id_user,
-    first_name: this.userData.userData[0].first_name,
-    last_name: this.userData.userData[0].last_name
-  }
-
-  isAdmin=this.userData.getUserType();
-
   // userInfo = {
-  //   id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
+  //   id_user: this.userData.userData[0].id_user,
+  //   first_name: this.userData.userData[0].first_name,
+  //   last_name: this.userData.userData[0].last_name
   // }
+
+  // isAdmin=this.userData.getUserType();
+
+  userInfo = {
+    id_user: 2,
+    first_name: 'Angel Servando',
+    last_name: 'Quiñones Garcia'
+  }
 
   options: CalendarOptions = {
     headerToolbar: {
@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
   }
 
   handleDateClick(info){
-    console.log(info.dateStr);
     const dialogRef = this.dialog.open(DialogMenu, {
       width: '800px',
       height: '500px',
