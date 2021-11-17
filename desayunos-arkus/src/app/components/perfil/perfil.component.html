@@ -1,64 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="Botonhamb " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-      aria-controls="offcanvasScrolling">
-      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list"
-        viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-      </svg></button>
-
-  </div>
-
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="100"
-    id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Bienvendido</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<mat-drawer-container class="nav-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
+    <div class="menuH">
+      <button (click)="drawer.toggle()">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
+          <path
+            d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 
+              27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z">
+          </path>
+        </svg>
+      </button>
     </div>
-    <div class="offcanvas-body">
-      <div class="perfilpos">
-        <div class="perfil">A</div>
+
+    <div class="perfilpos">
+      <div class="perfil">{{firstchar}}</div>
+    </div>
+    <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+
+      <div class="Firstlast" disabled>
+        <mat-form-field appearance="outline">
+          <mat-label for="fname">First name:</mat-label>
+          <input matInput type="text" id="fname" name="fname" formControlName="firstName"><br>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label for="lname">Last name:</mat-label>
+          <input matInput type="text" id="lname" name="lname" formControlName="lastName"><br>
+          <mat-error>
+            <!-- {{mensajerror}}-->
+            First Name is Required!
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label for="">Sedes:</mat-label>
+          <select matNativeControl name="curso" formControlName="sedes">
+            <option value="" disabled>Elige una opción</option>
+            <option>Monterrey</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>birthday date</mat-label>
+          <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" readonly>
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3></mat-datepicker>
+        </mat-form-field>
       </div>
 
-      <!-- <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()"> -->
-       <div class="Firstlast">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" formControlName="firstName"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" formControlName="lastName"><br>
+      <div class="EnvEdi">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
+
+        <button mat-raised-button color="primary" type="submit" (click)="buttonD()">Edit</button>
       </div>
-        <label for="">Sedes:</label><br>
-        <select name="curso" formControlName="sedes">
-       
-          <option value="" disabled>Elige una opción</option>
-    
-          <option >Monterrey</option>
-              <option >Chihuahua</option>
-              <option >Durango</option>
-              <option >Durango</option>
-    
-        </select><br><br>
-        <input type="date" max="maxdate" ><br>
-        <button type="submit"  [disabled]="!perfilForm.valid">submit</button>
-      <!-- </form> -->
-
-     
-
-    </div>
-  </div>
-
-
-</body>
-
-</html>
+      <div class="cerraSe">
+        <a href="#">Sign Out</a>
+      </div>
+    </form>
+  </mat-drawer>
+</mat-drawer-container>
+<div class="menuH">
+  <button (click)="drawer.toggle()">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
+      <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path>
+    </svg>
+  </button>
+</div>

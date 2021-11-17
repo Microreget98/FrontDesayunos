@@ -18,15 +18,17 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
-isAdmin=this.userData.getUserType();
-
-
+  // userInfo = {
+  //   id_user: 2,
+  //   first_name: 'Angel Servando',
+  //   last_name: 'Quiñones Garcia'
+  // }
 
   options: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      // right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: ''
     },
     initialView: 'dayGridMonth',
     weekends: true,
@@ -35,14 +37,13 @@ isAdmin=this.userData.getUserType();
     selectMirror: true,
     dayMaxEvents: true,
     dateClick: this.handleDateClick.bind(this),
-    height: "100%"
   };
 
   constructor(public dialog: MatDialog, private userData: UserDataService) {  }
 
   ngOnInit(): void {
+    
     // console.log(this.userdata)
-    console.log(this.isAdmin);
   }
 
   handleDateClick(info){
