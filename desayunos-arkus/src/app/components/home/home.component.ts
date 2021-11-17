@@ -18,11 +18,13 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
-//  userInfo = {
-//    id_user: 2,
-//    first_name: 'Angel Servando',
-//    last_name: 'Quiñones Garcia'
-//   }
+  isAdmin=this.userData.getUserType();
+
+  // userInfo = {
+  //   id_user: 2,
+  //   first_name: 'Angel Servando',
+  //   last_name: 'Quiñones Garcia'
+  // }
 
   options: CalendarOptions = {
     headerToolbar: {
@@ -43,7 +45,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     
-    // console.log(this.userdata)
   }
 
   handleDateClick(info){
