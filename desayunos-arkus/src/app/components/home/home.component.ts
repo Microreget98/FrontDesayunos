@@ -18,11 +18,11 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
-  // userInfo = {
-  //   id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
-  // }
+//  userInfo = {
+//    id_user: 2,
+//    first_name: 'Angel Servando',
+//    last_name: 'Quiñones Garcia'
+//   }
 
   options: CalendarOptions = {
     headerToolbar: {
