@@ -33,6 +33,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -53,7 +54,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     LoginRegistroComponent,
     HomeComponent,
     DialogMenu,
-    PerfilComponent
+    PerfilComponent,
+    VistaDeUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ReactiveFormsModule,
     MatTabsModule,
     MatToolbarModule,
-    FontAwesomeModule
+    FontAwesomeModule, 
   ],
   providers: [
     {
