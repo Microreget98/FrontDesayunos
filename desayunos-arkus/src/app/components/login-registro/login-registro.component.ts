@@ -129,7 +129,7 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Algo salió mal'
+          text: 'Algo salió mal' 
         })
       }
     )

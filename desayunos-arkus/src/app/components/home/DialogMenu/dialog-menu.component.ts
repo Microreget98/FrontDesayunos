@@ -86,9 +86,13 @@ export class DialogMenu implements OnInit {
   }
 
   handleDeleteUser(id_user) {
+    Swal.fire({
+      icon: 'success',
+      title: 'asistencia eliminada'
+    })
     const deleteParams = {
       id_user: id_user,
-      date: this.data.dateStr
+      date: this.data.dateStr 
     }
 
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`, {}, { params: deleteParams }).pipe(
