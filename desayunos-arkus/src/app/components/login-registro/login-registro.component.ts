@@ -46,15 +46,15 @@ export class LoginRegistroComponent implements OnInit {
   ngOnInit(): void {
     this.fLogin = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
-      loginPassword: ['',[Validators.required, Validators.minLength(8)]]
+      loginPassword: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
     });
 
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       registerEmail: ['', [Validators.required, Validators.email]],
-      registerPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
+      registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPassword: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
     })
@@ -128,7 +128,7 @@ export class LoginRegistroComponent implements OnInit {
     if (this.loginPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.loginPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return this.loginPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
   registerNameErrorMessage(){
     if(this.name.hasError('required')) {
@@ -164,13 +164,13 @@ export class LoginRegistroComponent implements OnInit {
     if (this.registerPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.registerPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return this.registerPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
   confirmPasswordErrorMessage(){
     if (this.confirmPassword.hasError('required')) {
       return 'La contraseña debe confirmarse';
     }
-    return this.confirmPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return this.confirmPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
   get loginEmail() { return this.fLogin.get('loginEmail');}
   get loginPassword() { return this.fLogin.get('loginPassword');}
