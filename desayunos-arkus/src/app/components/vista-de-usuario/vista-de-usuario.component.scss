@@ -17,8 +17,8 @@
 .style2 {
 
   align-items: center;
-  display: block;
-  position: relative;
+  display: flex;
+  //position: relative;
   min-height: 70px;
   line-height: 20px;
   padding: 0 20px;
@@ -26,6 +26,7 @@
   border-radius: 20px;
   margin: 0 30px 10px 0;
   background-color: #fff;
+  justify-content: space-between;
 }
 
 // .mat-card-avatar{
@@ -34,12 +35,16 @@
 // }
 
 .mat-card-header{
-  display: flex;
+  display: contents;
 }
 
 .mat-card-title{
-  display: flex;
+  display: contents;
   padding: 8px;
+}
+
+.roles {
+  display: contents;
 }
 
 
