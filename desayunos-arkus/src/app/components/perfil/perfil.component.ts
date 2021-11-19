@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -62,8 +63,28 @@ export class PerfilComponent implements OnInit {
         this.perfilForm.get(`${iterator}`).enable();
       } else {
         this.perfilForm.get(`${iterator}`).disable();
+      
       }
     }
   }
 
 }
+
+//#region swalalertmodificacion_usuario
+//mensaje de alerta modificacion de usuario correcta
+  // Swal.fire({
+  //         icon: 'success',
+  //         title: 'Usuario modificado con exito',
+  //         showConfirmButton: false,
+  //         timer: 1500
+  //       })
+//#endregion
+//#region swalalertmodificacion_usuario_error
+//mensaje de alerta modificacion de usuario no modificada error 
+   // Swal.fire({
+  //         icon: 'error',
+  //         title: 'Usuario no modificado',
+  //         showConfirmButton: false,
+  //         timer: 1500
+  //       })
+//#endregion

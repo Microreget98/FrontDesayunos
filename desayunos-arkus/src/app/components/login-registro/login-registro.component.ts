@@ -5,6 +5,7 @@ import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
+import Swal from 'sweetalert2';
   
 interface Sede{
   value: string;
@@ -18,6 +19,7 @@ interface Sede{
 })
 export class LoginRegistroComponent implements OnInit {
 
+  titularAlerta:string='';
   public fLogin: FormGroup;
   public fRegister: FormGroup;
 
@@ -57,6 +59,7 @@ export class LoginRegistroComponent implements OnInit {
       confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
+      
     })
 
   }
@@ -68,17 +71,27 @@ export class LoginRegistroComponent implements OnInit {
     }
     this.apiService.GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {...userData}).subscribe(
       (response: object) => {
-        if (response){
+          if (response){
           console.log(response)
           this.userData.addUserInfo(response)
           this.router.navigate(['/home'])
+          //Mensaje una vez logeado exitosamente
+          Swal.fire({
+            icon: 'success',
+            title: 'Buenos dìas :)',
+            text: 'Bienvenido'
+          })
+
         }
         else{
           console.log("FAVOR DE INTENTAR DE NUEVO")
+         
         }
+        
       }
     )
   }
+  
   sendRegister(): any{
     this.fRegister.controls['name'].setValue(this.normalize(this.fRegister.value.name))
     this.fRegister.controls['lastName'].setValue(this.normalize(this.fRegister.value.lastName))
@@ -91,14 +104,33 @@ export class LoginRegistroComponent implements OnInit {
       pass: this.fRegister.value.registerPassword,
       location: this.fRegister.value.sede,
       is_active: true
+      
     }
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/users`, {...userData}).subscribe(
       (response) => {
-        console.log(response)
+        console.log(response),
+        //Mensaje existoso al REGISTRARSE 
+        Swal.fire({
+          title: 'Registrado con éxito',
+          icon: 'success',
+          timer: 1500,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
       },
       (err) => {
         // ERROR QUE VIENE DESDE BASE DE DATOS
-        err.error
+        err.error,
+        //Mensaje de error al intentar REGISTRARSE
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salió mal' 
+        })
       }
     )
     // console.log(this.fRegister.value);
