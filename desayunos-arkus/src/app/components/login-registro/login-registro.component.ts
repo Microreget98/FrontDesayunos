@@ -5,8 +5,12 @@ import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
+<<<<<<< HEAD
 import Swal from 'sweetalert2';
   
+=======
+
+>>>>>>> bfab616f09f08412689a22e642222f60ebe3e38e
 interface Sede{
   value: string;
   viewValue: string;
@@ -37,12 +41,16 @@ export class LoginRegistroComponent implements OnInit {
     private apiService: ApiService, 
     private configService: ConfigService,
     private userData: UserDataService,
-    private router: Router) {
+    private router: Router,) {
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
     this.maxDate = new Date(currentYear - 18, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 18 años
 
+  }
+
+  cookieSession(){
+    this.userData.setCookie();
   }
 
   ngOnInit(): void {
@@ -59,9 +67,13 @@ export class LoginRegistroComponent implements OnInit {
       confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
+<<<<<<< HEAD
       
     })
 
+=======
+    });
+>>>>>>> bfab616f09f08412689a22e642222f60ebe3e38e
   }
 
   sendLogin(): any{
@@ -74,6 +86,7 @@ export class LoginRegistroComponent implements OnInit {
           if (response){
           console.log(response)
           this.userData.addUserInfo(response)
+          this.userData.setCookie()
           this.router.navigate(['/home'])
           //Mensaje una vez logeado exitosamente
           Swal.fire({
@@ -128,12 +141,11 @@ export class LoginRegistroComponent implements OnInit {
         //Mensaje de error al intentar REGISTRARSE
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Algo salió mal' 
+          title: 'Datos incorrectos',
+          text: 'Favor de revisar los datos introducidos' 
         })
       }
     )
-    // console.log(this.fRegister.value);
   }
   normalize(str:string):string{
     let normstr = str.split(' ');
