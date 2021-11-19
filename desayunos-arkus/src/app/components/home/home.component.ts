@@ -12,17 +12,12 @@ import { UserDataService } from '../login-registro/user-data.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
   userInfo = {
-    id_user: this.userData.userData[0].id_user,
-    first_name: this.userData.userData[0].first_name,
-    last_name: this.userData.userData[0].last_name
+    id_user: 0,
+    first_name:'',
+    last_name: '' 
   }
-
-  // userInfo = {
-  //   id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
-  // }
 
   options: CalendarOptions = {
     headerToolbar: {
@@ -42,8 +37,15 @@ export class HomeComponent implements OnInit {
   constructor(public dialog: MatDialog, private userData: UserDataService) {  }
 
   ngOnInit(): void {
+    this.userData.ngOnInit();
+    let parsedData = JSON.parse(this.userData.userDataString);
+    console.log(parsedData)
+    this.userInfo ={
+      id_user: parsedData.id_user,
+      first_name: parsedData.first_name,
+      last_name: parsedData.last_name
+    }
     
-    // console.log(this.userdata)
   }
 
   handleDateClick(info){

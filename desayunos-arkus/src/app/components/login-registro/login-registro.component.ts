@@ -5,7 +5,7 @@ import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
-  
+
 interface Sede{
   value: string;
   viewValue: string;
@@ -35,12 +35,16 @@ export class LoginRegistroComponent implements OnInit {
     private apiService: ApiService, 
     private configService: ConfigService,
     private userData: UserDataService,
-    private router: Router) {
+    private router: Router,) {
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
     this.maxDate = new Date(currentYear - 18, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 18 años
 
+  }
+
+  cookieSession(){
+    this.userData.setCookie();
   }
 
   ngOnInit(): void {
@@ -57,8 +61,7 @@ export class LoginRegistroComponent implements OnInit {
       confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
-    })
-
+    });
   }
 
   sendLogin(): any{
@@ -71,6 +74,7 @@ export class LoginRegistroComponent implements OnInit {
         if (response){
           console.log(response)
           this.userData.addUserInfo(response)
+          this.userData.setCookie()
           this.router.navigate(['/home'])
         }
         else{
@@ -97,11 +101,9 @@ export class LoginRegistroComponent implements OnInit {
         console.log(response)
       },
       (err) => {
-        // ERROR QUE VIENE DESDE BASE DE DATOS
         err.error
       }
     )
-    // console.log(this.fRegister.value);
   }
   normalize(str:string):string{
     let normstr = str.split(' ');

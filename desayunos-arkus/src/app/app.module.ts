@@ -33,6 +33,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CookieService } from 'ngx-cookie-service';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -89,7 +90,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
       deps: [ConfigService]
     },
     ApiService,
-    ConfigService
+    ConfigService,
+    CookieService
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogMenu]
