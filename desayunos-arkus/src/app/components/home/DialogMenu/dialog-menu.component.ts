@@ -8,6 +8,8 @@ import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ContentObserver } from '@angular/cdk/observers';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'dialog-menu',
@@ -16,6 +18,8 @@ import { ContentObserver } from '@angular/cdk/observers';
 })
 export class DialogMenu implements OnInit {
   faTimes = faTimes
+  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1])-1, parseInt(this.data.dateStr.split('-')[2]))
+  ActDi: Date = new Date();
 
   panelOpenState = false;
 
@@ -51,13 +55,22 @@ export class DialogMenu implements OnInit {
     this.selectedDishId = selectedOptions;
   }
 
+
   handleSaveButton() {
+     //Mensaje una vez Registrado para el desayuno exitosamente 
+     Swal.fire({
+      icon: 'success',
+      title: 'Registrado exitosamente',
+      text: 'Gracias ;)'
+    })
     const dataToPost = {
       id_user: this.data.userId,
       date: new Date(this.data.dateStr),
       is_active: true,
       was_deleted: false
-    }
+       }
+
+
     console.log(dataToPost)
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
       map((res) => {
@@ -76,9 +89,13 @@ export class DialogMenu implements OnInit {
   }
 
   handleDeleteUser(id_user) {
+    Swal.fire({
+      icon: 'success',
+      title: 'asistencia eliminada'
+    })
     const deleteParams = {
       id_user: id_user,
-      date: this.data.dateStr
+      date: this.data.dateStr 
     }
 
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`, {}, { params: deleteParams }).pipe(

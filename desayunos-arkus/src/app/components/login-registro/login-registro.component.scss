@@ -1,3 +1,12 @@
+.mat-tab-group{
+    margin-top: 10em;
+    display: flexbox;
+    border-radius: 2%;
+    align-items: stretch;
+    max-width: 30%;
+    margin-left: 35%;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 20, 0.774);    
+}
 .mat-tab-group.mat-primary{
     min-height: 20vh;
     display: flex;
@@ -5,11 +14,21 @@
     justify-content: center;
 }
 .mat-raised-button{
-    margin-left: 50px;
+    margin-left: 145px;
+    width: 30%;
     background-color: #b71c1c;
+    margin-bottom: 20px;
 }
 .mat-toolbar{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+td{
+    padding-right: 10px;
+    padding-top: 10px;
+  }
+.texbx{
+    width: 100%;
+    padding-top: 10px;
 }
