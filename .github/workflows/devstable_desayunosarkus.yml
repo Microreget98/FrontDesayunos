@@ -49,6 +49,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'desayunosarkus'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_18B0F450CE78482A8F6B08518F869768 }}
           package: ./dist/desayunos-arkus
