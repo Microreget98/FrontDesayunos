@@ -4,9 +4,6 @@
 name: Build and deploy Node.js app to Azure Web App - desayunosarkus
 
 on:
-  push:
-    branches:
-      - devstable
   workflow_dispatch:
 
 jobs:
@@ -14,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@devstable
 
       - name: Set up Node.js version
         uses: actions/setup-node@v1
@@ -24,8 +21,8 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm install
-          ng build 
-          ng test
+          npm run build --prod
+        working-directory: .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
