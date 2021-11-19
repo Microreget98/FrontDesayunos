@@ -18,13 +18,7 @@ export class HomeComponent implements OnInit {
     last_name: this.userData.userData[0].last_name
   }
 
-  isAdmin=this.userData.getUserType();
-
-  // userInfo = {
-  //  id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
-   //}
+  // isAdmin=this.userData.getUserType();
 
   options: CalendarOptions = {
     headerToolbar: {
@@ -48,7 +42,6 @@ export class HomeComponent implements OnInit {
   }
 
   handleDateClick(info){
-    console.log(info.dateStr);
     const dialogRef = this.dialog.open(DialogMenu, {
       width: '800px',
       height: '500px',
