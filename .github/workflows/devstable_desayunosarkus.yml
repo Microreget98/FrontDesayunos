@@ -51,4 +51,4 @@ jobs:
           app-name: 'desayunosarkus'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_18B0F450CE78482A8F6B08518F869768 }}
-          package: .
+          package: ./dist/desayunos-arkus
