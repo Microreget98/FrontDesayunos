@@ -10,6 +10,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ContentObserver } from '@angular/cdk/observers';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'dialog-menu',
   templateUrl: 'dialog-menu.component.html',
@@ -17,6 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class DialogMenu implements OnInit {
   faTimes = faTimes
+  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1])-1, parseInt(this.data.dateStr.split('-')[2]))
+  ActDi: Date = new Date();
 
   panelOpenState = false;
 
