@@ -68,11 +68,11 @@ export class DialogMenu implements OnInit {
         console.log(error)
       }
     );
-    this.apiService.PutData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
-      map((res) => {
-        this.loadData();
-      })
-    ).subscribe();
+    // this.apiService.PutData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
+    //   map((res) => {
+    //     this.loadData();
+    //   })
+    // ).subscribe();
   }
 
   handleDeleteUser(id_user) {

@@ -1,6 +1,6 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,9 +30,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs'
 import { PerfilComponent } from './components/perfil/perfil.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -59,7 +60,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     BrowserModule,
     AppRoutingModule,
     FullCalendarModule,
-    HttpClientModule  ,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatListModule,
@@ -79,7 +80,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ReactiveFormsModule,
     MatTabsModule,
     MatToolbarModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SweetAlert2Module
   ],
   providers: [
     {

@@ -97,3 +97,9 @@
 .cerraSe a {
   color: gray;
 }
+
+// Fade in out
+#fadeinout p{
+  opacity: 0;
+  transition: opacity 1 2s;
+}

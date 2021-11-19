@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { UserDataService } from '../login-registro/user-data.service';
 
 
 @Component({
@@ -9,8 +10,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  zindex = 1;
-  hide = true;
+  // fadeinout = "fadeinout"
+  hide:boolean = true;
   disprop: boolean = true;
   fnameandlas: boolean = true;
   showFiller = false;
@@ -20,9 +21,18 @@ export class PerfilComponent implements OnInit {
   firstchar: string = "";
 
   //Valida Todo Los inputs
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userData: UserDataService,) {
+    // this.perfilForm = this.fb.group({
+    //   firstName: [this.userData.userData[0].first_name, [Validators.required]],
+    //   lastName: [this.userData.userData[0].last_name, [Validators.required]],
+    //   sedes: [this.userData.userData[0].location, [Validators.required]],
+    //   passw: [null, [Validators.required]],
+    //   datePo: [this.userData.userData[0].dob, [Validators.required]]
+
+    // });
+
     this.perfilForm = this.fb.group({
-      firstName: [{value:null, disabled: true}, [Validators.required]],
+      firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       sedes: ['', [Validators.required]],
       passw: ['', [Validators.required]],
@@ -35,6 +45,7 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(typeof(this.userData.userData[0].last_name))
     this.firstchar = String(this.perfilForm.get("firstName").value).charAt(0);
     for (const iterator of Object.keys(this.perfilForm.controls)) {
       this.perfilForm.get(`${iterator}`).disable();
@@ -45,6 +56,10 @@ export class PerfilComponent implements OnInit {
   updateProfile() {
 
     console.log('perfilForm');
+
+  }
+
+  onClickFadeInOut(){
 
   }
 
