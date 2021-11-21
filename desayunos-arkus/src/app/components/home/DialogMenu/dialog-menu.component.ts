@@ -6,8 +6,7 @@ import { CalendarUsers } from '../models/CalendarUsers';
 import { DialogData } from '../models/DialogData';
 import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ContentObserver } from '@angular/cdk/observers';
+import { faTimes, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 
@@ -18,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class DialogMenu implements OnInit {
   faTimes = faTimes
+  faUser = faUserCircle
   inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1]) - 1, parseInt(this.data.dateStr.split('-')[2]))
   ActDi: Date = new Date();
 

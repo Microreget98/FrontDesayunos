@@ -26,20 +26,11 @@ export class PerfilComponent implements OnInit {
   firstchar: string = "";
 
   //Valida Todo Los inputs
-  constructor(private fb: FormBuilder, private userData: UserDataService, private router: Router, private apiService: ApiService,
-    private configService: ConfigService) {
-    // this.perfilForm = this.fb.group({
-    //   firstName: ['', [Validators.required]],
-    //   lastName: ['', [Validators.required]],
-    //   sedes: ['', [Validators.required]],
-    //   passw: ['', [Validators.required]],
-    //   datePo: ['', [Validators.required]]
-
-    // });
-
-    // this.firstchar = this.fname.charAt(0);
-
-  }
+  constructor(private fb: FormBuilder, 
+    private userData: UserDataService, 
+    private router: Router, 
+    private apiService: ApiService,
+    private configService: ConfigService) {}
 
   ngOnInit(): void {
     this.userData.ngOnInit();
@@ -110,10 +101,6 @@ export class PerfilComponent implements OnInit {
 
 }
 
-//#region swalalertmodificacion_usuario
-//mensaje de alerta modificacion de usuario correcta
-
-//#endregion
 //#region swalalertmodificacion_usuario_error
 //mensaje de alerta modificacion de usuario no modificada error 
    // Swal.fire({
