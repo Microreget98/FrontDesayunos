@@ -15,16 +15,10 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   userInfo = {
-    id_user: 2,
-    first_name: 'Angel Quinones',
-    last_name: 'Servando Garcia'
+    id_user: 0,
+    first_name: '',
+    last_name: ''
   }
-
-  // userInfo = {
-  //   id_user: 0,
-  //   first_name: '',
-  //   last_name: ''
-  // }
 
   // isAdmin=this.userData.getUserType();
 
