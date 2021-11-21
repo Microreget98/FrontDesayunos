@@ -40,7 +40,6 @@ export class DialogMenu implements OnInit {
   }
 
   loadData() {
-    // console.log(this.data.dateStr)
     this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`)
       .subscribe(
         {
@@ -61,7 +60,7 @@ export class DialogMenu implements OnInit {
     Swal.fire({
       icon: 'success',
       title: 'Registrado exitosamente',
-      text: 'Gracias ;)'
+      text: 'Gracias'
     })
     const dataToPost = {
       id_user: this.data.userId,
@@ -69,23 +68,19 @@ export class DialogMenu implements OnInit {
       is_active: true,
       was_deleted: false
     }
-
-
-    console.log(dataToPost)
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
       map((res) => {
         this.loadData();
       })
     ).subscribe(
       (error) => {
-        console.log(error)
       }
     );
-    this.apiService.PutData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
-      map((res) => {
-        this.loadData();
-      })
-    ).subscribe();
+    // this.apiService.PutData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
+    //   map((res) => {
+    //     this.loadData();
+    //   })
+    // ).subscribe();
   }
 
   handleDeleteUser(id_user) {
