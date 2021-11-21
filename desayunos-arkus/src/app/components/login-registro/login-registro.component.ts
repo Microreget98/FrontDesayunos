@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
+import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
-<<<<<<< HEAD
-import Swal from 'sweetalert2';
-  
-=======
 
->>>>>>> bfab616f09f08412689a22e642222f60ebe3e38e
 interface Sede{
   value: string;
   viewValue: string;
@@ -67,13 +62,7 @@ export class LoginRegistroComponent implements OnInit {
       confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
-<<<<<<< HEAD
-      
-    })
-
-=======
     });
->>>>>>> bfab616f09f08412689a22e642222f60ebe3e38e
   }
 
   sendLogin(): any{
@@ -84,23 +73,17 @@ export class LoginRegistroComponent implements OnInit {
     this.apiService.GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {...userData}).subscribe(
       (response: object) => {
           if (response){
-          console.log(response)
           this.userData.addUserInfo(response)
           this.userData.setCookie()
           this.router.navigate(['/home'])
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas :)',
+            title: 'Buenos dìas',
             text: 'Bienvenido'
           })
-
         }
-        else{
-          console.log("FAVOR DE INTENTAR DE NUEVO")
-         
-        }
-        
+        else{}
       }
     )
   }
@@ -121,7 +104,6 @@ export class LoginRegistroComponent implements OnInit {
     }
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/users`, {...userData}).subscribe(
       (response) => {
-        console.log(response),
         //Mensaje existoso al REGISTRARSE 
         Swal.fire({
           title: 'Registrado con éxito',

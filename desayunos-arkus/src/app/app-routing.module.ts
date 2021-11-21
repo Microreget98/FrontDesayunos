@@ -5,8 +5,8 @@ import { LoginRegistroComponent } from './components/login-registro/login-regist
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: LoginRegistroComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginRegistroComponent},
   { path: 'home', component: HomeComponent },
 ];
 

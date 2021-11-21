@@ -15,13 +15,6 @@
       <div class="perfil">{{firstchar}}</div>
     </div>
 
-    <!-- prueba -->
-    <!-- <div [id]="fadeinout">
-      <p>
-        Texto Fade In y OUT
-      </p>
-    </div> -->
-
     <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
       <div class="Firstlast" disabled>
@@ -68,7 +61,7 @@
         <button mat-raised-button color="primary" type="submit" (click)="buttonD()">Edit</button>
       </div>
       <div class="cerraSe">
-        <a href="#" >Sign Out</a>
+        <a href="" (click)="cerrarSesion()">Sign Out</a>
       </div>
     </form>
   </mat-drawer>

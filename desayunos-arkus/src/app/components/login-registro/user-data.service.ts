@@ -1,41 +1,46 @@
 import { Injectable } from '@angular/core';
 import { UserData } from './models/UserData';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService {
   userData: UserData[] = []
-  private cookie_name='';
-  private cookie_value='';
-  private all_cookies:any='';
-  userDataString:string 
-  
-  userType:Boolean;
+  private cookie_name = '';
+  private cookie_value = '';
+  private all_cookies: any = '';
+  userDataString: string
+
+  userType: Boolean;
 
 
-  addUserInfo(data){
+  addUserInfo(data) {
     this.userData.push(data)
   }
-  constructor( private cookieService:CookieService ){
+  constructor(private cookieService: CookieService, private router: Router) {
 
   }
 
-  setCookie(){
-    this.cookieService.set('name',JSON.stringify(this.userData[0]))
+  setCookie() {
+    this.cookieService.set('name', JSON.stringify(this.userData[0]))
   }
-  deleteCookie(){
+  deleteCookie() {
     this.cookieService.delete('name')
   }
-  deleteAll(){
+  deleteAll() {
     this.cookieService.deleteAll();
   }
 
-  ngOnInit():void{
-    this.cookie_name = this.cookieService.get('name');
-    this.userDataString = this.cookie_name
-    this.all_cookies = this.cookieService.getAll();
-    console.log(this.cookie_name)
+  ngOnInit(): void {
+    try{
+      this.cookie_name = this.cookieService.get('name');
+      this.userDataString = this.cookie_name
+      this.all_cookies = this.cookieService.getAll();
+    }catch{
+      this.router.navigate(['login'])
+    }
+    
   }
 }

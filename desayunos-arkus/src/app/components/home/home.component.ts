@@ -4,6 +4,7 @@ import { ApiService } from '../../core/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMenu } from './DialogMenu/dialog-menu.component';
 import { UserDataService } from '../login-registro/user-data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,11 @@ import { UserDataService } from '../login-registro/user-data.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   userInfo = {
     id_user: 0,
-    first_name:'',
-    last_name: '' 
+    first_name: '',
+    last_name: ''
   }
 
   // isAdmin=this.userData.getUserType();
@@ -36,25 +37,28 @@ export class HomeComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this),
   };
 
-  constructor(public dialog: MatDialog, private userData: UserDataService) {  }
+  constructor(public dialog: MatDialog, private userData: UserDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.userData.ngOnInit();
-    let parsedData = JSON.parse(this.userData.userDataString);
-    console.log(parsedData)
-    this.userInfo ={
-      id_user: parsedData.id_user,
-      first_name: parsedData.first_name,
-      last_name: parsedData.last_name
+    if (this.userData.userDataString !== '') {
+      let parsedData = JSON.parse(this.userData.userDataString);
+      this.userInfo = {
+        id_user: parsedData.id_user,
+        first_name: parsedData.first_name,
+        last_name: parsedData.last_name
+      }
     }
-    
+    else {
+      this.router.navigate(['/login'])
+    }
   }
 
-  handleDateClick(info){
+  handleDateClick(info) {
     const dialogRef = this.dialog.open(DialogMenu, {
       width: '800px',
       height: '500px',
-      data: {dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user}
+      data: { dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user }
     });
   }
 
