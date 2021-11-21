@@ -6,8 +6,7 @@ import { CalendarUsers } from '../models/CalendarUsers';
 import { DialogData } from '../models/DialogData';
 import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ContentObserver } from '@angular/cdk/observers';
+import { faTimes, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 
@@ -18,7 +17,8 @@ import Swal from 'sweetalert2';
 })
 export class DialogMenu implements OnInit {
   faTimes = faTimes
-  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1])-1, parseInt(this.data.dateStr.split('-')[2]))
+  faUser = faUserCircle
+  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1]) - 1, parseInt(this.data.dateStr.split('-')[2]))
   ActDi: Date = new Date();
 
   panelOpenState = false;
@@ -57,8 +57,8 @@ export class DialogMenu implements OnInit {
 
 
   handleSaveButton() {
-     //Mensaje una vez Registrado para el desayuno exitosamente 
-     Swal.fire({
+    //Mensaje una vez Registrado para el desayuno exitosamente 
+    Swal.fire({
       icon: 'success',
       title: 'Registrado exitosamente',
       text: 'Gracias ;)'
@@ -68,7 +68,7 @@ export class DialogMenu implements OnInit {
       date: new Date(this.data.dateStr),
       is_active: true,
       was_deleted: false
-       }
+    }
 
 
     console.log(dataToPost)
@@ -95,7 +95,7 @@ export class DialogMenu implements OnInit {
     })
     const deleteParams = {
       id_user: id_user,
-      date: this.data.dateStr 
+      date: this.data.dateStr
     }
 
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`, {}, { params: deleteParams }).pipe(
