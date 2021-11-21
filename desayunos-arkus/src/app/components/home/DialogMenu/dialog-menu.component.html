@@ -4,43 +4,12 @@
 </div>
 <div class="containerDialog">
   <div class="columnUsers">
-    <mat-card>
+    <mat-card *ngFor="let user of UserListPerDay">
       <div class="userInfo">
-        <!-- *ngFor="let user of UserListPerDay" -->
         <fa-icon [icon]="faUser" id="faicon"></fa-icon>
-        <p id="username">Angel Servando Quinones Garcia</p>
+        <p id="username">{{user.first_name + " " + user.last_name}}</p>
       </div>
-      <!-- {{user.first_name + " " + user.last_name}} -->
-      <button mat-button color="primary">
-        <!-- (click)="handleDeleteUser(user.id_user)" -->
-        <fa-icon [icon]="faTimes"></fa-icon>
-      </button>
-    </mat-card>
-  </div>
-  <div class="columnUsers">
-    <mat-card>
-      <div class="userInfo">
-        <!-- *ngFor="let user of UserListPerDay" -->
-        <fa-icon [icon]="faUser" id="faicon"></fa-icon>
-        <p id="username">Doña María del Rosario Cayetana Fitz-James Stuart y de Silva</p>
-      </div>
-      <!-- {{user.first_name + " " + user.last_name}} -->
-      <button mat-button color="primary">
-        <!-- (click)="handleDeleteUser(user.id_user)" -->
-        <fa-icon [icon]="faTimes"></fa-icon>
-      </button>
-    </mat-card>
-  </div>
-  <div class="columnUsers">
-    <mat-card>
-      <div class="userInfo">
-        <!-- *ngFor="let user of UserListPerDay" -->
-        <fa-icon [icon]="faUser" id="faicon"></fa-icon>
-        <p id="username">Angel Servando Quinones Garcia</p>
-      </div>
-      <!-- {{user.first_name + " " + user.last_name}} -->
-      <button mat-button color="primary">
-        <!-- (click)="handleDeleteUser(user.id_user)" -->
+      <button mat-button color="primary" (click)="handleDeleteUser(user.id_user)">
         <fa-icon [icon]="faTimes"></fa-icon>
       </button>
     </mat-card>

@@ -83,7 +83,13 @@ export class LoginRegistroComponent implements OnInit {
             text: 'Bienvenido'
           })
         }
-        else{}
+      },
+      (error: object) => {
+        Swal.fire({
+          icon: 'error',
+          title: "Tu usuario o contraseña son incorrectos",
+          text: "Favor de verificarlos"
+        })
       }
     )
   }
@@ -124,7 +130,7 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Datos incorrectos',
-          text: 'Favor de revisar los datos introducidos' 
+          text: 'Favor de revisar los datos introducidos, recuerda que el correo debe de ser de un dominio de arkus'
         })
       }
     )
