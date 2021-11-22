@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
+import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
