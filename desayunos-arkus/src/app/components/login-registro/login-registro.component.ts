@@ -79,7 +79,7 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas',
+            title: 'Buenos días',
             text: 'Bienvenido'
           })
         }

@@ -7,7 +7,9 @@ import { DialogData } from '../models/DialogData';
 import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
 import { faTimes, faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'; 
+import { UserDataService } from '../../login-registro/user-data.service';
+
 
 
 @Component({
@@ -28,11 +30,16 @@ export class DialogMenu implements OnInit {
 
   selectedDishId: number;
 
+  isAdmin=this.userData.getUserType();
+
+  isUser=this.userData.getUserId();
+
   constructor(
     public dialogRef: MatDialogRef<DialogMenu>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private apiService: ApiService,
-    private configService: ConfigService) { }
+    private configService: ConfigService,
+    private userData: UserDataService) { }
 
 
   ngOnInit(): void {
@@ -84,11 +91,27 @@ export class DialogMenu implements OnInit {
   }
 
   handleDeleteUser(id_user) {
+    
+    
+
+
     Swal.fire({
+      title: '¿Deseas eliminar este registro?',
+      text: "Se cancelará su asistencia a este día",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, estoy seguro',
+      cancelButtonText:'Cancelar'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        Swal.fire({
       icon: 'success',
-      title: 'asistencia eliminada'
-    })
-    const deleteParams = {
+      title: 'Asistencia eliminada'
+        })
+      const deleteParams = {
       id_user: id_user,
       date: this.data.dateStr
     }
@@ -98,6 +121,10 @@ export class DialogMenu implements OnInit {
         this.loadData();
       })
     ).subscribe();
+      }
+    })
+
+
 
   }
 

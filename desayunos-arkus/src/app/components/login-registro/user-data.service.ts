@@ -23,6 +23,15 @@ export class UserDataService {
 
   }
 
+  getUserType():boolean{
+    return this.userData[0].id_user_type===1;
+     }
+
+     getUserId():number{
+       return this.userData[0].id_user;
+     }
+
+     
   setCookie() {
     this.cookieService.set('name', JSON.stringify(this.userData[0]))
   }
