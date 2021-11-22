@@ -17,7 +17,10 @@
             <div>
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" formControlName="loginPassword">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="loginPassword">
+                    <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
@@ -72,7 +75,10 @@
             <div>
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" formControlName="registerPassword">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="registerPassword">
+                    <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="registerPassword.invalid">{{registerPasswordErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
@@ -80,15 +86,17 @@
             <div>
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Confirmar Contraseña</mat-label>
-                    <input matInput type="password" formControlName="confirmPassword">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+                    <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-error *ngIf="confirmPassword.invalid">{{confirmPasswordErrorMessage()}}</mat-error>
+                    <mat-error *ngIf="confirmPassword.errors.mustMatch">Las contraseñas deben coincidir</mat-error>
                 </mat-form-field>
             </div>
-
+            <br>
             <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">Registrarme</button>
 
         </form>
     </mat-tab>
 </mat-tab-group>
-<!-- <div>Valido: {{fLogin.valid | json}} </div>
-<div>Valido: {{fRegister.valid | json}} </div> -->
