@@ -1,15 +1,38 @@
-.mat-tab-group.mat-primary{
-    min-height: 20vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.mat-raised-button{
-    margin-left: 50px;
-    background-color: #b71c1c;
-}
-.mat-toolbar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.loginContainer{
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 2fr;
+    .mat-toolbar {
+        justify-content: center;
+        grid-column: 1/4;
+    }
+    .containerTabgroup{
+        grid-column-start: 2;
+        margin-top: 7rem;
+        .mat-tab-group {
+            grid-column-start: 2;
+            place-items: center;
+            border-radius: 2%;
+            box-shadow: 0 0 20px 1px rgba(0, 0, 20, 0.774);
+        }
+    }
+    .formfieldContainer{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        align-items: center;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 5px;
+        button{
+            justify-self: center;
+            height: fit-content;
+            width: fit-content;
+            margin-top: 10px;
+            margin-bottom: 31px;
+        }
+        .formfieldNamesContainer{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+    }
 }
