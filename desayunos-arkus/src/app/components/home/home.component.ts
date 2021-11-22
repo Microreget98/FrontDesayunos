@@ -102,7 +102,6 @@ export class HomeComponent implements OnInit {
 
       this.apiService.GetData(apiUrl).pipe(
         map((res: CalendarUsersByMonth[]) => {
-          console.log(res);
           res.forEach(usr => {
             eventLoad.push(
               { 
@@ -124,7 +123,6 @@ export class HomeComponent implements OnInit {
   }
 
   handleDateClick(info){
-    console.log(info.dateStr);
     const dialogRef = this.dialog.open(DialogMenu, {
       width: '800px',
       height: '500px',
