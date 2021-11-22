@@ -108,6 +108,7 @@ export class LoginRegistroComponent implements OnInit {
       is_active: true
       
     }
+    console.log(this.configService.config.apiUrl)
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/users`, {...userData}).subscribe(
       (response) => {
         //Mensaje existoso al REGISTRARSE 
