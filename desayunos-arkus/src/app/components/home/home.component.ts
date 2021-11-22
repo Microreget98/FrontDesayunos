@@ -8,6 +8,7 @@ import { Calendar } from '@fullcalendar/core';
 import { ConfigService } from 'src/app/core/config.service';
 import { map } from 'rxjs/operators';
 import { CalendarUsersByMonth } from './models/CalendarUsersByMonth';
+import { Router } from '@angular/router';
 
 const eventLoad = [];
 
@@ -23,18 +24,12 @@ export class HomeComponent implements OnInit {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   
   userInfo = {
-    id_user: this.userData.userData[0].id_user,
-    first_name: this.userData.userData[0].first_name,
-    last_name: this.userData.userData[0].last_name
+    id_user: 0,
+    first_name: '',
+    last_name: ''
   }
 
-  isAdmin=this.userData.getUserType();
-
-  // userInfo = {
-  //   id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
-  // }
+  // isAdmin=this.userData.getUserType();
 
   options: CalendarOptions = {
     headerToolbar: {
@@ -69,14 +64,27 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog,
     private userData: UserDataService,
     private apiService: ApiService,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private router: Router
     ) {
 
       
       }
 
   ngOnInit(): void {
-
+    
+    this.userData.ngOnInit();
+    if (this.userData.userDataString !== '') {
+      let parsedData = JSON.parse(this.userData.userDataString);
+      this.userInfo = {
+        id_user: parsedData.id_user,
+        first_name: parsedData.first_name,
+        last_name: parsedData.last_name
+      }
+    }
+    else {
+      this.router.navigate(['/login'])
+    }
     this.loadCalendarInfo();
     this.options.dayMaxEvents = 4;
     
@@ -122,8 +130,9 @@ export class HomeComponent implements OnInit {
       height: '500px',
       data: {dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user}
     }).afterClosed().subscribe((res) => {
-      this.loadCalendarInfo();
-    });
-  }
+        this.loadCalendarInfo();
+      }
+    );
 
+  }
 }
