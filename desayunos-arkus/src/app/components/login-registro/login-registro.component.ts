@@ -59,8 +59,8 @@ export class LoginRegistroComponent implements OnInit {
     });
 
     this.fRegister = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
+      lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       registerEmail: ['', [Validators.required, Validators.email]],
       registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['',[Validators.required]],
