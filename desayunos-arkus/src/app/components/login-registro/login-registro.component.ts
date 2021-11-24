@@ -114,7 +114,6 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           title: 'Registrado con éxito',
           icon: 'success',
-          timer: 1500,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
