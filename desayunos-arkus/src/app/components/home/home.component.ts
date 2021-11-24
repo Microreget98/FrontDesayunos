@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   options: CalendarOptions = {
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev,next,today',
       center: 'title',
       right: ''
     },

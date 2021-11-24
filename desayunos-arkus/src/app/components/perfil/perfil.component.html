@@ -59,11 +59,13 @@
       <div class="EnvEdi">
         <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
 
-        <button mat-raised-button color="primary" type="submit" (click)="buttonD()">Edit</button>
+        <button mat-raised-button color="primary"  (click)="buttonD()">Edit</button>
       </div>
       <div class="cerraSe">
         <a href="" (click)="cerrarSesion()">Sign Out</a>
       </div>
+
+      <button mat-raised-button color="primary"  (click)="vistaEn()"  >Vista</button>
     </form>
   </mat-drawer>
 
