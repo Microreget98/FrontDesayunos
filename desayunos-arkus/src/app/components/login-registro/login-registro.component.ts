@@ -86,7 +86,7 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas',
+            title: 'Buenos días',
             text: 'Bienvenido'
           })
         }
@@ -121,7 +121,6 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           title: 'Registrado con éxito',
           icon: 'success',
-          timer: 1500,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
