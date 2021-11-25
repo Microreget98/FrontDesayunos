@@ -1,3 +1,4 @@
 {
-    "apiUrl": "https://localhost:44361"
+    "apiUrl": "https://localhost:44361",
+    "apiUrlProd": "https://desayunosarkusnexus.eastus.cloudapp.azure.com"
 }

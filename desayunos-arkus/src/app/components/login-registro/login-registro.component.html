@@ -16,13 +16,14 @@
                 }}</mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" color="accent">
-              <mat-label>Contraseña</mat-label>
-              <input matInput type="password" formControlName="loginPassword" />
-              <mat-error *ngIf="loginPassword.invalid">{{
-                loginPasswordErrorMessage()
-                }}</mat-error>
-            </mat-form-field>
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="loginPassword">
+                    <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
+                </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="fLogin.invalid">
               Ingresar
@@ -83,27 +84,30 @@
             </mat-form-field>
             <mat-form-field class="texbx" appearance="outline" color="accent">
               <mat-label>Contraseña</mat-label>
-              <input matInput type="password" formControlName="registerPassword" />
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="registerPassword" />
+              <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
               <mat-error *ngIf="registerPassword.invalid">{{
                 registerPasswordErrorMessage()
                 }}</mat-error>
             </mat-form-field>
             <mat-form-field class="texbx" appearance="outline" color="accent">
               <mat-label>Confirmar Contraseña</mat-label>
-              <input matInput type="password" formControlName="confirmPassword" />
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" />
+              <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
               <mat-error *ngIf="confirmPassword.invalid">{{
                 confirmPasswordErrorMessage()
                 }}</mat-error>
+              <mat-error *ngIf="confirmPassword.errors.mustMatch">Las contraseñas deben coincidir</mat-error>
             </mat-form-field>
             <!-- ACABA INPUTS de dob, location, email y contraseñas -->
-
-            <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">
-              Registrarme
-            </button>
-          </div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">Registrarme</button>
+            </div>
         </form>
-      </mat-tab>
-
-    </mat-tab-group>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
 </div>

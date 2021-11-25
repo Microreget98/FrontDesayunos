@@ -15,7 +15,7 @@
       <div class="perfil">{{firstchar}}</div>
     </div>
 
-    <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <form action="" [formGroup]="perfilForm" (ngSubmit)="updateProfile()">
 
       <div class="Firstlast" disabled>
         <mat-form-field appearance="outline">
@@ -58,7 +58,7 @@
       <div class="EnvEdi">
         <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
 
-        <button mat-raised-button color="primary" type="submit" (click)="buttonD()">Edit</button>
+        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Edit</button>
       </div>
       <div class="cerraSe">
         <a href="" (click)="cerrarSesion()">Sign Out</a>

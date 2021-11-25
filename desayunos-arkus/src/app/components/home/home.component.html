@@ -1,4 +1,4 @@
 <app-perfil></app-perfil>
 <div class="calendar">
-    <full-calendar [options]="options"></full-calendar>
+    <full-calendar *ngIf="!isLoading" [options]="options" #calendar></full-calendar>
 </div>
