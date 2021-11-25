@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSave, faTimes, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -10,6 +10,7 @@ import { faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 export class VistaDeUsuarioComponent implements OnInit {
   faSave = faSave
   faTimes = faTimes
+  faUserCircle = faUserCircle
   constructor() { }
 
   ngOnInit(): void {
