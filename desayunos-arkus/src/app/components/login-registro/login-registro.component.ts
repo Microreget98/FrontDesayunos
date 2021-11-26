@@ -69,7 +69,7 @@ export class LoginRegistroComponent implements OnInit {
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      textEmail: ['', [Validators.required]],
+      textEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z._-]+$')]],
       registerEmail: ['', [Validators.required]],
       registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['',[Validators.required]],
@@ -182,13 +182,13 @@ export class LoginRegistroComponent implements OnInit {
     if(this.name.hasError('required')) {
       return 'Tu Nombre es requerido';
     }
-    return '';
+    return this.name.hasError('pattern') ? 'Solo se permiten letras' : '';
   }
   registerLastnameErrorMessage(){
     if(this.lastName.hasError('required')) {
       return 'Tu Apellido es requerido';
     }
-    return '';
+    return this.lastName.hasError('pattern') ? 'Solo se permiten letras' : '';;
   }
   registerDobErrorMessage(){
     if(this.dob.hasError('required')) {
@@ -206,7 +206,7 @@ export class LoginRegistroComponent implements OnInit {
     if (this.textEmail.hasError('required')) {
       return 'El correo es requerido';
     }
-    return '';
+    return this.textEmail.hasError('pattern') ? 'Solo se permiten ( - | _ | . ) y letras' : '';
   }
   registerEmailErrorMessage(){
     if (this.registerEmail.hasError('required')) {
@@ -226,22 +226,7 @@ export class LoginRegistroComponent implements OnInit {
     }
     return '';
   }
-  // termina campos registro
-  mustMatch(password: string, confirmation: string){
-    return (formGroup: FormGroup) => {
-      const pass = formGroup.controls[password];
-      const conf = formGroup.controls[confirmation];
-      if(conf.errors && !conf.errors.mustMatch){
-        return
-      }
-      if(pass.value === conf.value){
-        return conf.setErrors({mustMatch:null});
-      }
-      else{
-        conf.setErrors({mustMatch:true});
-      }
-    }
-  }
+
   get loginEmail() { return this.fLogin.get('loginEmail');}
   get loginPassword() { return this.fLogin.get('loginPassword');}
   get name() { return this.fRegister.get('name');}
@@ -257,5 +242,5 @@ export class LoginRegistroComponent implements OnInit {
 export const mustMatch:ValidatorFn = (abscontrol: AbstractControl): ValidationErrors | null => {
   const pass = abscontrol.get('registerPassword');
   const conf = abscontrol.get('confirmPassword');
-  return pass.value === conf.value ? { valid: true  } : null;
+  return pass.value != conf.value ? { valid: {matching:true} } : null;
 };

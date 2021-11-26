@@ -43,7 +43,6 @@
                 <mat-error *ngIf="name.invalid">{{
                   registerNameErrorMessage()
                   }}</mat-error>
-                <mat-error *ngIf="name.validator && name.dirty">Sólo se aceptan Letras</mat-error>
               </mat-form-field>
               <mat-form-field appearance="outline" color="accent">
                 <mat-label>Apellido</mat-label>
@@ -51,7 +50,6 @@
                 <mat-error *ngIf="lastName.invalid">{{
                   registerLastnameErrorMessage()
                   }}</mat-error>
-                  <mat-error *ngIf="lastName.validator && lastName.dirty">Sólo se aceptan Letras</mat-error>
               </mat-form-field>
             </div>
             <!-- ACABA INPUTS de Nombre y Apellido -->
