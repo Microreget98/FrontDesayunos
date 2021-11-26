@@ -79,8 +79,12 @@ export class PerfilComponent implements OnInit {
     );
   }
 
-  onClickFadeInOut() {
-
+  vistaEn() {
+(Response: object) =>{
+  if (Response){
+    this.router.navigate(['/vistausuarios'])
+  }
+}
   }
 
   onSubmit() {
