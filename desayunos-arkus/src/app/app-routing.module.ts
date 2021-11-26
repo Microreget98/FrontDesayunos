@@ -5,11 +5,13 @@ import { LoginRegistroComponent } from './components/login-registro/login-regist
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginRegistroComponent },
+  { path: 'login', component: LoginRegistroComponent},
   { path: 'home', component: HomeComponent },
   { path: 'vistausuarios', component: VistaDeUsuarioComponent }
+  { path: 'perfil', component: PerfilComponent },
 ];
 
 @NgModule({

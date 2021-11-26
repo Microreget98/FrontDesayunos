@@ -1,9 +1,5 @@
-<!-- <div class="cont"> -->
-<!-- <div class="profile">
-        <app-perfil></app-perfil>
-    </div> -->
 <app-perfil></app-perfil>
 <div class="calendar">
-    <full-calendar [options]="options"></full-calendar>
+    <!-- <full-calendar *ngIf="!isLoading" [options]="options" #calendar></full-calendar> -->
+    <full-calendar [options]="options" class="calendEdi"></full-calendar>
 </div>
-<!-- </div> -->
