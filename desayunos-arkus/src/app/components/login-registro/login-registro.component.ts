@@ -86,7 +86,7 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas',
+            title: 'Buenos días',
             text: 'Bienvenido'
           })
         }
@@ -121,7 +121,6 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           title: 'Registrado con éxito',
           icon: 'success',
-          timer: 1500,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
@@ -157,6 +156,7 @@ export class LoginRegistroComponent implements OnInit {
     } catch (error) { }
     return str
   }
+  // inicia campos login
   loginEmailErrorMessage(){
     if (this.loginEmail.hasError('required')) {
       return 'El correo es requerido';
@@ -169,6 +169,8 @@ export class LoginRegistroComponent implements OnInit {
     }
     return this.loginPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
+  // termina campos login
+  // inicia campos registro
   registerNameErrorMessage(){
     if(this.name.hasError('required')) {
       return 'Tu Nombre es requerido';
@@ -211,6 +213,7 @@ export class LoginRegistroComponent implements OnInit {
     }
     return '';
   }
+  // termina campos registro
   mustMatch(password: string, confirmation: string){
     return (formGroup: FormGroup) => {
       const pass = formGroup.controls[password];
