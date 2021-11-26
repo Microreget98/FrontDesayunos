@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
+import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -55,7 +56,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     LoginRegistroComponent,
     HomeComponent,
     DialogMenu,
-    PerfilComponent
+    PerfilComponent,
+    VistaDeUsuarioComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
+import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
