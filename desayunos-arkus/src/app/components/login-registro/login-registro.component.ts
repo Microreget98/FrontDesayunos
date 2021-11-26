@@ -21,7 +21,7 @@ export class LoginRegistroComponent implements OnInit {
   titularAlerta:string='';
   public fLogin: FormGroup;
   public fRegister: FormGroup;
-
+  
   minDate: Date;
   maxDate: Date;
   
@@ -79,12 +79,13 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos días',
+            title: 'Buen día',
             text: 'Bienvenido'
           })
         }
       },
-      (error: object) => {
+      (err) => {
+
         Swal.fire({
           icon: 'error',
           title: "Tu usuario o contraseña son incorrectos",
@@ -113,6 +114,7 @@ export class LoginRegistroComponent implements OnInit {
         //Mensaje existoso al REGISTRARSE 
         Swal.fire({
           title: 'Registrado con éxito',
+          text:"Ahora puedes iniciar sesión",
           icon: 'success',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
@@ -129,7 +131,7 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Datos incorrectos',
-          text: 'Favor de revisar los datos introducidos, recuerda que el correo debe de ser de un dominio de arkus'
+          text: err.error
         })
       }
     )
