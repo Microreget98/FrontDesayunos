@@ -9,7 +9,7 @@
         <fa-icon [icon]="faUser" id="faicon"></fa-icon>
         <p id="username">{{user.first_name + " " + user.last_name}}</p>
       </div>
-      <button mat-button color="primary" (click)="handleDeleteUser(user.id_user)">
+      <button mat-button *ngIf="isAdmin || user.id_user=== isUser && ActDi < inputDate"  color="primary" (click)="handleDeleteUser(user.id_user)">
         <fa-icon [icon]="faTimes"></fa-icon>
       </button>
     </mat-card>
