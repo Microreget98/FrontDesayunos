@@ -1,6 +1,6 @@
 import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -9,6 +9,10 @@ import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
 
 interface Sede{
+  value: string;
+  viewValue: string;
+}
+interface Email{
   value: string;
   viewValue: string;
 }
@@ -31,10 +35,13 @@ export class LoginRegistroComponent implements OnInit {
   
   selectedValue: string;
   sedes: Sede[] = [
-    {value: 'mty', viewValue: 'Monterrey'},
-    // {value: 'gdl', viewValue: 'Tijuana'},
-    // {value: 'col', viewValue: 'Colima'}
+    {value: 'mty', viewValue: 'Monterrey'}
   ];
+  emails: Email[] = [
+    {value: '@arkus.com', viewValue: 'arkus.com'},
+    {value: '@arkusnexus.com', viewValue: 'arkusnexus.com'},
+    {value: '@arkus-solutions.com', viewValue: 'arkus-solutions.com'},
+  ]
 
   constructor(private formBuilder: FormBuilder, 
     private apiService: ApiService, 
@@ -61,15 +68,14 @@ export class LoginRegistroComponent implements OnInit {
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
       lastName: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      registerEmail: ['', [Validators.required, Validators.email]],
+      textEmail: ['', [Validators.required]],
+      registerEmail: ['', [Validators.required]],
       registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['',[Validators.required]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
     },
-    {
-      validators : this.mustMatch('registerPassword','confirmPassword')
-    })
+    { validators : mustMatch });
   }
 
   sendLogin(): any{
@@ -86,7 +92,7 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas',
+            title: 'Buenos días',
             text: 'Bienvenido'
           })
         }
@@ -109,7 +115,7 @@ export class LoginRegistroComponent implements OnInit {
       first_name: this.fRegister.value.name,
       last_name:  this.fRegister.value.lastName,
       dob: this.fRegister.value.dob,
-      email: this.fRegister.value.registerEmail,
+      email: this.fRegister.value.textEmail + this.fRegister.value.registerEmail,
       pass: this.fRegister.value.registerPassword,
       location: this.fRegister.value.sede,
       is_active: true
@@ -183,7 +189,7 @@ export class LoginRegistroComponent implements OnInit {
   }
   registerDobErrorMessage(){
     if(this.dob.hasError('required')) {
-      return 'Selecciona tu fecha de Nacimiento';
+      return 'Debes seleccionar una fecha';
     }
     return '';
   }
@@ -193,11 +199,17 @@ export class LoginRegistroComponent implements OnInit {
     }
     return '';
   }
-  registerEmailErrorMessage(){
-    if (this.registerEmail.hasError('required')) {
+  textEmailErrorMessage(){
+    if (this.textEmail.hasError('required')) {
       return 'El correo es requerido';
     }
-    return this.registerEmail.hasError('email') ? 'El correo no es válido' : '';
+    return '';
+  }
+  registerEmailErrorMessage(){
+    if (this.registerEmail.hasError('required')) {
+      return 'El dominio es requerido';
+    }
+    return '';
   }
   registerPasswordErrorMessage(){
     if (this.registerPassword.hasError('required')) {
@@ -211,28 +223,21 @@ export class LoginRegistroComponent implements OnInit {
     }
     return '';
   }
-  mustMatch(password: string, confirmation: string){
-    return (formGroup: FormGroup) => {
-      const pass = formGroup.controls[password];
-      const conf = formGroup.controls[confirmation];
-      if(conf.errors && !conf.errors.mustMatch){
-        return
-      }
-      if(pass.value === conf.value){
-        return conf.setErrors({mustMatch:null});
-      }
-      else{
-        conf.setErrors({mustMatch:true});
-      }
-    }
-  }
+
   get loginEmail() { return this.fLogin.get('loginEmail');}
   get loginPassword() { return this.fLogin.get('loginPassword');}
   get name() { return this.fRegister.get('name');}
   get lastName() { return this.fRegister.get('lastName');}
   get dob() { return this.fRegister.get('dob');}
   get sede() { return this.fRegister.get('sede');}
+  get textEmail() { return this.fRegister.get('textEmail');}
   get registerEmail() { return this.fRegister.get('registerEmail');}
   get registerPassword() { return this.fRegister.get('registerPassword');}
   get confirmPassword() { return this.fRegister.get('confirmPassword');}
 }
+
+export const mustMatch:ValidatorFn = (abscontrol: AbstractControl): ValidationErrors | null => {
+  const pass = abscontrol.get('registerPassword');
+  const conf = abscontrol.get('confirmPassword');
+  return pass.value === conf.value ? { valid: true  } : null;
+};

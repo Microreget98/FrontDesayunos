@@ -7,8 +7,8 @@
     }
     .containerTabgroup{
         grid-column-start: 2;
-        margin-top: 7rem;
-        margin-bottom: 30px;
+        margin-top: 6rem;
+        margin-bottom: 6rem;
         .mat-tab-group {
             grid-column-start: 2;
             place-items: center;
@@ -35,6 +35,14 @@
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-bottom: 5px;
+        }
+        .formfieldEmailContainer{
+            display: grid;
+            grid-template-columns: 1fr 0 1fr;
+            gap: 20px;
+        }
+        h2{
+            margin-top: 15px;
         }
     }
 }
