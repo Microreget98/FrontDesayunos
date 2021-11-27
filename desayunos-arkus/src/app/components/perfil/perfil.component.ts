@@ -39,7 +39,7 @@ export class PerfilComponent implements OnInit {
       firstName: [userDataInfo.first_name, [Validators.required]],
       lastName: [userDataInfo.last_name, [Validators.required]],
       sedes: [userDataInfo.location, [Validators.required]],
-      passw: [null, [Validators.required]],
+      passw: [null],
       datePo: [userDataInfo.dob, [Validators.required]]
 
     });
@@ -50,14 +50,19 @@ export class PerfilComponent implements OnInit {
   }
 
   updateProfile() {
+    let userDataInfo = JSON.parse(this.userData.userDataString);
     let userData = {
+      id_user: userDataInfo.id_user,
+      id_user_type: userDataInfo.id_user_type,
+      email: userDataInfo.email,
+      is_active: userDataInfo.is_active,
       first_name: this.perfilForm.value.firstName,
       last_name: this.perfilForm.value.lastName,
-      dob: this.perfilForm.value.sedes,
+      dob: this.perfilForm.value.datePo,
       pass: this.perfilForm.value.passw,
-      location: this.perfilForm.value.datePo
+      location: this.perfilForm.value.sedes
     }
-    this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar`,).subscribe(
+    this.apiService.PutData(`${this.configService.config.apiUrl}/api/users/${userDataInfo.id_user}`, userData).subscribe(
       (response) => {
         if (response != null || response != undefined) {
           Swal.fire({
@@ -74,8 +79,12 @@ export class PerfilComponent implements OnInit {
     );
   }
 
-  onClickFadeInOut() {
-
+  vistaEn() {
+(Response: object) =>{
+  if (Response){
+    this.router.navigate(['/vistausuarios'])
+  }
+}
   }
 
   onSubmit() {

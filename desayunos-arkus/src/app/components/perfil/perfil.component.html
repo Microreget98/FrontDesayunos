@@ -1,4 +1,5 @@
 <mat-drawer-container class="nav-container" autosize>
+  
   <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
     <div class="menuH">
       <button (click)="drawer.toggle()">
@@ -15,7 +16,7 @@
       <div class="perfil">{{firstchar}}</div>
     </div>
 
-    <form action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
       <div class="Firstlast" disabled>
         <mat-form-field appearance="outline">
@@ -58,13 +59,16 @@
       <div class="EnvEdi">
         <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
 
-        <button mat-raised-button color="primary" type="submit" (click)="buttonD()">Edit</button>
+        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Edit</button>
       </div>
       <div class="cerraSe">
         <a href="" (click)="cerrarSesion()">Sign Out</a>
       </div>
+
+      <button mat-raised-button color="primary"  (click)="vistaEn()"  >Vista</button>
     </form>
   </mat-drawer>
+
 </mat-drawer-container>
 <div class="menuH">
   <button (click)="drawer.toggle()">

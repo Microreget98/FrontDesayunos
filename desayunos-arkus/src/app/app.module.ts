@@ -33,9 +33,11 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
+
 
 
 const appInitializerFn = (config: ConfigService) => {
@@ -57,7 +59,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     HomeComponent,
     DialogMenu,
     PerfilComponent,
-    ConfirmacionComponent
+    ConfirmacionComponent,
+    VistaDeUsuarioComponent
   ],
   imports: [
     BrowserModule,

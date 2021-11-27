@@ -1,6 +1,9 @@
+import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
+import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
@@ -17,6 +20,8 @@ interface Sede{
   styleUrls: ['./login-registro.component.scss']
 })
 export class LoginRegistroComponent implements OnInit {
+
+  hide = true;
 
   titularAlerta:string='';
   public fLogin: FormGroup;
@@ -51,18 +56,21 @@ export class LoginRegistroComponent implements OnInit {
   ngOnInit(): void {
     this.fLogin = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
-      loginPassword: ['',[Validators.required, Validators.minLength(8)]]
+      loginPassword: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
     });
 
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       registerEmail: ['', [Validators.required, Validators.email]],
-      registerPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['',[Validators.required, Validators.minLength(8)]],
+      registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      confirmPassword: ['',[Validators.required]],
       sede: ['',[Validators.required]],
       dob: ['',[Validators.required]]
-    });
+    },
+    {
+      validators : this.mustMatch('registerPassword','confirmPassword')
+    })
   }
 
   sendLogin(): any{
@@ -79,7 +87,7 @@ export class LoginRegistroComponent implements OnInit {
           //Mensaje una vez logeado exitosamente
           Swal.fire({
             icon: 'success',
-            title: 'Buenos dìas',
+            title: 'Buenos días',
             text: 'Bienvenido'
           })
         }
@@ -114,7 +122,6 @@ export class LoginRegistroComponent implements OnInit {
         Swal.fire({
           title: 'Registrado con éxito',
           icon: 'success',
-          timer: 1500,
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
@@ -150,6 +157,7 @@ export class LoginRegistroComponent implements OnInit {
     } catch (error) { }
     return str
   }
+  // inicia campos login
   loginEmailErrorMessage(){
     if (this.loginEmail.hasError('required')) {
       return 'El correo es requerido';
@@ -160,8 +168,10 @@ export class LoginRegistroComponent implements OnInit {
     if (this.loginPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.loginPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return this.loginPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
+  // termina campos login
+  // inicia campos registro
   registerNameErrorMessage(){
     if(this.name.hasError('required')) {
       return 'Tu Nombre es requerido';
@@ -196,13 +206,29 @@ export class LoginRegistroComponent implements OnInit {
     if (this.registerPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.registerPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return this.registerPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
   }
   confirmPasswordErrorMessage(){
     if (this.confirmPassword.hasError('required')) {
       return 'La contraseña debe confirmarse';
     }
-    return this.confirmPassword.hasError('minLength') ? '' : 'Debe contener 8 caracteres';
+    return '';
+  }
+  // termina campos registro
+  mustMatch(password: string, confirmation: string){
+    return (formGroup: FormGroup) => {
+      const pass = formGroup.controls[password];
+      const conf = formGroup.controls[confirmation];
+      if(conf.errors && !conf.errors.mustMatch){
+        return
+      }
+      if(pass.value === conf.value){
+        return conf.setErrors({mustMatch:null});
+      }
+      else{
+        conf.setErrors({mustMatch:true});
+      }
+    }
   }
   get loginEmail() { return this.fLogin.get('loginEmail');}
   get loginPassword() { return this.fLogin.get('loginPassword');}

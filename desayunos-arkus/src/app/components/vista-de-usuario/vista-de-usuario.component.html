@@ -1,0 +1,35 @@
+<div class="usersview">
+    <div class="header">
+        <img src="https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613c50e0018116747c3bc5bc_ArkusNexus_MainLogo.svg"
+            width="400" height="70">
+    </div>
+    
+        <div class="containerDialog">
+            <div class="col-12 columnUsers">
+                <fa-icon [icon]="faSave" class="faicon" ></fa-icon><!--(click)=""-->
+                <fa-icon [icon]="faTimes" class="faicon" ></fa-icon><!--(click)=""-->
+            </div>
+        </div>
+    <!-- <div class="user"> -->
+        <mat-card for="deleteuser">
+            <div class="userIdentifier">
+                <fa-icon [icon]="faUserCircle" class="userimg"></fa-icon>
+                <p class="username">Liliana Medina</p>
+            </div>
+            <div class="roles">
+                <mat-form-field appearance="fill">
+                    <mat-label>Roles</mat-label>
+                    <mat-select matNativeControl>
+                        <mat-option value="2">Colaborador</mat-option>
+                        <mat-option value="1">Admin</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- {{user.first_name + " " + user.last_name}} -->
+            <div class="delete">
+                <p>Eliminar usuario?</p>
+                <input type="checkbox" name="" id="deleteuser">
+            </div>
+        </mat-card>
+    <!-- </div> -->
+</div>
