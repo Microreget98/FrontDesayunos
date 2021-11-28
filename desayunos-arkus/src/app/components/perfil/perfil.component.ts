@@ -26,11 +26,11 @@ export class PerfilComponent implements OnInit {
   firstchar: string = "";
 
   //Valida Todo Los inputs
-  constructor(private fb: FormBuilder, 
-    private userData: UserDataService, 
-    private router: Router, 
+  constructor(private fb: FormBuilder,
+    private userData: UserDataService,
+    private router: Router,
     private apiService: ApiService,
-    private configService: ConfigService) {}
+    private configService: ConfigService) { }
 
   ngOnInit(): void {
     this.userData.ngOnInit();
@@ -68,23 +68,22 @@ export class PerfilComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Usuario modificado con exito',
-            showConfirmButton: false,
-            timer: 1500
+            showConfirmButton: false
           })
         }
-        else{
-          
+        else {
+
         }
       }
     );
   }
 
   vistaEn() {
-(Response: object) =>{
-  if (Response){
-    this.router.navigate(['/vistausuarios'])
-  }
-}
+    (Response: object) => {
+      if (Response) {
+        this.router.navigate(['/vistausuarios'])
+      }
+    }
   }
 
   onSubmit() {
