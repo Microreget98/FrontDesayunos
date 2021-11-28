@@ -35,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
+import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 
 
@@ -57,6 +58,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     HomeComponent,
     DialogMenu,
     PerfilComponent,
+    ConfirmacionComponent,
     VistaDeUsuarioComponent
   ],
   imports: [
