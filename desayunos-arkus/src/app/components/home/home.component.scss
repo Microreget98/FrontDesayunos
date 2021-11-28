@@ -1,12 +1,18 @@
-.calendar{
+.calendar {
     height: 100%;
 }
-.fc{
+.fc {
     // position: relative;
     padding: 1em;
     height: 100%;
     // padding-right: 2em;
 }
-.fc .fc-toolbar.fc-header-toolbar{
-    padding-right: 2em;
+.calendar .fc table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 40em; /* normalize cross-browser */
+}
+
+.fc th {
+    text-align: right;
 }
