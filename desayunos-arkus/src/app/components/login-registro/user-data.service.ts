@@ -23,15 +23,17 @@ export class UserDataService {
 
   }
 
-  getUserType():boolean{
-    return this.userData[0].id_user_type===1;
-     }
+  getUserType(): boolean {
+    let userData = JSON.parse(this.userDataString)
+    return userData.id_user_type === 1;
+  }
 
-     getUserId():number{
-       return this.userData[0].id_user;
-     }
+  getUserId(): number {
+    let userData = JSON.parse(this.userDataString)
+    return userData.id_user;
+  }
 
-     
+
   setCookie() {
     this.cookieService.set('name', JSON.stringify(this.userData[0]))
   }
@@ -43,13 +45,13 @@ export class UserDataService {
   }
 
   ngOnInit(): void {
-    try{
+    try {
       this.cookie_name = this.cookieService.get('name');
       this.userDataString = this.cookie_name
       this.all_cookies = this.cookieService.getAll();
-    }catch{
+    } catch {
       this.router.navigate(['login'])
     }
-    
+
   }
 }
