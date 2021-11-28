@@ -1,14 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/api.service';
 import { CalendarUsers } from '../models/CalendarUsers';
 import { DialogData } from '../models/DialogData';
 import { Dishes } from '../models/Dishes';
 import { ConfigService } from '../../../core/config.service';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ContentObserver } from '@angular/cdk/observers';
+import { faTimes, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
+import { UserDataService } from '../../login-registro/user-data.service';
+
 
 
 @Component({
@@ -18,7 +19,8 @@ import Swal from 'sweetalert2';
 })
 export class DialogMenu implements OnInit {
   faTimes = faTimes
-  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1])-1, parseInt(this.data.dateStr.split('-')[2]))
+  faUser = faUserCircle
+  inputDate: Date = new Date(parseInt(this.data.dateStr.split('-')[0]), parseInt(this.data.dateStr.split('-')[1]) - 1, parseInt(this.data.dateStr.split('-')[2]))
   ActDi: Date = new Date();
 
   panelOpenState = false;
@@ -28,11 +30,17 @@ export class DialogMenu implements OnInit {
 
   selectedDishId: number;
 
+  isAdmin = this.userData.getUserType();
+
+  isUser = this.userData.getUserId();
+  toastr: any;
+
   constructor(
     public dialogRef: MatDialogRef<DialogMenu>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private apiService: ApiService,
-    private configService: ConfigService) { }
+    private configService: ConfigService,
+    private userData: UserDataService) { }
 
 
   ngOnInit(): void {
@@ -40,7 +48,6 @@ export class DialogMenu implements OnInit {
   }
 
   loadData() {
-    // console.log(this.data.dateStr)
     this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`)
       .subscribe(
         {
@@ -57,52 +64,73 @@ export class DialogMenu implements OnInit {
 
 
   handleSaveButton() {
-     //Mensaje una vez Registrado para el desayuno exitosamente 
-     Swal.fire({
-      icon: 'success',
-      title: 'Registrado exitosamente',
-      text: 'Gracias ;)'
-    })
+
     const dataToPost = {
       id_user: this.data.userId,
       date: new Date(this.data.dateStr),
       is_active: true,
       was_deleted: false
-       }
+    }
 
-
-    console.log(dataToPost)
     this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
+      catchError((error): any =>
+        //Mensaje una vez Registrado para el desayuno exitosamente 
+        Swal.fire({
+          icon: 'error',
+          title: 'Un error a ocurrido',
+          text: 'Inténtelo nuevamente'
+        })),
       map((res) => {
         this.loadData();
       })
     ).subscribe(
-      (error) => {
-        console.log(error)
+      (res) => {
+
+        //Mensaje una vez Registrado para el desayuno exitosamente 
+        if (res !==undefined) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registrado exitosamente',
+            text: 'Gracias'
+          })
+        }
       }
     );
-    this.apiService.PutData(`${this.configService.config.apiUrl}/api/Calendar`, dataToPost).pipe(
-      map((res) => {
-        this.loadData();
-      })
-    ).subscribe();
   }
 
-  handleDeleteUser(id_user) {
-    Swal.fire({
-      icon: 'success',
-      title: 'asistencia eliminada'
-    })
-    const deleteParams = {
-      id_user: id_user,
-      date: this.data.dateStr 
-    }
 
-    this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`, {}, { params: deleteParams }).pipe(
-      map((res) => {
-        this.loadData();
-      })
-    ).subscribe();
+  handleDeleteUser(id_user) {
+
+    Swal.fire({
+      title: '¿Deseas eliminar este registro?',
+      text: "Se cancelará su asistencia a este día",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, estoy seguro',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Asistencia eliminada'
+        })
+        const deleteParams = {
+          id_user: id_user,
+          date: this.data.dateStr
+        }
+
+        this.apiService.PostData(`${this.configService.config.apiUrl}/api/Calendar/DeleteUser`, {}, { params: deleteParams }).pipe(
+          map((res) => {
+            this.loadData();
+          })
+        ).subscribe();
+      }
+    })
+
+
 
   }
 
