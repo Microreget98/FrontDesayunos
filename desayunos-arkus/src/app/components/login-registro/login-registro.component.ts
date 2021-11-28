@@ -52,7 +52,7 @@ export class LoginRegistroComponent implements OnInit {
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
-    this.maxDate = new Date(currentYear - 18, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 18 años
+    this.maxDate = new Date(currentYear - 17, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 17 años
   }
 
   cookieSession() {
@@ -216,7 +216,6 @@ export class LoginRegistroComponent implements OnInit {
     if (this.registerPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    console.log(this.registerPassword.errors);
     return this.registerPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
     // return this.registerPassword.hasError('minLength', 'maxLength') ? '' : `Debe contener 8-16 caracteres - carcteres actuales ${this.registerPassword.errors?.maxlength.actualLength}`;
   }
@@ -241,7 +240,6 @@ export class LoginRegistroComponent implements OnInit {
 //#region custom field validatios
 export function matchPass(password): ValidatorFn{
   return (controlname: AbstractControl): ValidationErrors | null => {
-    console.log(controlname);
     const confpass = controlname.value;
     const pass = password.value;
     if (confpass !== pass){
