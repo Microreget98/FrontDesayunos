@@ -30,10 +30,17 @@ export class HomeComponent implements OnInit {
   }
 
   // isAdmin=this.userData.getUserType();
+ 
+
+  // userInfo = {
+  //   id_user: 2,
+  //   first_name: 'Angel Servando',
+  //   last_name: 'Quiñones Garcia'
+  // }
 
   options: CalendarOptions = {
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev,next,today',
       center: 'title',
       right: ''
     },
