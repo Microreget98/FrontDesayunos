@@ -13,8 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'confirmacion', component: ConfirmacionComponent },
   { path: 'vistausuarios', component: VistaDeUsuarioComponent },
-  { path: 'perfil', component: PerfilComponent },
-];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = true;
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-  
+
   userInfo = {
     id_user: 0,
     first_name: '',
@@ -52,14 +52,14 @@ export class HomeComponent implements OnInit {
     selectMirror: true,
     dayMaxEvents: true,
     dateClick: this.handleDateClick.bind(this),
-    eventContent: function(arg){
+    eventContent: function (arg) {
       let image = document.createElement('img');
       let div = document.createElement('span');
       image.src = arg.event.extendedProps.imgUrl;
       image.width = 20;
       image.height = 20;
       div.innerText = arg.event.extendedProps.fullName;
-      let arrayOfDomNodes = [ image, div ];
+      let arrayOfDomNodes = [image, div];
       return { domNodes: arrayOfDomNodes };
     },
     events: [
@@ -73,13 +73,12 @@ export class HomeComponent implements OnInit {
     private apiService: ApiService,
     private configService: ConfigService,
     private router: Router
-    ) {
+  ) {
 
-      
-      }
+
+  }
 
   ngOnInit(): void {
-    
     this.userData.ngOnInit();
     if (this.userData.userDataString !== '') {
       let parsedData = JSON.parse(this.userData.userDataString);
@@ -94,49 +93,49 @@ export class HomeComponent implements OnInit {
     }
     this.loadCalendarInfo();
     this.options.dayMaxEvents = 4;
-    
+
   }
 
-  loadCalendarInfo(){
+  loadCalendarInfo() {
     let calendarEl;
-      var calendar = new Calendar(calendarEl, {
-        timeZone: 'local',
-      });
-      let month: number = calendar.view.currentStart.getMonth() + 1;
-      let year: number = calendar.view.currentStart.getFullYear();
+    var calendar = new Calendar(calendarEl, {
+      timeZone: 'local',
+    });
+    let month: number = calendar.view.currentStart.getMonth() + 1;
+    let year: number = calendar.view.currentStart.getFullYear();
 
-      const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`
+    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`
 
-      this.apiService.GetData(apiUrl).pipe(
-        map((res: CalendarUsersByMonth[]) => {
-          res.forEach(usr => {
-            eventLoad.push(
-              { 
-                title: 'user', 
-                date: usr.date ,
-                backgroundColor: 'white', 
-                textColor: 'black',
-                borderColor: 'white',
-                extendedProps: {
-                  fullName: usr.first_name + " " + usr.last_name,
-                  imgUrl: "../../../assets/img/avatar.jpg"
-                }
+    this.apiService.GetData(apiUrl).pipe(
+      map((res: CalendarUsersByMonth[]) => {
+        res.forEach(usr => {
+          eventLoad.push(
+            {
+              title: 'user',
+              date: usr.date,
+              backgroundColor: 'white',
+              textColor: 'black',
+              borderColor: 'white',
+              extendedProps: {
+                fullName: usr.first_name + " " + usr.last_name,
+                imgUrl: "../../../assets/img/avatar.jpg"
               }
-            );
-          });
-          this.isLoading = false;
-        })
-      ).subscribe();
+            }
+          );
+        });
+        this.isLoading = false;
+      })
+    ).subscribe();
   }
 
-  handleDateClick(info){
+  handleDateClick(info) {
     const dialogRef = this.dialog.open(DialogMenu, {
       width: '800px',
       height: '500px',
-      data: {dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user}
+      data: { dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user }
     }).afterClosed().subscribe((res) => {
-        this.loadCalendarInfo();
-      }
+      this.loadCalendarInfo();
+    }
     );
 
   }
