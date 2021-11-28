@@ -104,9 +104,9 @@
               <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-              <mat-error *ngIf="registerPassword.invalid">{{
-                registerPasswordErrorMessage()
-                }}</mat-error>
+              <mat-error *ngIf="registerPassword.invalid">
+                {{ registerPasswordErrorMessage() }}
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="texbx" appearance="outline" color="accent">
               <mat-label>Confirmar Contraseña</mat-label>
@@ -117,7 +117,7 @@
               <mat-error *ngIf="confirmPassword.invalid">{{
                 confirmPasswordErrorMessage()
                 }}</mat-error>
-              <mat-error *ngIf="confirmPassword.errors?.['mustMatch']">Las contraseñas deben coincidir</mat-error>
+              <mat-error *ngIf="confirmPassword.errors?.['matching']">Las contraseñas deben coincidir</mat-error>
             </mat-form-field>
             <!-- ACABA INPUTS de dob, location, email y contraseñas -->
             <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">Registrarme</button>
