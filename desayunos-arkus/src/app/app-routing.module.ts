@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'confirmacion', component: ConfirmacionComponent },
   { path: 'vistausuarios', component: VistaDeUsuarioComponent },
 
-
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

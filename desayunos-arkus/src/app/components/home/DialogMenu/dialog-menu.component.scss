@@ -7,22 +7,21 @@
 // .mat-button{
 //     margin-bottom: 5px;
 // }
-.title{
+.title {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     max-height: 50px;
     justify-items: start;
-    button{
+    button {
         justify-self: end;
     }
 }
-.containerDialog{
+.containerDialog {
     // border: solid 1px black;
     display: grid;
     margin-top: 5px;
-    
 }
-.mat-card{
+.mat-card {
     border: solid 1px black;
     display: grid;
     grid-template-columns: 85% 15%;
@@ -33,17 +32,17 @@
         justify-self: end;
     }
 }
-.columnUsers{
+.columnUsers {
     // border: solid 5px pink;
     display: grid;
 }
-.userInfo{
+.userInfo {
     // border: solid 1px red;
     display: grid;
     grid-template-columns: 5% 95%;
     justify-items: start;
     align-items: center;
-    #faicon{
+    #faicon {
         margin-left: 5px;
         margin-right: 5px;
         font-size: 25px;
@@ -75,3 +74,13 @@
 // .columnUsers button{
 //     align-content: center;
 // }
+@media (max-width: 450px) {
+    .regi {
+    width: 70%;
+    height: 50px;
+    }
+    
+    #username{
+        margin-left: 20px;
+    }
+}
