@@ -1,4 +1,4 @@
 {
-    "apiUrl": "https://localhost:44361",
-    "apiUrlProd": "https://desayunosarkusnexus.eastus.cloudapp.azure.com"
+    "apiUrlDev": "https://localhost:44361",
+    "apiUrl": "http://ec2-18-217-136-32.us-east-2.compute.amazonaws.com"
 }
