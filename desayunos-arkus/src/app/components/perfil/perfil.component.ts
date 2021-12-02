@@ -86,10 +86,6 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-
-  }
-
   cerrarSesion() {
     this.userData.deleteCookie()
     this.router.navigate(['/login'])
