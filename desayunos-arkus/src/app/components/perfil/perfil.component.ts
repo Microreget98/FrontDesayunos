@@ -36,8 +36,8 @@ export class PerfilComponent implements OnInit {
     this.userData.ngOnInit();
     let userDataInfo = JSON.parse(this.userData.userDataString)
     this.perfilForm = this.fb.group({
-      firstName: [userDataInfo.first_name, [Validators.required]],
-      lastName: [userDataInfo.last_name, [Validators.required]],
+      firstName: [userDataInfo.first_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
+      lastName: [userDataInfo.last_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
       sedes: [userDataInfo.location, [Validators.required]],
       passw: [null],
       datePo: [userDataInfo.dob, [Validators.required]]
@@ -79,11 +79,8 @@ export class PerfilComponent implements OnInit {
   }
 
   vistaEn() {
-    (Response: object) => {
-      if (Response) {
+    
         this.router.navigate(['/vistausuarios'])
-      }
-    }
   }
 
   cerrarSesion() {

@@ -53,33 +53,18 @@
         left: 5px;
     }
 }
-
-// .columnUsers {
-//     padding-left: 10px;
-//     padding-right: 10px;
-// }
-// .deleteIcon {
-//     padding-left: 5px;
-// }
-// .mat-card{
-//     margin-top: 1px;
-//     margin-bottom: 1px;
-// }
-// button{
-//     margin-bottom: 1rem;
-// }
-// h1{
-//     margin-bottom: 0rem;
-// }
-// .columnUsers button{
-//     align-content: center;
-// }
 @media (max-width: 450px) {
     .regi {
     width: 70%;
     height: 50px;
     }
-    
+    .title {
+        margin-bottom: 20px;
+    }
+    .mat-dialog-title {
+        font-size: 20px; 
+        font-weight: bold;
+    }
     #username{
         margin-left: 20px;
     }
