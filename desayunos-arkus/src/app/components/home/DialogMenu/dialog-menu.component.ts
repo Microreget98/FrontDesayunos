@@ -115,8 +115,7 @@ export class DialogMenu implements OnInit {
   handleDeleteUser(id_user) {
 
     Swal.fire({
-      title: '¿Deseas eliminar este registro?',
-      text: "Se cancelará su asistencia a este día",
+      title: '¿Deseas eliminar el registro de este día?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -128,7 +127,7 @@ export class DialogMenu implements OnInit {
       if (result.isConfirmed) {
         Swal.fire({
           icon: 'success',
-          title: 'Asistencia eliminada'
+          title: 'Registro eliminado'
         })
         const deleteParams = {
           id_user: id_user,

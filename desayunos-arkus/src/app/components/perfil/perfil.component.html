@@ -65,11 +65,9 @@
             <div class="cerraSe">
                 <a href="" (click)="cerrarSesion()">Sign Out</a>
             </div>
-
-            <button mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
-        </form>
-    </mat-drawer>
-
+      <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
+    </form>
+  </mat-drawer>
 </mat-drawer-container>
 <div class="menuH">
     <button (click)="drawer.toggle()">

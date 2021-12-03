@@ -30,7 +30,7 @@ export class PerfilComponent implements OnInit {
   firstchar: string = "";
   public image: string;
   public archivos: any = []
-  
+
   //Valida Todo Los inputs
   constructor(
     private sanitizer: DomSanitizer,
