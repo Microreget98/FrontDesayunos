@@ -22,9 +22,9 @@ export class PerfilComponent implements OnInit {
   showFiller = false;
 
   perfilForm = new FormGroup({})
+  isAdmin = false;
 
   firstchar: string = "";
-
   //Valida Todo Los inputs
   constructor(private fb: FormBuilder,
     private userData: UserDataService,
@@ -33,7 +33,9 @@ export class PerfilComponent implements OnInit {
     private configService: ConfigService) { }
 
   ngOnInit(): void {
+   // console.log(this.isAdmin)
     this.userData.ngOnInit();
+    this.isAdmin=this.userData.getUserType();
     let userDataInfo = JSON.parse(this.userData.userDataString)
     this.perfilForm = this.fb.group({
       firstName: [userDataInfo.first_name, [Validators.required]],

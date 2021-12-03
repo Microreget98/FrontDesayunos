@@ -92,7 +92,9 @@ export class LoginRegistroComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Buen día',
-            text: 'Bienvenido'
+            text: 'Bienvenido',
+            showConfirmButton: false,
+            timer : 1500
           })
         }
       },
