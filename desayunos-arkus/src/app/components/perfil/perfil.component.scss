@@ -1,10 +1,5 @@
-// .mat-drawer-opened{
-//   z-index: 1;
-// }
-
 .mat-drawer-container {
   visibility: hidden;
-  // z-index: 1;
 }
 
 /*El Apartado De La  Letra Del Ususario y su vista*/
@@ -77,51 +72,46 @@
   fill: red;
 }
 
-.Acomodar{
+.Acomodar {
   padding-left: 20%;
   width: 80%;
 }
-  
 
 @media (max-width: 2000px) {
   .example-sidenav {
-    
     width: 25%;
-}
+  }
 }
 @media (max-width: 1400px) {
   .example-sidenav {
     float: none;
     width: 40%;
+  }
 }
-}
-@media (max-width: 950px ) {
+@media (max-width: 950px) {
   .example-sidenav {
     float: none;
     width: 50%;
+  }
 }
-}
-@media (max-width: 700px ) {
+@media (max-width: 700px) {
   .example-sidenav {
     float: none;
     width: 60%;
+  }
 }
-}
-@media (max-width: 500px ) {
+@media (max-width: 500px) {
   .example-sidenav {
     float: none;
     width: 80%;
+  }
 }
-}
-@media (max-width: 400px ) {
+@media (max-width: 400px) {
   .example-sidenav {
     float: none;
     width: 100%;
+  }
 }
-}
-
-
-
 
 //Separacion De Botones Del Perfil
 .EnvEdi {
@@ -140,7 +130,11 @@
 }
 
 // Fade in out
-#fadeinout p{
+#fadeinout p {
   opacity: 0;
   transition: opacity 1 2s;
+}
+.viss{
+margin-top: 20px;
+width: 100%;
 }
