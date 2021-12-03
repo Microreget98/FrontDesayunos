@@ -16,15 +16,15 @@
       <div class="perfil">{{firstchar}}</div>
     </div>
 
-    <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="updateProfile()">
 
       <div class="Firstlast" disabled>
         <mat-form-field appearance="outline">
-          <mat-label for="fname">First name:</mat-label>
+          <mat-label for="fname">Nombre:</mat-label>
           <input matInput type="text" id="fname" name="fname" formControlName="firstName"><br>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label for="lname">Last name:</mat-label>
+          <mat-label for="lname">Apellido:</mat-label>
           <input matInput type="text" id="lname" name="lname" formControlName="lastName"><br>
           <mat-error>
             <!-- {{mensajerror}}-->
@@ -33,7 +33,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Modify password</mat-label>
+          <mat-label>Modificar Contraseña</mat-label>
           <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
@@ -49,7 +49,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>birthday date</mat-label>
+          <mat-label>Fecha De Nacimiento</mat-label>
           <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" readonly>
           <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
           <mat-datepicker #dp3></mat-datepicker>
@@ -57,14 +57,15 @@
       </div>
 
       <div class="EnvEdi">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">Guardar</button>
 
-        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Edit</button>
+        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Editar/Cancelar</button>
       </div>
+      <button class="viss" mat-raised-button color="primary"  (click)="vistaEn()"  >Ver Usuario Registrados</button><br>
       <div class="cerraSe">
-        <a href="" (click)="cerrarSesion()">Sign Out</a>
+        <a href="" (click)="cerrarSesion()">Cerrar Sesión</a>
+        <br><br>
       </div>
-
       <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
     </form>
   </mat-drawer>

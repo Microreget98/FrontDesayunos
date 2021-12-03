@@ -9,6 +9,7 @@ import { ConfigService } from 'src/app/core/config.service';
 import { map } from 'rxjs/operators';
 import { CalendarUsersByMonth } from './models/CalendarUsersByMonth';
 import { Router } from '@angular/router';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 const eventLoad = [];
 
@@ -43,6 +44,7 @@ export class HomeComponent implements OnInit {
       left: 'prev,next,today',
       center: 'title',
       right: ''
+    
     },
     initialView: 'dayGridMonth',
     initialEvents: eventLoad,
@@ -118,7 +120,7 @@ export class HomeComponent implements OnInit {
               borderColor: 'white',
               extendedProps: {
                 fullName: usr.first_name + " " + usr.last_name,
-                imgUrl: "../../../assets/img/avatar.jpg"
+                imgUrl: "../../../assets/img/icons8-user-64.png"
               }
             }
           );
