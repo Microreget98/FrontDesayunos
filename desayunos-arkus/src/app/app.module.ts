@@ -37,7 +37,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTableModule} from '@angular/material/table';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -86,7 +87,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatTabsModule,
     MatToolbarModule,
     FontAwesomeModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
   providers: [
     {
