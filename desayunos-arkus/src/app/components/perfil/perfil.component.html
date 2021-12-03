@@ -1,78 +1,78 @@
 <mat-drawer-container class="nav-container" autosize>
-  
-  <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
-    <div class="menuH">
-      <button (click)="drawer.toggle()">
+
+    <mat-drawer #drawer class="example-sidenav" mode="over" position="end" style="position: absolute;">
+        <div class="menuH">
+            <button (click)="drawer.toggle()">
         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
           <path
-            d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25 
+            d="M 9.15625 6.3125 L 6.3125 9.15625 L 22.15625 25 L 6.21875 40.96875 L 9.03125 43.78125 L 25
               27.84375 L 40.9375 43.78125 L 43.78125 40.9375 L 27.84375 25 L 43.6875 9.15625 L 40.84375 6.3125 L 25 22.15625 Z">
           </path>
         </svg>
       </button>
-    </div>
+        </div>
+        <div mat-dialog-content class="perfilpos">
+            <div mat-dialog-actions>
+                <img *ngIf="image" width="300px" height="300px" [src]="image" alt="">
+                <button mat-button (click)="openarch()" class="perfil">{{firstchar}}</button>
+            </div>
+        </div>
+      
+        <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
-    <div class="perfilpos">
-      <div class="perfil">{{firstchar}}</div>
-    </div>
+            <div class="Firstlast" disabled>
+                <mat-form-field appearance="outline">
+                    <mat-label for="fname">First name:</mat-label>
+                    <input matInput type="text" id="fname" name="fname" formControlName="firstName"><br>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label for="lname">Last name:</mat-label>
+                    <input matInput type="text" id="lname" name="lname" formControlName="lastName"><br>
+                    <mat-error>
+                        <!-- {{mensajerror}}-->
+                        First Name is Required!
+                    </mat-error>
+                </mat-form-field>
 
-    <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="updateProfile()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Modify password</mat-label>
+                    <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+              
+                <mat-form-field appearance="outline">
+                    <mat-label for="">Sedes:</mat-label>
+                    <mat-select matNativeControl name="curso" formControlName="sedes">
+                        <mat-option value="" disabled>Elige una opción</mat-option>
+                        <mat-option value="mty">Monterrey</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>birthday date</mat-label>
+                    <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #dp3></mat-datepicker>
+                </mat-form-field>
+            </div>
 
-      <div class="Firstlast" disabled>
-        <mat-form-field appearance="outline">
-          <mat-label for="fname">Nombre:</mat-label>
-          <input matInput type="text" id="fname" name="fname" formControlName="firstName"><br>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label for="lname">Apellido:</mat-label>
-          <input matInput type="text" id="lname" name="lname" formControlName="lastName"><br>
-          <mat-error>
-            <!-- {{mensajerror}}-->
-            First Name is Required!
-          </mat-error>
-        </mat-form-field>
+            <div class="EnvEdi">
+                <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Modificar Contraseña</mat-label>
-          <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-        </mat-form-field>
+                <button mat-raised-button color="primary" type="button" (click)="buttonD()">Edit</button>
+            </div>
+            <div class="cerraSe">
+                <a href="" (click)="cerrarSesion()">Sign Out</a>
+            </div>
 
-        <mat-form-field appearance="outline">
-          <mat-label for="">Sedes:</mat-label>
-          <mat-select matNativeControl name="curso" formControlName="sedes">
-            <mat-option value="" disabled>Elige una opción</mat-option>
-            <mat-option value="mty">Monterrey</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Fecha De Nacimiento</mat-label>
-          <input matInput [matDatepicker]="dp3" id="dateP" name="dateP" formControlName="datePo" readonly>
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="EnvEdi">
-        <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">Guardar</button>
-
-        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Editar/Cancelar</button>
-      </div>
-      <button class="viss" mat-raised-button color="primary"  (click)="vistaEn()"  >Ver Usuario Registrados</button><br>
-      <div class="cerraSe">
-        <a href="" (click)="cerrarSesion()">Cerrar Sesión</a>
-        <br><br>
-      </div>
-      <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
-    </form>
-  </mat-drawer>
+            <button mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
+        </form>
+    </mat-drawer>
 
 </mat-drawer-container>
 <div class="menuH">
-  <button (click)="drawer.toggle()">
+    <button (click)="drawer.toggle()">
     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0 0 50 50">
       <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"></path>
     </svg>
