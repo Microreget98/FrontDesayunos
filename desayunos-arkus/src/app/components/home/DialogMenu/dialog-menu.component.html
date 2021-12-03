@@ -1,12 +1,12 @@
 <div class="title">
   <h1 mat-dialog-title>Registro {{data.dateStr}}</h1>
-  <button mat-stroked-button color="primary" (click)="handleSaveButton()" *ngIf="ActDi < inputDate">Register</button>
+  <button class="regi" mat-stroked-button color="primary" (click)="handleSaveButton()" *ngIf="ActDi < inputDate">Register</button>
 </div>
 <div class="containerDialog">
   <div class="columnUsers">
     <mat-card *ngFor="let user of UserListPerDay">
       <div class="userInfo">
-        <fa-icon [icon]="faUser" id="faicon"></fa-icon>
+        <img src="../../../assets/img/icons8-user-64.png" height="25"  id="faicon">
         <p id="username">{{user.first_name + " " + user.last_name}}</p>
       </div>
       <button mat-button *ngIf="isAdmin || user.id_user=== isUser && ActDi < inputDate"  color="primary" (click)="handleDeleteUser(user.id_user)">
