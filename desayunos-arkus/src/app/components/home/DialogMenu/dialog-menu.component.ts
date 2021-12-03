@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/api.service';
 import { CalendarUsers } from '../models/CalendarUsers';
 import { DialogData } from '../models/DialogData';
