@@ -1,5 +1,4 @@
 {
-    "apiUrlDev": "https://localhost:44361",
-    "apiUrlPord1": "http://ec2-18-216-110-135.us-east-2.compute.amazonaws.com",
-    "apiUrl": "http://66.175.236.212:5001"
+    "apiUrl": "https://localhost:44361",
+    "apiUrlPord": "http://18.216.110.135"
 }
