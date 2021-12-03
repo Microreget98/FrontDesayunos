@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators  } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/core/api.service';
@@ -50,7 +50,7 @@ export class PerfilComponent implements OnInit {
       firstName: [userDataInfo.first_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
       lastName: [userDataInfo.last_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
       sedes: [userDataInfo.location, [Validators.required]],
-      passw: [null],
+      passw: ['',[Validators.minLength(8),Validators.maxLength(16)]],
       datePo: [userDataInfo.dob, [Validators.required]]
     });
 
@@ -113,44 +113,30 @@ export class PerfilComponent implements OnInit {
       }
     }
   }
-
-  openarch(): void{
-    const dialogRef = this.dialog.open(FotopComponent,{});
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-    })
-  }
-
-  imgperfil(event): any {
-      const imagenrecibida = event.target.files[0]
-      this.extraerBase64(imagenrecibida).then((imagen: any) => {
-      this.image = imagen.base;
-      console.log(imagen);
-
-      })
-  }
-
-  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
-    try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-      const reader = new FileReader();
-      reader.readAsDataURL($event);
-      reader.onload = () =>{
-        resolve({
-          base: reader.result
-        });
-      };
-      reader.onerror = error => {
-        resolve({
-          base: null
-        });
-      };
-    }catch (e){
-      return null;
+  registerLastNameErrorMessage(){
+    if (this.lastName.hasError('required')) {
+      return 'Tu Nombre es requerido';
     }
-  })
+    return this.lastName.hasError('pattern') ? 'Solo se permiten letras' : '';
+  }
+  registerFirstNameErrorMessage(){
+    if (this.firstName.hasError('required')) {
+      return 'Tu Nombre es requerido';
+    }
+    return this.firstName.hasError('pattern') ? 'Solo se permiten letras' : '';
+  }
+  registerPasswordErrorMessage() {
+    if (this.passw.hasError('required')) {
+      return 'La contraseña es requerida';
+    }
+    return this.passw.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
+    // return this.registerPassword.hasError('minLength', 'maxLength') ? '' : `Debe contener 8-16 caracteres - carcteres actuales ${this.registerPassword.errors?.maxlength.actualLength}`;
+  }
+  get lastName() { return this.perfilForm.get('lastName'); }
+  get firstName() { return this.perfilForm.get('firstName'); }
+  get passw() { return this.perfilForm.get('passw'); }
 }
+//mensajes de error Perfil
 
 
 
