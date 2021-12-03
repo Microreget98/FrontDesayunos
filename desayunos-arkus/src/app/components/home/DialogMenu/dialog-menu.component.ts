@@ -33,7 +33,10 @@ export class DialogMenu implements OnInit {
   isAdmin = this.userData.getUserType();
 
   isUser = this.userData.getUserId();
+  
   toastr: any;
+
+  btnEneabled=false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogMenu>,
@@ -47,15 +50,25 @@ export class DialogMenu implements OnInit {
     this.loadData();
   }
 
+  UserValidationDay(userslist:CalendarUsers[] ){
+    let emptyuserlist:CalendarUsers[] = [];
+    emptyuserlist = userslist.filter(x => x.id_user === this.isUser)
+    this.btnEneabled = emptyuserlist.length > 0 ? true : false;
+  }
+
+
   loadData() {
     this.apiService.GetData(`${this.configService.config.apiUrl}/api/Calendar/${this.data.dateStr}`)
       .subscribe(
         {
           next: (res: CalendarUsers[]) => {
             this.UserListPerDay = res;
+            this.UserValidationDay(this.UserListPerDay);
           }
+          
         }
       );
+
   }
 
   getSelectedDish(selectedOptions) {
@@ -87,7 +100,7 @@ export class DialogMenu implements OnInit {
       (res) => {
 
         //Mensaje una vez Registrado para el desayuno exitosamente 
-        if (res !==undefined) {
+        if (res !==null) {
           Swal.fire({
             icon: 'success',
             title: 'Registrado exitosamente',
@@ -102,8 +115,7 @@ export class DialogMenu implements OnInit {
   handleDeleteUser(id_user) {
 
     Swal.fire({
-      title: '¿Deseas eliminar este registro?',
-      text: "Se cancelará su asistencia a este día",
+      title: '¿Deseas eliminar el registro de este día?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -115,7 +127,7 @@ export class DialogMenu implements OnInit {
       if (result.isConfirmed) {
         Swal.fire({
           icon: 'success',
-          title: 'Asistencia eliminada'
+          title: 'Registro eliminado'
         })
         const deleteParams = {
           id_user: id_user,
