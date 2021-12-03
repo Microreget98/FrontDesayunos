@@ -1,9 +1,5 @@
-// .mat-drawer-opened{
-//   z-index: 1;
-// }
 .mat-drawer-container {
     visibility: hidden;
-    // z-index: 1;
 }
 
 
@@ -148,4 +144,8 @@
 #fadeinout p {
     opacity: 0;
     transition: opacity 1 2s;
+}
+.viss{
+margin-top: 20px;
+width: 100%;
 }

@@ -17,8 +17,7 @@
                 <button mat-button (click)="openarch()" class="perfil">{{firstchar}}</button>
             </div>
         </div>
-
-
+      
         <form class="Acomodar" action="" [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
 
             <div class="Firstlast" disabled>
@@ -39,10 +38,10 @@
                     <mat-label>Modify password</mat-label>
                     <input id="passw" name="passw" matInput [type]="hide ? 'password' : 'text'" formControlName="passw">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
-
+              
                 <mat-form-field appearance="outline">
                     <mat-label for="">Sedes:</mat-label>
                     <mat-select matNativeControl name="curso" formControlName="sedes">
