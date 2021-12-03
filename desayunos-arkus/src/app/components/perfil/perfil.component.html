@@ -66,8 +66,7 @@
         <a href="" (click)="cerrarSesion()">Cerrar Sesión</a>
         <br><br>
       </div>
-
-      
+      <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="vistaEn()">Vista</button>
     </form>
   </mat-drawer>
 
