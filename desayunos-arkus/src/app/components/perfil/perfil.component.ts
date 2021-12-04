@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -6,6 +6,9 @@ import { ApiService } from 'src/app/core/api.service';
 import { ConfigService } from 'src/app/core/config.service';
 import Swal from 'sweetalert2';
 import { UserDataService } from '../login-registro/user-data.service';
+import {MatDialog} from '@angular/material/dialog';
+import { FotopComponent } from '../fotop/fotop.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,18 +25,26 @@ export class PerfilComponent implements OnInit {
   showFiller = false;
 
   perfilForm = new FormGroup({})
+  isAdmin = false;
 
   firstchar: string = "";
+  public image: string;
+  public archivos: any = []
 
   //Valida Todo Los inputs
-  constructor(private fb: FormBuilder,
+  constructor(
+    private sanitizer: DomSanitizer,
+    private fb: FormBuilder,
     private userData: UserDataService,
     private router: Router,
     private apiService: ApiService,
-    private configService: ConfigService) { }
+    private configService: ConfigService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
+   // console.log(this.isAdmin)
     this.userData.ngOnInit();
+    this.isAdmin=this.userData.getUserType();
     let userDataInfo = JSON.parse(this.userData.userDataString)
     this.perfilForm = this.fb.group({
       firstName: [userDataInfo.first_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
@@ -41,13 +52,16 @@ export class PerfilComponent implements OnInit {
       sedes: [userDataInfo.location, [Validators.required]],
       passw: [null],
       datePo: [userDataInfo.dob, [Validators.required]]
-
     });
+
     this.firstchar = String(this.perfilForm.get("firstName").value).charAt(0);
     for (const iterator of Object.keys(this.perfilForm.controls)) {
       this.perfilForm.get(`${iterator}`).disable();
     }
   }
+
+
+
 
   updateProfile() {
     let userDataInfo = JSON.parse(this.userData.userDataString);
@@ -100,10 +114,50 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  openarch(): void{
+    const dialogRef = this.dialog.open(FotopComponent,{});
+    dialogRef.afterClosed().subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  imgperfil(event): any {
+      const imagenrecibida = event.target.files[0]
+      this.extraerBase64(imagenrecibida).then((imagen: any) => {
+      this.image = imagen.base;
+      console.log(imagen);
+
+      })
+  }
+
+  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () =>{
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = error => {
+        resolve({
+          base: null
+        });
+      };
+    }catch (e){
+      return null;
+    }
+  })
 }
 
+
+
+
+
 //#region swalalertmodificacion_usuario_error
-//mensaje de alerta modificacion de usuario no modificada error 
+//mensaje de alerta modificacion de usuario no modificada error
    // Swal.fire({
   //         icon: 'error',
   //         title: 'Usuario no modificado',
