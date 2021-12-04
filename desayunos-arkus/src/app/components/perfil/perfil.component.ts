@@ -6,8 +6,8 @@ import { ApiService } from 'src/app/core/api.service';
 import { ConfigService } from 'src/app/core/config.service';
 import Swal from 'sweetalert2';
 import { UserDataService } from '../login-registro/user-data.service';
-import {MatDialog} from '@angular/material/dialog';
-import { FotopComponent } from '../fotop/fotop.component';
+import { MatDialog } from '@angular/material/dialog';
+
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -17,8 +17,6 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  // fadeinout = "fadeinout"
-
   hide: boolean = true;
   disprop: boolean = true;
   fnameandlas: boolean = true;
@@ -42,13 +40,13 @@ export class PerfilComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-   // console.log(this.isAdmin)
+    // console.log(this.isAdmin)
     this.userData.ngOnInit();
-    this.isAdmin=this.userData.getUserType();
+    this.isAdmin = this.userData.getUserType();
     let userDataInfo = JSON.parse(this.userData.userDataString)
     this.perfilForm = this.fb.group({
-      firstName: [userDataInfo.first_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
-      lastName: [userDataInfo.last_name, [Validators.required,Validators.pattern('^[a-zñ A-ZÑ]+$')]],
+      firstName: [userDataInfo.first_name, [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')]],
+      lastName: [userDataInfo.last_name, [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')]],
       sedes: [userDataInfo.location, [Validators.required]],
       passw: [null],
       datePo: [userDataInfo.dob, [Validators.required]]
@@ -59,9 +57,6 @@ export class PerfilComponent implements OnInit {
       this.perfilForm.get(`${iterator}`).disable();
     }
   }
-
-
-
 
   updateProfile() {
     let userDataInfo = JSON.parse(this.userData.userDataString);
@@ -93,8 +88,7 @@ export class PerfilComponent implements OnInit {
   }
 
   vistaEn() {
-    
-        this.router.navigate(['/vistausuarios'])
+    this.router.navigate(['/vistausuarios'])
   }
 
   cerrarSesion() {
@@ -114,54 +108,40 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  openarch(): void{
-    const dialogRef = this.dialog.open(FotopComponent,{});
-    dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-    })
-  }
+  // openarch(): void {
+  //   const dialogRef = this.dialog.open(FotopComponent, {});
+  //   dialogRef.afterClosed().subscribe(res => {
+  //     console.log(res);
+  //   })
+  // }
 
-  imgperfil(event): any {
-      const imagenrecibida = event.target.files[0]
-      this.extraerBase64(imagenrecibida).then((imagen: any) => {
-      this.image = imagen.base;
-      console.log(imagen);
+  // imgperfil(event): any {
+  //   const imagenrecibida = event.target.files[0]
+  //   this.extraerBase64(imagenrecibida).then((imagen: any) => {
+  //     this.image = imagen.base;
+  //     console.log(imagen);
 
-      })
-  }
+  //   })
+  // }
 
-  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
-    try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-      const reader = new FileReader();
-      reader.readAsDataURL($event);
-      reader.onload = () =>{
-        resolve({
-          base: reader.result
-        });
-      };
-      reader.onerror = error => {
-        resolve({
-          base: null
-        });
-      };
-    }catch (e){
-      return null;
-    }
-  })
+  // extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+  //   try {
+  //     const unsafeImg = window.URL.createObjectURL($event);
+  //     const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL($event);
+  //     reader.onload = () => {
+  //       resolve({
+  //         base: reader.result
+  //       });
+  //     };
+  //     reader.onerror = error => {
+  //       resolve({
+  //         base: null
+  //       });
+  //     };
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // })
 }
-
-
-
-
-
-//#region swalalertmodificacion_usuario_error
-//mensaje de alerta modificacion de usuario no modificada error
-   // Swal.fire({
-  //         icon: 'error',
-  //         title: 'Usuario no modificado',
-  //         showConfirmButton: false,
-  //         timer: 1500
-  //       })
-//#endregion
