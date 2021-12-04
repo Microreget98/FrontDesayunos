@@ -54,8 +54,15 @@
                     <mat-datepicker #dp3></mat-datepicker>
                 </mat-form-field>
             </div>
-            <div class="EnvEdi">
-                <button mat-raised-button color="primary" type="submit" [disabled]="!perfilForm.valid">submit</button>
+
+        <button mat-raised-button color="primary" type="button" (click)="buttonD()">Editar/Cancelar</button>
+      </div>
+      <button class="viss" mat-raised-button color="primary"  (click)="vistaEn()"  >Ver Usuarios Registrados</button><br>
+      <div class="cerraSe">
+        <a href="" (click)="cerrarSesion()">Cerrar Sesión</a>
+        <br><br>
+      </div>
+
                 <button mat-raised-button color="primary" type="button" (click)="buttonD()">Edit</button>
             </div>
             <div class="cerraSe">
