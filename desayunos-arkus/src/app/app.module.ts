@@ -37,7 +37,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CookieService } from 'ngx-cookie-service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatTableModule} from '@angular/material/table';
+import { FotopComponent } from './components/fotop/fotop.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -59,7 +61,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DialogMenu,
     PerfilComponent,
     ConfirmacionComponent,
-    VistaDeUsuarioComponent
+    VistaDeUsuarioComponent,
+    FotopComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatTabsModule,
     MatToolbarModule,
     FontAwesomeModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    MatButtonToggleModule,
+    MatCheckboxModule,
+    MatTableModule
   ],
   providers: [
     {
@@ -100,6 +106,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CookieService
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogMenu]
+  entryComponents: [DialogMenu,FotopComponent]
 })
 export class AppModule { }

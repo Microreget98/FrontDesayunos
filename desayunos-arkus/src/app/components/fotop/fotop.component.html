@@ -1,0 +1,9 @@
+<div mat-dialog-content>{{message}}</div>
+<div *ngIf="previsualizacion">
+    <img width="300px" height="300px" [src]="previsualizacion" alt="">
+</div>
+<input (change)="capturarFile($event)" type="file">
+<div mat-dialog-actions class="perfbutton">
+    <button mat-button [mat-dialog-close]="true">Subir</button>
+    <button mat-button [mat-dialog-close]="false">Cancelar</button>
+</div>
