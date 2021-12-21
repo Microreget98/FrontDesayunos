@@ -1,12 +1,19 @@
 import { ContentObserver } from '@angular/cdk/observers';
 import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
-import { ApiService } from '../../core/api.service'
+import { ApiService } from '../../core/api.service';
 import { ConfigService } from '../../core/config.service';
 import { UserDataService } from './user-data.service';
 
@@ -22,34 +29,32 @@ interface Email {
 @Component({
   selector: 'app-login-registro',
   templateUrl: './login-registro.component.html',
-  styleUrls: ['./login-registro.component.scss']
+  styleUrls: ['./login-registro.component.scss'],
 })
 export class LoginRegistroComponent implements OnInit {
-
   hide = true;
 
   public fLogin: FormGroup;
   public fRegister: FormGroup;
-  
+
   minDate: Date;
   maxDate: Date;
 
   selectedValue: string;
-  sedes: Sede[] = [
-    { value: 'mty', viewValue: 'Monterrey' }
-  ];
+  sedes: Sede[] = [{ value: 'mty', viewValue: 'Monterrey' }];
   emails: Email[] = [
     { value: '@arkus.com', viewValue: 'arkus.com' },
     { value: '@arkusnexus.com', viewValue: 'arkusnexus.com' },
     { value: '@arkus-solutions.com', viewValue: 'arkus-solutions.com' },
-  ]
+  ];
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private apiService: ApiService,
     private configService: ConfigService,
     private userData: UserDataService,
-    private router: Router,) {
-
+    private router: Router
+  ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
     this.maxDate = new Date(currentYear - 17, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 17 años
@@ -62,96 +67,130 @@ export class LoginRegistroComponent implements OnInit {
   ngOnInit(): void {
     this.fLogin = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
-      loginPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]]
+      loginPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(16),
+        ],
+      ],
     });
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')]],
-      lastName: ['', [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')]],
-      textEmail: ['', [Validators.required, Validators.pattern('^[a-z A-Z0-9._-]+$')]],
+      lastName: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')],
+      ],
+      textEmail: [
+        '',
+        [Validators.required, Validators.pattern('^[a-z A-Z0-9._-]+$')],
+      ],
       registerEmail: ['', [Validators.required]],
-      registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
+      registerPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(16),
+        ],
+      ],
       confirmPassword: ['', [Validators.required]],
       sede: ['', [Validators.required]],
-      dob: ['', [Validators.required]]
+      dob: ['', [Validators.required]],
     });
-    this.confirmPassword.addValidators(matchPass(this.fRegister.get('registerPassword')));
+    this.confirmPassword.addValidators(
+      matchPass(this.fRegister.get('registerPassword'))
+    );
   }
-  
+
   sendLogin(): any {
     let userData: object = {
       email: this.fLogin.get('loginEmail').value,
-      pass: this.fLogin.get('loginPassword').value
-    }
-    this.apiService.GetDataWBody(`${this.configService.config.apiUrl}/api/login`, { ...userData }).subscribe(
-      (response: object) => {
-        if (response) {
-          this.userData.addUserInfo(response)
-          this.userData.setCookie()
-          this.router.navigate(['/home'])
-          //Mensaje una vez logeado exitosamente
+      pass: this.fLogin.get('loginPassword').value,
+    };
+    this.apiService
+      .GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {
+        ...userData,
+      })
+      .subscribe(
+        (response: object) => {
+          if (response) {
+            this.userData.addUserInfo(response);
+            this.userData.setCookie();
+            this.router.navigate(['/home']);
+            //Mensaje una vez logeado exitosamente
+            Swal.fire({
+              icon: 'success',
+              title: 'Buen día',
+              text: 'Bienvenido',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        },
+        (err) => {
           Swal.fire({
-            icon: 'success',
-            title: 'Buen día',
-            text: 'Bienvenido',
-            showConfirmButton: false,
-            timer : 1500
-          })
+            icon: 'error',
+            title: 'Tu usuario o contraseña son incorrectos',
+            text: 'Favor de verificarlos',
+          });
         }
-      },
-      (err) => {
-
-        Swal.fire({
-          icon: 'error',
-          title: "Tu usuario o contraseña son incorrectos",
-          text: "Favor de verificarlos"
-        })
-      }
-    )
+      );
   }
 
   sendRegister(): any {
-    this.fRegister.controls['name'].setValue(this.normalize(this.fRegister.value.name))
-    this.fRegister.controls['lastName'].setValue(this.normalize(this.fRegister.value.lastName))
+    this.fRegister.controls['name'].setValue(
+      this.normalize(this.fRegister.value.name)
+    );
+    this.fRegister.controls['lastName'].setValue(
+      this.normalize(this.fRegister.value.lastName)
+    );
     let userData = {
       id_user_type: 2,
       first_name: this.fRegister.value.name,
       last_name: this.fRegister.value.lastName,
       dob: this.fRegister.value.dob,
-      email: this.fRegister.value.textEmail + this.fRegister.value.registerEmail,
+      email:
+        this.fRegister.value.textEmail + this.fRegister.value.registerEmail,
       pass: this.fRegister.value.registerPassword,
       location: this.fRegister.value.sede,
-      is_active: true
-
-    }
-    this.apiService.PostData(`${this.configService.config.apiUrl}/api/users`, { ...userData }).subscribe(
-      (response) => {
-        //Mensaje existoso al REGISTRARSE 
-        Swal.fire({
-          title: 'Registrado con éxito',
-          text:"Ahora puedes iniciar sesión",
-          icon: 'success',
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        })
-      },
-      (err) => {
-        //Mensaje de error al intentar REGISTRARSE
-        Swal.fire({
-          icon: 'error',
-          title: 'Datos incorrectos',
-          text: err.error
-        })
-      }
-    )
+      is_active: true,
+    };
+    this.apiService
+      .PostData(`${this.configService.config.apiUrl}/api/users`, {
+        ...userData,
+      })
+      .subscribe(
+        (response) => {
+          //Mensaje existoso al REGISTRARSE
+          Swal.fire({
+            title: 'Registrado con éxito',
+            text: 'Ahora puedes iniciar sesión',
+            icon: 'success',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown',
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp',
+            },
+          });
+        },
+        (err) => {
+          //Mensaje de error al intentar REGISTRARSE
+          Swal.fire({
+            icon: 'error',
+            title: 'Datos incorrectos',
+            text: err.error,
+          });
+        }
+      );
   }
   normalize(str: string): string {
     let normstr = str.split(' ');
     for (const iterator of normstr) {
-      normstr[normstr.indexOf(iterator)] = iterator.charAt(0).toUpperCase() + iterator.slice(1).toLowerCase()
+      normstr[normstr.indexOf(iterator)] =
+        iterator.charAt(0).toUpperCase() + iterator.slice(1).toLowerCase();
     }
     str = '';
     for (const iterator of normstr) {
@@ -160,8 +199,8 @@ export class LoginRegistroComponent implements OnInit {
     }
     try {
       str = str.trim();
-    } catch (error) { }
-    return str
+    } catch (error) {}
+    return str;
   }
   // inicia campos login
   loginEmailErrorMessage() {
@@ -174,7 +213,9 @@ export class LoginRegistroComponent implements OnInit {
     if (this.loginPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.loginPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
+    return this.loginPassword.hasError('minLength', 'maxLength')
+      ? ''
+      : 'Debe contener 8-16 caracteres';
   }
   // termina campos login
   //#region campos registro
@@ -188,7 +229,7 @@ export class LoginRegistroComponent implements OnInit {
     if (this.lastName.hasError('required')) {
       return 'Tu Apellido es requerido';
     }
-    return this.lastName.hasError('pattern') ? 'Solo se permiten letras' : '';;
+    return this.lastName.hasError('pattern') ? 'Solo se permiten letras' : '';
   }
   registerDobErrorMessage() {
     if (this.dob.hasError('required')) {
@@ -206,7 +247,9 @@ export class LoginRegistroComponent implements OnInit {
     if (this.textEmail.hasError('required')) {
       return 'El correo es requerido';
     }
-    return this.textEmail.hasError('pattern') ? 'Solo se permiten ( - | _ | . ) y letras' : '';
+    return this.textEmail.hasError('pattern')
+      ? 'Solo se permiten ( - | _ | . ) y letras'
+      : '';
   }
   registerEmailErrorMessage() {
     if (this.registerEmail.hasError('required')) {
@@ -218,7 +261,9 @@ export class LoginRegistroComponent implements OnInit {
     if (this.registerPassword.hasError('required')) {
       return 'La contraseña es requerida';
     }
-    return this.registerPassword.hasError('minLength', 'maxLength') ? '' : 'Debe contener 8-16 caracteres';
+    return this.registerPassword.hasError('minLength', 'maxLength')
+      ? ''
+      : 'Debe contener 8-16 caracteres';
     // return this.registerPassword.hasError('minLength', 'maxLength') ? '' : `Debe contener 8-16 caracteres - carcteres actuales ${this.registerPassword.errors?.maxlength.actualLength}`;
   }
   confirmPasswordErrorMessage() {
@@ -228,28 +273,47 @@ export class LoginRegistroComponent implements OnInit {
     return '';
   }
   ////#endregion campos registro
-  get loginEmail() { return this.fLogin.get('loginEmail'); }
-  get loginPassword() { return this.fLogin.get('loginPassword'); }
-  get name() { return this.fRegister.get('name'); }
-  get lastName() { return this.fRegister.get('lastName'); }
-  get dob() { return this.fRegister.get('dob'); }
-  get sede() { return this.fRegister.get('sede'); }
-  get textEmail() { return this.fRegister.get('textEmail'); }
-  get registerEmail() { return this.fRegister.get('registerEmail'); }
-  get registerPassword() { return this.fRegister.get('registerPassword'); }
-  get confirmPassword() { return this.fRegister.get('confirmPassword'); }
+  get loginEmail() {
+    return this.fLogin.get('loginEmail');
+  }
+  get loginPassword() {
+    return this.fLogin.get('loginPassword');
+  }
+  get name() {
+    return this.fRegister.get('name');
+  }
+  get lastName() {
+    return this.fRegister.get('lastName');
+  }
+  get dob() {
+    return this.fRegister.get('dob');
+  }
+  get sede() {
+    return this.fRegister.get('sede');
+  }
+  get textEmail() {
+    return this.fRegister.get('textEmail');
+  }
+  get registerEmail() {
+    return this.fRegister.get('registerEmail');
+  }
+  get registerPassword() {
+    return this.fRegister.get('registerPassword');
+  }
+  get confirmPassword() {
+    return this.fRegister.get('confirmPassword');
+  }
 }
 //#region custom field validatios
-export function matchPass(password): ValidatorFn{
+export function matchPass(password): ValidatorFn {
   return (controlname: AbstractControl): ValidationErrors | null => {
     const confpass = controlname.value;
     const pass = password.value;
-    if (confpass !== pass){
-      return {matching: true};
-    }
-    else{
+    if (confpass !== pass) {
+      return { matching: true };
+    } else {
       return null;
     }
-  }
+  };
 }
 //#endregion
