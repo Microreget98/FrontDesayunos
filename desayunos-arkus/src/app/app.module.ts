@@ -1,45 +1,46 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
 import { ApiService } from './core/api.service';
-import { HomeComponent } from './components/home/home.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfigService } from './core/config.service';
+import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
+import { CookieService } from 'ngx-cookie-service';
+import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FotopComponent } from './components/fotop/fotop.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { HomeComponent } from './components/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginRegistroComponent } from './components/login-registro/login-registro.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxCaptchaModule  } from 'ngx-captcha';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatListModule } from '@angular/material/list';
-import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ConfigService } from './core/config.service';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTabsModule } from '@angular/material/tabs'
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { CookieService } from 'ngx-cookie-service';
-import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
-import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatTableModule} from '@angular/material/table';
-import { FotopComponent } from './components/fotop/fotop.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -47,10 +48,11 @@ const appInitializerFn = (config: ConfigService) => {
   };
 };
 
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+FullCalendarModule.registerPlugins([
+  // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
-  timeGridPlugin
+  timeGridPlugin,
 ]);
 
 @NgModule({
@@ -62,50 +64,51 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PerfilComponent,
     ConfirmacionComponent,
     VistaDeUsuarioComponent,
-    FotopComponent
+    FotopComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FontAwesomeModule,
+    FormsModule,
     FullCalendarModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
-    MatListModule,
     MatDividerModule,
     MatExpansionModule,
-    MatButtonModule,
-    FormsModule,
-    MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule,
-    MatInputModule,
-    MatSidenavModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatFormFieldModule,
-    MatCardModule,
+    MatInputModule,
+    MatListModule,
+    MatNativeDateModule,
     MatSelectModule,
-    ReactiveFormsModule,
+    MatSidenavModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    FontAwesomeModule,
+    NgxCaptchaModule,
+    ReactiveFormsModule,
     SweetAlert2Module,
-    MatButtonToggleModule,
-    MatCheckboxModule,
-    MatTableModule
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFn,
       multi: true,
-      deps: [ConfigService]
+      deps: [ConfigService],
     },
     ApiService,
     ConfigService,
-    CookieService
+    CookieService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogMenu,FotopComponent]
+  entryComponents: [DialogMenu, FotopComponent],
 })
-export class AppModule { }
+export class AppModule {}
