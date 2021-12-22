@@ -140,12 +140,15 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   sendRegister(): any {
+    //Normalize name and lastName
     this.fRegister.controls['name'].setValue(
       this.normalize(this.fRegister.value.name)
     );
     this.fRegister.controls['lastName'].setValue(
       this.normalize(this.fRegister.value.lastName)
     );
+
+    //Create object to send to api
     let userData = {
       id_user_type: 2,
       first_name: this.fRegister.value.name,
@@ -157,6 +160,7 @@ export class LoginRegistroComponent implements OnInit {
       location: this.fRegister.value.sede,
       is_active: true,
     };
+    
     this.apiService
       .PostData(`${this.configService.config.apiUrl}/api/users`, {
         ...userData,
@@ -186,6 +190,7 @@ export class LoginRegistroComponent implements OnInit {
         }
       );
   }
+
   normalize(str: string): string {
     let normstr = str.split(' ');
     for (const iterator of normstr) {
@@ -202,6 +207,7 @@ export class LoginRegistroComponent implements OnInit {
     } catch (error) {}
     return str;
   }
+
   // inicia campos login
   loginEmailErrorMessage() {
     if (this.loginEmail.hasError('required')) {
@@ -209,6 +215,7 @@ export class LoginRegistroComponent implements OnInit {
     }
     return this.loginEmail.hasError('email') ? 'El correo no es válido' : '';
   }
+
   loginPasswordErrorMessage() {
     if (this.loginPassword.hasError('required')) {
       return 'La contraseña es requerida';
@@ -225,24 +232,28 @@ export class LoginRegistroComponent implements OnInit {
     }
     return this.name.hasError('pattern') ? 'Solo se permiten letras' : '';
   }
+
   registerLastnameErrorMessage() {
     if (this.lastName.hasError('required')) {
       return 'Tu Apellido es requerido';
     }
     return this.lastName.hasError('pattern') ? 'Solo se permiten letras' : '';
   }
+
   registerDobErrorMessage() {
     if (this.dob.hasError('required')) {
       return 'Debes seleccionar una fecha';
     }
     return '';
   }
+
   registerSedeErrorMessage() {
     if (this.dob.hasError('required')) {
       return 'Selecciona tu Sede';
     }
     return '';
   }
+
   textEmailErrorMessage() {
     if (this.textEmail.hasError('required')) {
       return 'El correo es requerido';
@@ -251,12 +262,14 @@ export class LoginRegistroComponent implements OnInit {
       ? 'Solo se permiten ( - | _ | . ) y letras'
       : '';
   }
+
   registerEmailErrorMessage() {
     if (this.registerEmail.hasError('required')) {
       return 'El dominio es requerido';
     }
     return '';
   }
+
   registerPasswordErrorMessage() {
     if (this.registerPassword.hasError('required')) {
       return 'La contraseña es requerida';
@@ -266,6 +279,7 @@ export class LoginRegistroComponent implements OnInit {
       : 'Debe contener 8-16 caracteres';
     // return this.registerPassword.hasError('minLength', 'maxLength') ? '' : `Debe contener 8-16 caracteres - carcteres actuales ${this.registerPassword.errors?.maxlength.actualLength}`;
   }
+
   confirmPasswordErrorMessage() {
     if (this.confirmPassword.hasError('required')) {
       return 'La contraseña debe confirmarse';
@@ -273,37 +287,48 @@ export class LoginRegistroComponent implements OnInit {
     return '';
   }
   ////#endregion campos registro
+
   get loginEmail() {
     return this.fLogin.get('loginEmail');
   }
+
   get loginPassword() {
     return this.fLogin.get('loginPassword');
   }
+
   get name() {
     return this.fRegister.get('name');
   }
+
   get lastName() {
     return this.fRegister.get('lastName');
   }
+
   get dob() {
     return this.fRegister.get('dob');
   }
+
   get sede() {
     return this.fRegister.get('sede');
   }
+
   get textEmail() {
     return this.fRegister.get('textEmail');
   }
+
   get registerEmail() {
     return this.fRegister.get('registerEmail');
   }
+
   get registerPassword() {
     return this.fRegister.get('registerPassword');
   }
+
   get confirmPassword() {
     return this.fRegister.get('confirmPassword');
   }
 }
+
 //#region custom field validatios
 export function matchPass(password): ValidatorFn {
   return (controlname: AbstractControl): ValidationErrors | null => {
