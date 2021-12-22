@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     },
     initialView: 'dayGridMonth',
     initialEvents: eventLoad,
-    weekends: true,
+    weekends: false,
     editable: true,
     selectable: true,
     selectMirror: true,
