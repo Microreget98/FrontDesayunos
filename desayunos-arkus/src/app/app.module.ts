@@ -34,7 +34,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NgxCaptchaModule  } from 'ngx-captcha';
+import { NgxCaptchaModule } from 'ngx-captcha';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
