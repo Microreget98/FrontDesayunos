@@ -9,12 +9,20 @@
     grid-column-start: 2;
     margin-top: 6rem;
     margin-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
     .mat-tab-group {
       grid-column-start: 2;
       place-items: center;
       border-radius: 2%;
       box-shadow: 0 0 20px 1px rgba(0, 0, 20, 0.774);
+      flex: 5;
     }
+  }
+  .captchaDiv {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
   }
   .formfieldContainer {
     display: grid;
