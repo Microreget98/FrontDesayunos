@@ -116,10 +116,19 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   sendLogin(): any {
+    //If the captcha is not valid don't register
+    if (!this.fCaptcha.valid) {
+      alert('Captcha no validado');
+      return;
+    }
+
+    //Create object to send to api
     let userData: object = {
       email: this.fLogin.get('loginEmail').value,
       pass: this.fLogin.get('loginPassword').value,
     };
+
+    //Send request to api
     this.apiService
       .GetDataWBody(`${this.configService.config.apiUrl}/api/login`, {
         ...userData,
