@@ -70,8 +70,8 @@ export class LoginRegistroComponent implements OnInit {
 
     //Captcha form
     this.fCaptcha = this.formBuilder.group({
-      recaptcha: ['', Validators.required]
-    })
+      recaptcha: ['', Validators.required],
+    });
 
     //Login form
     this.fLogin = this.formBuilder.group({
@@ -151,11 +151,9 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   sendRegister(): any {
-    //Print the value of the captcha
-    console.log('captchaValue', this.fCaptcha.value.recaptcha);
-
     //If the captcha is not valid don't register
-    if (this.fCaptcha.value.recaptcha === ''){
+    if (!this.fCaptcha.valid) {
+      alert('Captcha no validado');
       return;
     }
 
