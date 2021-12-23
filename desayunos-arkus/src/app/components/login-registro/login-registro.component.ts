@@ -1,5 +1,3 @@
-import { ContentObserver } from '@angular/cdk/observers';
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -9,9 +7,7 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
-import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service';
 import { ConfigService } from '../../core/config.service';
