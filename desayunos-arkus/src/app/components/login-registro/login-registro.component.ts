@@ -44,6 +44,10 @@ export class LoginRegistroComponent implements OnInit {
     { value: '@arkus-solutions.com', viewValue: 'arkus-solutions.com' },
   ];
 
+  //Recaptcha V2
+  siteKey: string;
+  public fCaptcha: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
@@ -61,6 +65,15 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Site key for Recaptcha V2
+    this.siteKey = '6Lc_WLwdAAAAACoeP0Ni_xk8Ny3MU2SD4cfCJiel';
+
+    //Captcha form
+    this.fCaptcha = this.formBuilder.group({
+      recaptcha: ['', Validators.required]
+    })
+
+    //Login form
     this.fLogin = this.formBuilder.group({
       loginEmail: ['', [Validators.required, Validators.email]],
       loginPassword: [
@@ -72,6 +85,8 @@ export class LoginRegistroComponent implements OnInit {
         ],
       ],
     });
+
+    //Register form
     this.fRegister = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^[a-zñ A-ZÑ]+$')]],
       lastName: [
@@ -136,6 +151,14 @@ export class LoginRegistroComponent implements OnInit {
   }
 
   sendRegister(): any {
+    //Print the value of the captcha
+    console.log('captchaValue', this.fCaptcha.value.recaptcha);
+
+    //If the captcha is not valid don't register
+    if (this.fCaptcha.value.recaptcha === ''){
+      return;
+    }
+
     //Normalize name and lastName
     this.fRegister.controls['name'].setValue(
       this.normalize(this.fRegister.value.name)
@@ -156,7 +179,8 @@ export class LoginRegistroComponent implements OnInit {
       location: this.fRegister.value.sede,
       is_active: true,
     };
-    
+
+    //Send request to api
     this.apiService
       .PostData(`${this.configService.config.apiUrl}/api/users`, {
         ...userData,
