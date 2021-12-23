@@ -108,6 +108,7 @@ export class HomeComponent implements OnInit {
 
     const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`
 
+    //Send request to the API
     this.apiService.GetData(apiUrl).pipe(
       map((res: CalendarUsersByMonth[]) => {
         res.forEach(usr => {
