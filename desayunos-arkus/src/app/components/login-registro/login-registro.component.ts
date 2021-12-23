@@ -118,7 +118,11 @@ export class LoginRegistroComponent implements OnInit {
   sendLogin(): any {
     //If the captcha is not valid don't register
     if (!this.fCaptcha.valid) {
-      alert('Captcha no validado');
+      Swal.fire({
+        title: 'Aviso',
+        text: 'No se ha validado el captcha',
+        icon: 'info',
+      });
       return;
     }
 
@@ -162,7 +166,11 @@ export class LoginRegistroComponent implements OnInit {
   sendRegister(): any {
     //If the captcha is not valid don't register
     if (!this.fCaptcha.valid) {
-      alert('Captcha no validado');
+      Swal.fire({
+        title: 'Aviso',
+        text: 'No se ha validado el captcha',
+        icon: 'info',
+      });
       return;
     }
 
