@@ -1,10 +1,6 @@
-import { ContentObserver } from '@angular/cdk/observers';
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { MAT_CHECKBOX_REQUIRED_VALIDATOR } from '@angular/material/checkbox';
 import { Router } from '@angular/router';
-import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../core/api.service'
 import { ConfigService } from '../../core/config.service';
@@ -51,8 +47,8 @@ export class LoginRegistroComponent implements OnInit {
     private router: Router,) {
 
     const currentYear = new Date().getFullYear();
-    this.minDate = new Date(currentYear - 75, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
-    this.maxDate = new Date(currentYear - 17, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 17 años
+    this.minDate = new Date(currentYear - 70, 0, 1); //Fija el valor mínimo a 1 de Enero de hace 75 años
+    this.maxDate = new Date(currentYear - 18, 11, 31); //Fija el valor máximo a 31 de Diciembre de hace 17 años
   }
 
   cookieSession() {
@@ -71,7 +67,7 @@ export class LoginRegistroComponent implements OnInit {
       registerEmail: ['', [Validators.required]],
       registerPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       confirmPassword: ['', [Validators.required]],
-      sede: ['', [Validators.required]],
+      lotn: ['', [Validators.required]],
       dob: ['', [Validators.required]]
     });
     this.confirmPassword.addValidators(matchPass(this.fRegister.get('registerPassword')));
@@ -163,6 +159,10 @@ export class LoginRegistroComponent implements OnInit {
     } catch (error) { }
     return str
   }
+
+  onSubmit(){
+
+  }
   // inicia campos login
   loginEmailErrorMessage() {
     if (this.loginEmail.hasError('required')) {
@@ -197,7 +197,7 @@ export class LoginRegistroComponent implements OnInit {
     return '';
   }
   registerSedeErrorMessage() {
-    if (this.dob.hasError('required')) {
+    if (this.lotn.hasError('required')) {
       return 'Selecciona tu Sede';
     }
     return '';
@@ -233,7 +233,7 @@ export class LoginRegistroComponent implements OnInit {
   get name() { return this.fRegister.get('name'); }
   get lastName() { return this.fRegister.get('lastName'); }
   get dob() { return this.fRegister.get('dob'); }
-  get sede() { return this.fRegister.get('sede'); }
+  get lotn() { return this.fRegister.get('lotn'); }
   get textEmail() { return this.fRegister.get('textEmail'); }
   get registerEmail() { return this.fRegister.get('registerEmail'); }
   get registerPassword() { return this.fRegister.get('registerPassword'); }

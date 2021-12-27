@@ -89,16 +89,19 @@ export class HomeComponent implements OnInit {
         first_name: parsedData.first_name,
         last_name: parsedData.last_name
       }
+      this.loadCalendarInfo();
+      this.options.dayMaxEvents = 4;
     }
     else {
       this.router.navigate(['/login'])
     }
-    this.loadCalendarInfo();
-    this.options.dayMaxEvents = 4;
+    // this.loadCalendarInfo();
+    // this.options.dayMaxEvents = 4;
 
   }
 
   loadCalendarInfo() {
+    eventLoad.splice(0, eventLoad.length);
     let calendarEl;
     var calendar = new Calendar(calendarEl, {
       timeZone: 'local',
@@ -135,10 +138,11 @@ export class HomeComponent implements OnInit {
       width: '800px',
       height: '500px',
       data: { dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user }
-    }).afterClosed().subscribe((res) => {
-      this.loadCalendarInfo();
-    }
-    );
+    })
+    // .afterClosed().subscribe((res) => {
+    //   this.loadCalendarInfo();
+    // }
+    // );
 
   }
 }

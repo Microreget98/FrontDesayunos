@@ -5,6 +5,8 @@ import { LoginRegistroComponent } from './components/login-registro/login-regist
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-usuario.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+// import { Calendar } from '@fullcalendar/core';
 
 
 const routes: Routes = [
@@ -13,6 +15,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'confirmacion', component: ConfirmacionComponent },
   { path: 'vistausuarios', component: VistaDeUsuarioComponent },
+  { path: 'nuevocal', component: CalendarComponent}
 ]
 
 @NgModule({

@@ -15,6 +15,20 @@ export class UserDataService {
 
   userType: Boolean;
 
+  bypass(){
+    let userData: UserData[] = [{
+      dob: new Date(),
+      email: "generic@arkusnexus.com",
+      first_name: "Generic",
+      last_name: "GenericLastName",
+      id_user: 1,
+      id_user_type: 1,
+      is_active: true,
+      location: "mty",
+      pass: "88450"
+    }]
+    this.cookieService.set('name', JSON.stringify(userData[0]))
+  }
 
   addUserInfo(data) {
     this.userData.push(data)
@@ -46,6 +60,7 @@ export class UserDataService {
 
   ngOnInit(): void {
     try {
+      this.bypass();
       this.cookie_name = this.cookieService.get('name');
       this.userDataString = this.cookie_name
       this.all_cookies = this.cookieService.getAll();

@@ -62,7 +62,7 @@ export class VistaDeUsuarioComponent implements OnInit {
         })
       }
     );
-    console.log(this.dataToDisplay);
+    // console.log(this.dataToDisplay);
     // this.tableUsersList.renderRows();
   }
 

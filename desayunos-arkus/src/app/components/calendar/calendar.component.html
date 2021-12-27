@@ -1,0 +1,35 @@
+<div class="header">
+    <div class="navcontrols">
+        <button type="button" title="before" mat-raised-button color="primary" id="monthBefore">
+            <fa-icon [icon]="lessThan"></fa-icon>
+        </button>
+        <button type="button" title="after" mat-raised-button color="primary" id="monthAfter">
+            <fa-icon [icon]="greaterThan"></fa-icon>
+        </button>
+        <button mat-raised-button color="primary" id="today">
+            Today
+        </button>
+    </div>
+    <span id="actualMonth">Month</span>
+    <app-perfil></app-perfil>
+</div>
+<div class="calendarTable">
+    <div class="headerTable">
+        <div class="day lunes">Lunes</div>
+        <div class="day martes">Martes</div>
+        <div class="day miercoles">Miercoles</div>
+        <div class="day jueves">Jueves</div>
+        <div class="day viernes">Viernes</div>
+    </div>
+    <!-- <div class="rowTable" *ngFor="let semana of month.weeks"> -->
+        <!-- {{semana}} -->
+        <!-- <div class="day" *ngFor="let days of semana | keyvalue" > -->
+            <!-- <p *ngIf="days.value.length > 0">{{days.key}}</p> -->
+            <!-- {{day.key}} -->
+            <!-- <app-dayofmonth [data]="day.value.data"></app-dayofmonth> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    <div class="footer">
+        <p>ESTO ES EL FOOTER</p>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 <div class="loginContainer">
   <mat-toolbar>
-    <img class="logTam" src="https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613c50e0018116747c3bc5bc_ArkusNexus_MainLogo.svg"
+    <img class="logTam"
+      src="https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613c50e0018116747c3bc5bc_ArkusNexus_MainLogo.svg"
       width="400" height="70" />
   </mat-toolbar>
   <div class="containerTabgroup">
@@ -16,14 +17,15 @@
                 }}</mat-error>
             </mat-form-field>
 
-                <mat-form-field appearance="outline" color="accent">
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="loginPassword">
-                    <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                    <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
-                </mat-form-field>
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="loginPassword">
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginPassword.invalid">{{loginPasswordErrorMessage()}}</mat-error>
+            </mat-form-field>
 
             <button mat-raised-button color="primary" [disabled]="fLogin.invalid">
               Ingresar
@@ -54,7 +56,7 @@
             </div>
             <!-- ACABA INPUTS de Nombre y Apellido -->
             <!-- INICIA INPUTS de dob, location, email y contraseñas -->
-            <mat-form-field class="texbx" appearance="outline" color="accent">
+            <mat-form-field class="texbx" appearance="outline" color="accent" id="prueba">
               <mat-label>Selecciona tu Fecha de Nacimiento</mat-label>
               <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="datepicker" [disabled]="true"
                 formControlName="dob" />
@@ -66,12 +68,12 @@
             </mat-form-field>
             <mat-form-field class="texbx" appearance="outline" color="accent">
               <mat-label>Selecciona tu Sede</mat-label>
-              <mat-select [formGroup]="fRegister" name="sede" formControlName="sede">
+              <mat-select [formGroup]="fRegister" name="lotn" formControlName="lotn">
                 <mat-option *ngFor="let sede of sedes" [value]="sede.value">{{
                   sede.viewValue
                   }}</mat-option>
               </mat-select>
-              <mat-error *ngIf="sede.invalid">{{
+              <mat-error *ngIf="lotn.invalid">{{
                 registerSedeErrorMessage()
                 }}</mat-error>
             </mat-form-field>
@@ -82,7 +84,7 @@
                 <input matInput type="text" formControlName="textEmail" />
                 <mat-error *ngIf="textEmail.invalid">{{
                   textEmailErrorMessage()
-                }}</mat-error>
+                  }}</mat-error>
               </mat-form-field>
               <h2>@</h2>
               <mat-form-field class="texbx" appearance="outline" color="accent">
@@ -90,40 +92,43 @@
                 <mat-select [formGroup]="fRegister" name="registerEmail" formControlName="registerEmail">
                   <mat-option *ngFor="let email of emails" [value]="email.value">{{
                     email.viewValue
-                  }}</mat-option>
+                    }}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="registerEmail.invalid">{{
                   registerEmailErrorMessage()
-                }}</mat-error>
+                  }}</mat-error>
               </mat-form-field>
             </div>
-              
-              <mat-form-field class="texbx" appearance="outline" color="accent">
-                <mat-label>Contraseña</mat-label>
+
+            <mat-form-field class="texbx" appearance="outline" color="accent">
+              <mat-label>Contraseña</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="registerPassword" />
-              <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+              </button>
               <mat-error *ngIf="registerPassword.invalid">
                 {{ registerPasswordErrorMessage() }}
               </mat-error>
             </mat-form-field>
-            <mat-form-field class="texbx" appearance="outline" color="accent">
+            <mat-form-field class="texbx" appearance="outline" color="accent" id="confpass">
               <mat-label>Confirmar Contraseña</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword" />
-              <button type= "button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+              </button>
               <mat-error *ngIf="confirmPassword.invalid">{{
                 confirmPasswordErrorMessage()
                 }}</mat-error>
-              <mat-error *ngIf="confirmPassword.errors?.['matching']">Las contraseñas deben coincidir</mat-error>
+              <mat-error id="compError" *ngIf="confirmPassword.errors?.['matching']">Las contraseñas deben coincidir
+              </mat-error>
             </mat-form-field>
             <!-- ACABA INPUTS de dob, location, email y contraseñas -->
             <button mat-raised-button color="primary" type="submit" [disabled]="fRegister.invalid">Registrarme</button>
-            </div>
+          </div>
         </form>
-    </mat-tab>
-  </mat-tab-group>
-</div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
 </div>
