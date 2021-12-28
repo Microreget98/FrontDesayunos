@@ -1,0 +1,44 @@
+.mat-card {
+  border-radius: 32px;
+  border: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  width: 175px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .mat-card-header {
+    display: flex;
+    justify-content: right;
+    .mat-card-title {
+      margin: 0px;
+      height: 30px;
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+  .mat-card-actions,
+  .mat-card-subtitle,
+  .mat-card-content {
+    margin-bottom: 4px;
+    .mat-list-base {
+      display: flex;
+      flex-direction: column;
+      .mat-list-item {
+        display: flex;
+        justify-content: space-between;
+        height: 20px;
+        font-size: 12px;
+        padding: 0px;
+      }
+    }
+  }
+  .mat-card-footer {
+    padding: 10px;
+  }
+}
+
+.myDiv {
+  display: flex;
+}

@@ -41,6 +41,7 @@ import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -65,6 +66,7 @@ FullCalendarModule.registerPlugins([
     ConfirmacionComponent,
     VistaDeUsuarioComponent,
     FotopComponent,
+    CalendarDayComponent,
   ],
   imports: [
     AppRoutingModule,
