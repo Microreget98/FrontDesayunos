@@ -2,15 +2,30 @@
     border-radius: 40px;
     border: solid;
     border-width: 1px;
-    border-color: lightgray;
-    width: 200px;
-    height: 250px;
+    border-color: rgb(236, 25, 35);
+    width: 250px;
+    height: 200px;
     display: grid;
     grid-column: 1/2;
     grid-row: 1/2;
+    .mat-card-header{
+        display: grid;
+        justify-content: right;
+        .mat-card-title{
+        margin: 0px;
+        height: 30px;
+        font-size: 20px;
+        line-height: 20px;
+        }
+    }
+    .mat-card-footer{
+        display: grid;
+        justify-content: center;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 23px;        
+        font-style: oblique;
+    }
 }
+    
 
-.arkus-nexus-logo{
-    background-image: url(https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613f82a2bceafc58516997ab_ArkusNexus_iso.png);
-    background-size: cover;
-}
+

@@ -3,12 +3,13 @@
         <div>
             <mat-card class="bigDay">
                 <mat-card-header>
-                    <div mat-card-avatar class="arkus-nexus-logo"></div>
                     <mat-card-title>
                         <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber">{{dayNumber}}</p>
                     </mat-card-title>
                 </mat-card-header>
-                <mat-card-footer>Martes</mat-card-footer>
+                <mat-card-footer>
+                    <p style="margin-bottom: 0px;" [(ngModel)]="dayName">{{dayName}}</p>
+                </mat-card-footer>
             </mat-card>
         </div>
     </div>

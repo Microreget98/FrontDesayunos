@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BigDayComponent implements OnInit {
   public dayNumber: string = '29';
+  public dayName: string = 'Miércoles'
 
   constructor() { }
 
