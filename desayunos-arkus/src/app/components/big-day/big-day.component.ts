@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-big-day',
@@ -6,12 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./big-day.component.scss']
 })
 export class BigDayComponent implements OnInit {
-  public dayNumber: string = '29';
-  public dayName: string = 'Miércoles'
-
+@Input() date: Date =new Date();
+dayNumber:number;
+dayName:number;
   constructor() { }
 
   ngOnInit(): void {
+  this.dayNumber = this.date.getDate();
+  console.log(this.date)
+  this.dayName = this.date.getDay();
   }
 
 }

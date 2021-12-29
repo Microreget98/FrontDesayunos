@@ -1,19 +1,18 @@
 <div class="fullHome">
-    <div class="breakfast">
-        <div>
-            <mat-card class="bigDay">
-                <mat-card-header>
-                    <mat-card-title>
-                        <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber">{{dayNumber}}</p>
-                    </mat-card-title>
-                </mat-card-header>
-                <mat-card-footer>
-                    <p style="margin-bottom: 0px;" [(ngModel)]="dayName">{{dayName}}</p>
-                </mat-card-footer>
-            </mat-card>
-        </div>
+  <div class="breakfast">
+    <div>
+      <mat-card class="bigDay">
+        <mat-card-header>
+          <mat-card-title>
+            <p style="margin-bottom: 0px" [(ngModel)]="date">
+              {{ dayNumber }}
+            </p>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-footer>
+          <p style="margin-bottom: 0px" [(ngModel)]="date">{{ dayName }}</p>
+        </mat-card-footer>
+      </mat-card>
     </div>
+  </div>
 </div>
-
-
-
