@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./big-day.component.scss']
 })
 export class BigDayComponent implements OnInit {
+  public dayNumber: string = '29';
 
   constructor() { }
 

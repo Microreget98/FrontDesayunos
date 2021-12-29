@@ -1,22 +1,15 @@
 <div class="fullHome">
     <div class="breakfast">
-        <div class="bigDay">
-            <mat-card class="dayCard">
-                <mat-card-header class="header">
-                  <p class="dailyInformation">
-                    Hola
-                </p>
+        <div>
+            <mat-card class="bigDay">
+                <mat-card-header>
+                    <div mat-card-avatar class="arkus-nexus-logo"></div>
+                    <mat-card-title>
+                        <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber">{{dayNumber}}</p>
+                    </mat-card-title>
                 </mat-card-header>
+                <mat-card-footer>Martes</mat-card-footer>
             </mat-card>
-        </div>
-        <div class="usersInfo">
-
-        </div>
-        <div class="calendar">
-
-        </div>
-        <div class="footer">
-            
         </div>
     </div>
 </div>

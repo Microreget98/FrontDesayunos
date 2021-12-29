@@ -1,0 +1,16 @@
+.bigDay{
+    border-radius: 40px;
+    border: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    width: 200px;
+    height: 250px;
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.arkus-nexus-logo{
+    background-image: url(https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613f82a2bceafc58516997ab_ArkusNexus_iso.png);
+    background-size: cover;
+}
