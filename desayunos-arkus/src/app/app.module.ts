@@ -40,6 +40,7 @@ import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTableModule} from '@angular/material/table';
 import { FotopComponent } from './components/fotop/fotop.component';
+import { BigDayComponent } from './components/big-day/big-day.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -62,7 +63,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PerfilComponent,
     ConfirmacionComponent,
     VistaDeUsuarioComponent,
-    FotopComponent
+    FotopComponent,
+    BigDayComponent
   ],
   imports: [
     BrowserModule,
