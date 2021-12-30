@@ -1,0 +1,74 @@
+.mat-card {
+  border-color: lightgray;
+  border-radius: 32px;
+  border-width: 1px;
+  border: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  min-width: 200px;
+  .mat-card-header {
+    display: flex;
+    justify-content: right;
+    .mat-card-title {
+      font-size: 20px;
+      height: 30px;
+      line-height: 20px;
+      margin: 0px;
+    }
+  }
+  .mat-card-actions,
+  .mat-card-subtitle,
+  .mat-card-content {
+    margin-bottom: 4px;
+    .mat-list-base {
+      display: flex;
+      flex-direction: column;
+      .mat-list-item {
+        display: flex;
+        font-size: 12px;
+        height: 20px;
+        justify-content: space-between;
+        padding: 0px;
+      }
+    }
+  }
+  .mat-card-footer {
+    padding: 10px;
+  }
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button,
+.mat-fab,
+.mat-mini-fab {
+  font-size: 20px;
+}
+
+.mexican-festive {
+  animation: gradient 10s ease-in-out infinite;
+  background-size: 200% 200%;
+  background: linear-gradient(-45deg, #2ca813, #ffffff, #f31c15);
+}
+
+.american-festive {
+  animation: gradient 10s ease-in-out infinite;
+  background-size: 200% 200%;
+  background: linear-gradient(-45deg, #f31c15, #ffffff, #3577f1);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
