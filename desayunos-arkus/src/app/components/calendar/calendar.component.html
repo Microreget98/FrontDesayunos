@@ -1,3 +1,4 @@
 <div class="main">
-  <app-calendar-day></app-calendar-day>
+  <app-calendar-day *ngFor="let day of days" [date]="day.date" [breakfasts]="day.breakfasts" [userData]="userData"
+    [festiveType]="day.festiveType" [handleDayClick]="handleDayClick"></app-calendar-day>
 </div>

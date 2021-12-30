@@ -12,10 +12,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./calendar-day.component.scss'],
 })
 export class CalendarDayComponent implements OnInit {
-  @Input() date: Date = new Date();
-  @Input() breakfasts: Array<Breakfast>;
+  @Input() date: Date;
+  @Input() breakfasts: Array<Breakfast> = [];
   @Input() userData: UserData;
-  @Input() festiveType: number;
+  @Input() festiveType: number = 0;
   @Input() public handleDayClick: (param: number) => void;
 
   dayNumber: number;
@@ -55,6 +55,11 @@ export class CalendarDayComponent implements OnInit {
   getCssFestClass(festiveType: number) {
     if (festiveType === 1) return 'mexican-festive';
     if (festiveType === 2) return 'american-festive';
+    return '';
+  }
+
+  getCssPastDay() {
+    if (this.date < new Date()) return 'cardPastDay';
     return '';
   }
 

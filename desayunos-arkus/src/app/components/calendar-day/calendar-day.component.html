@@ -1,22 +1,22 @@
-<mat-card [ngClass]="getCssFestClass(festiveType)">
-  <mat-card-header>
-    <button mat-mini-fab color="primary" (click)="handleDayClick(dayNumber)">
-      <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber">{{dayNumber}}</p>
+<div [ngClass]="['card',getCssFestClass(festiveType), getCssPastDay()]">
+  <div class="header">
+    <button mat-mini-fab color="'white'" style="border: solid 1px red;" (click)="handleDayClick(dayNumber)">
+      <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber" ngDefaultControl>{{dayNumber}}</p>
     </button>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let bf of myBreakfasts">
-        <div class="myDiv">
-          <mat-icon>person</mat-icon>
-          <p>{{bf.name}}</p>
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-  <mat-card-footer>
+  </div>
+  <div class="content">
+    <div class="contentWrapper">
+      <div class="listItem" *ngFor="let bf of myBreakfasts">
+        <mat-icon>person</mat-icon>
+        <p class="pItem">{{bf.name}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
     <button mat-mini-fab color="primary" (click)="handleSaveButton()" [disabled]="isButtonEnabled()">
       <mat-icon>fastfood</mat-icon>
     </button>
-  </mat-card-footer>
-</mat-card>
+    <p *ngIf="breakfasts.length > 4" class="footerPlus" [(ngModel)]="breakfasts">+{{breakfasts.length - 4}}</p>
+  </div>
+</div>

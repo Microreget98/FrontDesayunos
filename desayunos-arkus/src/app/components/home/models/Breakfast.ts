@@ -1,6 +1,6 @@
 export interface Breakfast {
   userId: number;
-  date: string;
+  date: Date;
   firstName: string;
   lastName: string;
 }
