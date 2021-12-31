@@ -1,28 +1,40 @@
 .main {
-  padding: 30px;
   border: solid 1px lightgray;
   border-radius: 60px;
   box-shadow: 0px 0px 10px 0px black;
-  width: fit-content;
-  height: fit-content;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 15px 15px;
+  grid-template-areas:
+    ". title ."
+    ". navigation ."
+    ". calendar .";
+}
+
+.title {
+  padding-top: 50px;
+  grid-area: title;
+  display: flex;
+  justify-content: space-between;
+  h1 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 120px;
+  }
+}
+
+.navigation {
+  grid-area: navigation;
+  display: flex;
+}
+
+.calendar {
+  grid-area: calendar;
   display: grid;
   grid-template-columns: 200px 200px 200px 200px 200px;
   gap: 15px 15px;
-}
-
-.monthTitle {
-  text-align: left;
-  grid-column-start: auto;
-  grid-column-end: span 3;
-  margin: 30px;
-  font-size: 80px;
-}
-.yearTitle {
-  text-align: end;
-  grid-column-start: auto;
-  grid-column-end: span 2;
-  margin: 30px;
-  font-size: 80px;
+  padding-bottom: 50px;
 }
 
 p {

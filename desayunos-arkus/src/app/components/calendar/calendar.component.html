@@ -1,12 +1,19 @@
 <div class="main">
-  <h1 class="monthTitle" [ngModel]="monthName" ngDefaultControl>{{monthName}}</h1>
-  <h1 class="yearTitle" [ngModel]="year" ngDefaultControl>{{year}}</h1>
-  <p>Lunes</p>
-  <p>Martes</p>
-  <p>Miércoles</p>
-  <p>Jueves</p>
-  <p>Viernes</p>
-  <app-calendar-day *ngFor="let day of days" [date]="day.date" [breakfasts]="day.breakfasts" [userData]="userData"
-    [festiveType]="day.festiveType" [handleDayClick]="handleDayClick" (registered)="ngOnInit()">
-  </app-calendar-day>
+  <div class="title">
+    <h1 [ngModel]="monthName" ngDefaultControl>{{monthName}}</h1>
+    <h1 [ngModel]="year" ngDefaultControl>{{year}}</h1>
+  </div>
+  <div class="navigation">
+
+  </div>
+  <div class="calendar">
+    <p>Lunes</p>
+    <p>Martes</p>
+    <p>Miércoles</p>
+    <p>Jueves</p>
+    <p>Viernes</p>
+    <app-calendar-day *ngFor="let day of days" [date]="day.date" [breakfasts]="day.breakfasts" [userData]="userData"
+      [festiveType]="day.festiveType" [handleDayClick]="handleDayClick" (registered)="ngOnInit()">
+    </app-calendar-day>
+  </div>
 </div>
