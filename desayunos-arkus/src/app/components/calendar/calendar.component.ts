@@ -25,6 +25,10 @@ export class CalendarComponent implements OnInit {
     console.log(`click desde el día ${day}`);
   };
 
+  monthName: string = new Date(this.year, this.month).toLocaleString('es-MX', {
+    month: 'long',
+  });
+
   dateSpan: Array<Date>;
   days: Array<Day>;
 
