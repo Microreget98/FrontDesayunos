@@ -1,7 +1,7 @@
 import { ApiService } from 'src/app/core/api.service';
 import { Breakfast } from '../home/models/Breakfast';
 import { catchError } from 'rxjs/operators';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConfigService } from 'src/app/core/config.service';
 import { UserData } from '../home/models/UserData';
 import Swal from 'sweetalert2';
@@ -17,6 +17,7 @@ export class CalendarDayComponent implements OnInit {
   @Input() userData: UserData;
   @Input() festiveType: number = 0;
   @Input() public handleDayClick: (param: number) => void;
+  @Output() registered = new EventEmitter<boolean>();
 
   dayNumber: number;
   myBreakfasts: Array<any>;
@@ -100,6 +101,7 @@ export class CalendarDayComponent implements OnInit {
       )
       .subscribe((res) => {
         if (res !== null) {
+          this.registered.emit(true);
           Swal.fire({
             timer: 2000,
             icon: 'success',

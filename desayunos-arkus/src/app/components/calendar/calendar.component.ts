@@ -39,6 +39,7 @@ export class CalendarComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.dateSpan = this.getDateSpan(this.month, this.year);
+    this.monthsBreakFasts = [];
     await this.getMonthBreakfasts();
     this.createDays();
   }
