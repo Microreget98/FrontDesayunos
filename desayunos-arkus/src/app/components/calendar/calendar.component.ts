@@ -107,8 +107,6 @@ export class CalendarComponent implements OnInit {
           day: day.date.getDate(),
         };
 
-        console.log(bfDate, dayDate);
-
         if (bfDate.year !== dayDate.year) continue;
         if (bfDate.month !== dayDate.month) continue;
         if (bfDate.day !== dayDate.day) continue;
