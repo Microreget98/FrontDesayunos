@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { ApiService } from 'src/app/core/api.service';
+import { ConfigService } from 'src/app/core/config.service';
 import { Breakfast } from '../home/models/Breakfast';
+import { CalendarUsersByMonth } from '../home/models/CalendarUsersByMonth';
 import { Day } from '../home/models/Day';
 import { FestiveDay } from '../home/models/FestiveDay';
 import { UserData } from '../home/models/UserData';
@@ -24,16 +28,56 @@ export class CalendarComponent implements OnInit {
   dateSpan: Array<Date>;
   days: Array<Day>;
 
-  constructor() {}
+  constructor(
+    private configService: ConfigService,
+    private apiService: ApiService
+  ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.dateSpan = this.getDateSpan(this.month, this.year);
-    this.createDays(this.dateSpan);
+    await this.getMonthBreakfasts();
+    this.createDays();
   }
 
-  createDays(dateSpan: Array<Date>) {
+  async getMonthBreakfasts() {
+    const months = [
+      {
+        year: this.month === 0 ? this.year - 1 : this.year,
+        month: this.month === 0 ? 12 : this.month,
+      },
+      {
+        year: this.year,
+        month: this.month + 1,
+      },
+      {
+        year: this.month === 11 ? this.year + 1 : this.year,
+        month: this.month === 11 ? 1 : this.month + 2,
+      },
+    ];
+
+    for (const month of months) {
+      const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month.month}&year=${month.year}`;
+      await this.apiService
+        .GetData(apiUrl)
+        .pipe(
+          map((res: CalendarUsersByMonth[]) => {
+            res.forEach((usr) => {
+              this.monthsBreakFasts.push({
+                date: new Date(usr.date),
+                firstName: usr.first_name,
+                lastName: usr.last_name,
+                userId: usr.id_user,
+              });
+            });
+          })
+        )
+        .toPromise();
+    }
+  }
+
+  createDays() {
     const days = [];
-    const [d0, dF] = dateSpan;
+    const [d0, dF] = this.dateSpan;
 
     // Initiate the days
     for (let day = d0; day <= dF; day.setDate(day.getDate() + 1)) {
@@ -45,14 +89,30 @@ export class CalendarComponent implements OnInit {
 
     this.days = days;
 
-    let remainingBreakfasts = [...this.monthsBreakFasts];
+    const remainingBreakfasts = [...this.monthsBreakFasts];
+
     for (let day of this.days) {
       // Insert the breakfasts
       day.breakfasts = [];
       for (let i = remainingBreakfasts.length - 1; i >= 0; i--) {
         const bf = remainingBreakfasts[i];
+        const bfDate = {
+          year: bf.date.getFullYear(),
+          month: bf.date.getMonth(),
+          day: bf.date.getDate(),
+        };
+        const dayDate = {
+          year: day.date.getFullYear(),
+          month: day.date.getMonth(),
+          day: day.date.getDate(),
+        };
 
-        if (bf.date.getTime() !== day.date.getTime()) continue;
+        console.log(bfDate, dayDate);
+
+        if (bfDate.year !== dayDate.year) continue;
+        if (bfDate.month !== dayDate.month) continue;
+        if (bfDate.day !== dayDate.day) continue;
+
         day.breakfasts.push(bf);
         remainingBreakfasts.splice(i, 1);
       }
