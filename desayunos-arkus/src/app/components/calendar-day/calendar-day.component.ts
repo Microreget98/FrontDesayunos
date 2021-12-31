@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./calendar-day.component.scss'],
 })
 export class CalendarDayComponent implements OnInit {
-  @Input() date: Date;
+  @Input() date: Date = new Date();
   @Input() breakfasts: Array<Breakfast> = [];
   @Input() userData: UserData;
   @Input() festiveType: number = 0;
@@ -78,7 +78,7 @@ export class CalendarDayComponent implements OnInit {
   handleSaveButton() {
     const postData = {
       id_user: this.userData.id,
-      date: new Date().toISOString().slice(0, -5),
+      date: new Date(this.date.getTime()).toISOString().slice(0, -5),
       is_active: true,
       was_deleted: false,
     };
