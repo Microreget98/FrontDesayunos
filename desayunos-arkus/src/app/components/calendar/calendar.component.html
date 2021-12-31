@@ -1,10 +1,13 @@
 <div class="main">
   <div class="title">
+    <button mat-mini-fab color="white" (click)="handleMonthChange(-1)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
     <h1 [ngModel]="monthName" ngDefaultControl>{{monthName}}</h1>
     <h1 [ngModel]="year" ngDefaultControl>{{year}}</h1>
-  </div>
-  <div class="navigation">
-
+    <button mat-mini-fab color="white" (click)="handleMonthChange(1)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
   </div>
   <div class="calendar">
     <p>Lunes</p>

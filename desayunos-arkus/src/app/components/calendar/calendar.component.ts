@@ -25,9 +25,7 @@ export class CalendarComponent implements OnInit {
     console.log(`click desde el día ${day}`);
   };
 
-  monthName: string = new Date(this.year, this.month).toLocaleString('es-MX', {
-    month: 'long',
-  });
+  monthName: string = '';
 
   dateSpan: Array<Date>;
   days: Array<Day>;
@@ -38,10 +36,30 @@ export class CalendarComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.monthName = new Date(this.year, this.month).toLocaleString('es-MX', {
+      month: 'long',
+    });
     this.dateSpan = this.getDateSpan(this.month, this.year);
     this.monthsBreakFasts = [];
     await this.getMonthBreakfasts();
     this.createDays();
+  }
+
+  handleMonthChange(plusMinus: number) {
+    console.log('this month', this.month);
+    console.log('this year', this.year);
+
+    if (plusMinus >= 0) {
+      this.year = this.month === 11 ? this.year + 1 : this.year;
+      this.month = this.month === 11 ? 0 : this.month + 1;
+    }
+
+    if (plusMinus < 0) {
+      this.year = this.month === 0 ? this.year - 1 : this.year;
+      this.month = this.month === 0 ? 11 : this.month - 1;
+    }
+
+    this.ngOnInit();
   }
 
   async getMonthBreakfasts() {

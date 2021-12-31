@@ -1,22 +1,24 @@
 .main {
-  border: solid 1px lightgray;
+  align-items: center;
   border-radius: 60px;
+  border: solid 1px lightgray;
   box-shadow: 0px 0px 10px 0px black;
   display: grid;
-  justify-content: center;
-  align-items: center;
-  gap: 15px 15px;
+  gap: 25px 25px;
   grid-template-areas:
     ". title ."
-    ". navigation ."
     ". calendar .";
+  grid-template-columns: auto min-content auto;
+  justify-items: center;
 }
 
 .title {
-  padding-top: 50px;
-  grid-area: title;
+  align-items: center;
   display: flex;
+  grid-area: title;
   justify-content: space-between;
+  padding-top: 50px;
+  width: 100%;
   h1 {
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -25,19 +27,21 @@
 }
 
 .navigation {
-  grid-area: navigation;
   display: flex;
+  grid-area: navigation;
+  justify-content: space-between;
+  width: 150px;
 }
 
 .calendar {
-  grid-area: calendar;
   display: grid;
-  grid-template-columns: 200px 200px 200px 200px 200px;
   gap: 15px 15px;
+  grid-area: calendar;
+  grid-template-columns: 200px 200px 200px 200px 200px;
   padding-bottom: 50px;
 }
 
 p {
-  text-align: center;
   margin: 0px;
+  text-align: center;
 }
