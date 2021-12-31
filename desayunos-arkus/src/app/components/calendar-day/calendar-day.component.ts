@@ -37,7 +37,11 @@ export class CalendarDayComponent implements OnInit {
   isButtonEnabled() {
     const todayLimit = this.getTodayLimit();
     const now = new Date();
+    const isAlreadyRegistered = this.breakfasts.find(
+      (bf) => bf.userId === this.userData.id
+    );
 
+    if (isAlreadyRegistered) return true;
     if (this.festiveType !== 0) return true;
     if (now >= todayLimit) return true;
     return false;
