@@ -115,18 +115,20 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.ngOnInit();
-    this.buildMonth();
-    console.log("ASDGFAGTWAEFA");
-    
-    // let currDate = new Date(2021, 11, 0)
-    // for (let index = 1; index < currDate.getDate(); index+7) {
-    // }
-    
+    this.buildMonth(2021, 11);
+
     // this.prueba(2021, 11);
   }
-  
-  buildMonth() {
-    this.month.weeks.push("p")
+
+  buildMonth(year?, month?, day?) {
+    // this.month.weeks.push("p")
+    let actualMonth = new Date(year, month + 1, 0)
+    let firstDayMonth = new Date(year, month, 1)
+    let numberOfDays = firstDayMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
+    console.log(numberOfDays);
+    for (let index = 0; index < numberOfDays / 7; index++) {
+      this.month.weeks.push({ 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] })
+    }
     console.log(this.month.weeks);
 
   }
