@@ -29,7 +29,7 @@ export class CalendarDayComponent implements OnInit {
 
   ngOnInit(): void {
     this.dayNumber = this.date.getDate();
-    this.myBreakfasts = this.compressNames(this.breakfasts);
+    this.myBreakfasts = this.compressNames(this.breakfasts).reverse();
 
     // Pick the first 4 elements of the array
     this.myBreakfasts = this.myBreakfasts.slice(0, 4);
