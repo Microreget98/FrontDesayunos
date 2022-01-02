@@ -1,18 +1,11 @@
-<div class="fullHome">
-  <div class="breakfast">
-    <div>
-      <mat-card class="bigDay">
-        <mat-card-header>
-          <mat-card-title>
-            <p style="margin-bottom: 0px">
-              {{ dayNumber }}
-            </p>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-footer>
-          <p style="margin-bottom: 0px" >{{ weekDayName }}</p>
-        </mat-card-footer>
-      </mat-card>
-    </div>
+<div class="card">
+  <div class="header">
+    <button mat-mini-fab color="'white'">
+      <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber" ngDefaultControl>{{dayNumber}}</p>
+    </button>
+  </div>
+
+  <div class="footer">
+    <p>{{ weekDayName }}</p>
   </div>
 </div>
