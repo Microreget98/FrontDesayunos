@@ -1,9 +1,19 @@
-.calendar {
-    height: 100%;
+.main {
+  display: grid;
+  gap: 3em 0;
+  grid-template-areas:
+    "header header header"
+    ". content ."
+    "footer footer footer";
 }
-.fc {
-    // position: relative;
-    padding: 1em;
-    height: 100%;
-    // padding-right: 2em;
+.header {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.footer {
+  grid-area: footer;
 }
