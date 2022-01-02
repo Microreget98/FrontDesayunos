@@ -12,6 +12,8 @@
 
 .content {
   grid-area: content;
+  display: grid;
+  gap: 1em 0;
 }
 
 .footer {
