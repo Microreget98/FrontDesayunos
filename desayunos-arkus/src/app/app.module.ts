@@ -5,7 +5,10 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { ApiService } from './core/api.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BigDayComponent } from './components/big-day/big-day.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 import { ConfigService } from './core/config.service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { CookieService } from 'ngx-cookie-service';
@@ -41,8 +44,6 @@ import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -60,15 +61,16 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRegistroComponent,
-    HomeComponent,
-    DialogMenu,
-    PerfilComponent,
-    ConfirmacionComponent,
-    VistaDeUsuarioComponent,
-    FotopComponent,
+    BigDayComponent,
     CalendarComponent,
     CalendarDayComponent,
+    ConfirmacionComponent,
+    DialogMenu,
+    FotopComponent,
+    HomeComponent,
+    LoginRegistroComponent,
+    PerfilComponent,
+    VistaDeUsuarioComponent,
   ],
   imports: [
     AppRoutingModule,
