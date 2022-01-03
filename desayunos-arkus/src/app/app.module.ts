@@ -12,7 +12,6 @@ import { CalendarDayComponent } from './components/calendar-day/calendar-day.com
 import { ConfigService } from './core/config.service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { CookieService } from 'ngx-cookie-service';
-import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotopComponent } from './components/fotop/fotop.component';
@@ -67,7 +66,6 @@ FullCalendarModule.registerPlugins([
     CalendarComponent,
     CalendarDayComponent,
     ConfirmacionComponent,
-    DialogMenu,
     FotopComponent,
     HomeComponent,
     LoginRegistroComponent,
@@ -119,6 +117,6 @@ FullCalendarModule.registerPlugins([
     CookieService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogMenu, FotopComponent],
+  entryComponents: [FotopComponent],
 })
 export class AppModule {}
