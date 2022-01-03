@@ -1,6 +1,6 @@
 <div [ngClass]="['card',getCssFestClass(festiveType), getCssPastDay()]">
   <div class="header">
-    <button mat-mini-fab color="'white'" (click)="handleDayClick(dayNumber)">
+    <button mat-mini-fab color="'white'" (click)="handleClick()">
       <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber" ngDefaultControl>{{dayNumber}}</p>
     </button>
   </div>

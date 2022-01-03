@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/api.service';
 import { ConfigService } from 'src/app/core/config.service';
@@ -21,9 +21,8 @@ export class CalendarComponent implements OnInit {
 
   @Input() userData: UserData;
   @Input() festiveDays: Array<FestiveDay> = [];
-  @Input() handleDayClick: (param: number) => void = (day: number) => {
-    console.log(`click desde el día ${day}`);
-  };
+
+  @Output() dayClicked = new EventEmitter<any>();
 
   monthName: string = '';
 
@@ -60,6 +59,10 @@ export class CalendarComponent implements OnInit {
     }
 
     this.ngOnInit();
+  }
+
+  handleDayClick(e: any) {
+    this.dayClicked.emit(e);
   }
 
   async getMonthBreakfasts() {

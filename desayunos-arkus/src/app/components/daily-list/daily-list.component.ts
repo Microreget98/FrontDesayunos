@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { ApiService } from 'src/app/core/api.service';
 import { ConfigService } from 'src/app/core/config.service';
@@ -12,8 +20,8 @@ import { UserDataService } from '../login-registro/user-data.service';
   templateUrl: './daily-list.component.html',
   styleUrls: ['./daily-list.component.scss'],
 })
-export class DailyListComponent implements OnInit {
-  @Input() date: Date = new Date(2022, 0, 3);
+export class DailyListComponent implements OnInit, OnChanges {
+  @Input() date: Date;
   @Input() breakfasts: Array<Breakfast> = [];
   @Input() userPersonalData: UserData = {
     id: 0,
@@ -22,10 +30,10 @@ export class DailyListComponent implements OnInit {
   };
   @Output() deleted = new EventEmitter<boolean>();
 
-  todayLimitDate = new Date(this.date.getTime());
+  todayLimitDate: Date;
   now: Date = new Date();
 
-  dateStr: string = this.date.toISOString().slice(0, 10) + ' 06:00:00.000';
+  dateStr: string = '';
   bfCount: number = 0;
 
   isAdmin: boolean = false; // this.userData.getUserType();
@@ -41,7 +49,17 @@ export class DailyListComponent implements OnInit {
     this.isAdmin = this.userData.getUserType();
     this.isUser = this.userData.getUserId();
     this.bfCount = this.breakfasts.length;
+
+    this.dateStr = this.date.toISOString().slice(0, 10) + ' 06:00:00.000';
+
+    this.todayLimitDate = new Date(this.date.getTime());
+    this.todayLimitDate.setDate(this.todayLimitDate.getDate() - 1);
     this.todayLimitDate.setHours(15, 0, 0, 0);
+    console.log(this.todayLimitDate);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.ngOnInit();
   }
 
   handleDeleteUser(userId: number) {

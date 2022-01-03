@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { UserDataService } from '../login-registro/user-data.service';
 import { Router } from '@angular/router';
 import { UserData } from './models/UserData';
@@ -15,6 +14,8 @@ export class HomeComponent implements OnInit {
     lastName: '',
   };
 
+  selectedDay: any = { date: new Date(), breakfasts: [] };
+
   constructor(private userData: UserDataService, private router: Router) {}
 
   ngOnInit(): void {
@@ -29,5 +30,10 @@ export class HomeComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+
+  handleCalendarDayClick(e) {
+    this.selectedDay = e;
+    console.log(e);
   }
 }

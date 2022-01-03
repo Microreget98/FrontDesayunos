@@ -16,8 +16,8 @@ export class CalendarDayComponent implements OnInit {
   @Input() breakfasts: Array<Breakfast> = [];
   @Input() userData: UserData;
   @Input() festiveType: number = 0;
-  @Input() public handleDayClick: (param: number) => void;
   @Output() registered = new EventEmitter<boolean>();
+  @Output() clicked = new EventEmitter<any>();
 
   dayNumber: number;
   myBreakfasts: Array<any>;
@@ -78,6 +78,13 @@ export class CalendarDayComponent implements OnInit {
     }
 
     return newBreakfasts;
+  }
+
+  handleClick() {
+    this.clicked.emit({
+      date: this.date,
+      breakfasts: this.breakfasts,
+    });
   }
 
   handleSaveButton() {

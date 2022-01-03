@@ -4,8 +4,9 @@
     </div>
 
     <div class="content">
-        <app-selected-day></app-selected-day>
-        <app-calendar [userData]="userInfo"></app-calendar>
+        <app-selected-day [date]="selectedDay.date" [breakfasts]="selectedDay.breakfasts" [userData]="userInfo">
+        </app-selected-day>
+        <app-calendar [userData]="userInfo" (dayClicked)="handleCalendarDayClick($event)"></app-calendar>
     </div>
 
     <div class="footer">
