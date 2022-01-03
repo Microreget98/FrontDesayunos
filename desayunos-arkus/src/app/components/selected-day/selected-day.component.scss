@@ -1,4 +1,6 @@
 .main {
   display: grid;
   grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 0 1em;
 }
