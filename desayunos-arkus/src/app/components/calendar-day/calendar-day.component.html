@@ -1,0 +1,23 @@
+<div [ngClass]="['card',getCssFestClass(festiveType), getCssPastDay()]">
+  <div class="header">
+    <button mat-mini-fab color="'white'" (click)="handleClick()">
+      <p style="margin-bottom: 0px;" [(ngModel)]="dayNumber" ngDefaultControl>{{dayNumber}}</p>
+    </button>
+  </div>
+  <div class="content">
+    <div class="contentWrapper">
+      <div class="listItem" *ngFor="let bf of myBreakfasts">
+        <mat-icon class="contIcon" [inline]="true">person</mat-icon>
+        <p class="pItem">{{bf.name}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <button mat-mini-fab color="primary" (click)="handleSaveButton()" [disabled]="isButtonEnabled()">
+      <mat-icon [inline]="true">fastfood</mat-icon>
+    </button>
+    <p *ngIf="breakfasts.length > 4" class="footerPlus" [(ngModel)]="breakfasts" ngDefaultControl>+{{breakfasts.length -
+      4}}</p>
+  </div>
+</div>

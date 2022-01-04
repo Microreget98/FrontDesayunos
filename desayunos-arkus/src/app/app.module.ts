@@ -5,11 +5,13 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { ApiService } from './core/api.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BigDayComponent } from './components/big-day/big-day.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 import { ConfigService } from './core/config.service';
 import { ConfirmacionComponent } from './components/confirmacion/confirmacion.component';
 import { CookieService } from 'ngx-cookie-service';
-import { DialogMenu } from './components/home/DialogMenu/dialog-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotopComponent } from './components/fotop/fotop.component';
@@ -41,6 +43,8 @@ import { VistaDeUsuarioComponent } from './components/vista-de-usuario/vista-de-
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { SelectedDayComponent } from './components/selected-day/selected-day.component';
+import { DailyListComponent } from './components/daily-list/daily-list.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -58,13 +62,17 @@ FullCalendarModule.registerPlugins([
 @NgModule({
   declarations: [
     AppComponent,
-    LoginRegistroComponent,
-    HomeComponent,
-    DialogMenu,
-    PerfilComponent,
+    BigDayComponent,
+    CalendarComponent,
+    CalendarDayComponent,
     ConfirmacionComponent,
-    VistaDeUsuarioComponent,
     FotopComponent,
+    HomeComponent,
+    LoginRegistroComponent,
+    PerfilComponent,
+    VistaDeUsuarioComponent,
+    SelectedDayComponent,
+    DailyListComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -109,6 +117,6 @@ FullCalendarModule.registerPlugins([
     CookieService,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogMenu, FotopComponent],
+  entryComponents: [FotopComponent],
 })
 export class AppModule {}

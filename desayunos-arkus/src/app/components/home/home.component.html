@@ -1,4 +1,17 @@
 <app-perfil></app-perfil>
-<div class="calendar">
- <full-calendar *ngIf="!isLoading" [options]="options" #calendar></full-calendar> 
+<div class="main">
+    <div class="header">
+    </div>
+
+    <div class="content">
+        <app-selected-day [date]="selectedDay.date" [breakfasts]="selectedDay.breakfasts" [userData]="userInfo"
+            (deleted)="ngOnInit()">
+        </app-selected-day>
+        <app-calendar [year]="selectedYear" [month]="selectedMonth" [userData]="userInfo" [festiveDays]="festiveDays"
+            (dayClicked)="updateSelectedDay($event)" (registered)="ngOnInit()" (monthChange)="handleMonthChange($event)"
+            [monthsBreakFasts]="monthsBreakFasts"></app-calendar>
+    </div>
+
+    <div class="footer">
+    </div>
 </div>

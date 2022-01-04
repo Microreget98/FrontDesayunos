@@ -1,0 +1,22 @@
+<div class="main">
+  <div class="title">
+    <button mat-mini-fab color="white" (click)="handleMonthChange(-1)">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <h1 [ngModel]="monthName" ngDefaultControl>{{monthName}}</h1>
+    <h1 [ngModel]="year" ngDefaultControl>{{year}}</h1>
+    <button mat-mini-fab color="white" (click)="handleMonthChange(1)">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+  <div class="calendar">
+    <p>Lunes</p>
+    <p>Martes</p>
+    <p>Miércoles</p>
+    <p>Jueves</p>
+    <p>Viernes</p>
+    <app-calendar-day *ngFor="let day of days" [date]="day.date" [breakfasts]="day.breakfasts" [userData]="userData"
+      [festiveType]="day.festiveType" (clicked)="handleDayClick($event)" (registered)="handleRegister()">
+    </app-calendar-day>
+  </div>
+</div>

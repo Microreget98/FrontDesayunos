@@ -1,144 +1,239 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, createElement, FullCalendarComponent } from '@fullcalendar/angular';
-import { ApiService } from '../../core/api.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogMenu } from './DialogMenu/dialog-menu.component';
+import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
-import { Calendar } from '@fullcalendar/core';
-import { ConfigService } from 'src/app/core/config.service';
-import { map } from 'rxjs/operators';
-import { CalendarUsersByMonth } from './models/CalendarUsersByMonth';
 import { Router } from '@angular/router';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-
-const eventLoad = [];
-
+import { UserData } from './models/UserData';
+import { Breakfast } from './models/Breakfast';
+import { ConfigService } from 'src/app/core/config.service';
+import { ApiService } from 'src/app/core/api.service';
+import { CalendarUsersByMonth } from './models/CalendarUsersByMonth';
+import { map } from 'rxjs/operators';
+import { FestiveDay } from './models/FestiveDay';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  // Breakfasts of the past, present and next month
+  monthsBreakFasts: Array<Breakfast> = [];
 
-  isLoading: boolean = true;
+  selectedYear: number = new Date().getFullYear();
+  selectedMonth: number = new Date().getMonth();
+  selectedDay: any = {
+    date: new Date(),
+    breakfasts: [],
+  };
 
-  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
-
-  userInfo = {
-    id_user: 0,
-    first_name: '',
-    last_name: ''
-  }
-
-  // isAdmin=this.userData.getUserType();
- 
-
-  // userInfo = {
-  //   id_user: 2,
-  //   first_name: 'Angel Servando',
-  //   last_name: 'Quiñones Garcia'
-  // }
-
-  options: CalendarOptions = {
-    headerToolbar: {
-      left: 'prev,next,today',
-      center: 'title',
-      right: ''
-    
+  festiveDays: Array<FestiveDay> = [
+    // USA
+    {
+      year: 2022,
+      month: 0,
+      day: 17,
+      type: 2,
     },
-    initialView: 'dayGridMonth',
-    initialEvents: eventLoad,
-    weekends: true,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true,
-    dateClick: this.handleDateClick.bind(this),
-    eventContent: function (arg) {
-      let image = document.createElement('img');
-      let div = document.createElement('span');
-      image.src = arg.event.extendedProps.imgUrl;
-      image.width = 20;
-      image.height = 20;
-      div.innerText = arg.event.extendedProps.fullName;
-      let arrayOfDomNodes = [image, div];
-      return { domNodes: arrayOfDomNodes };
+    {
+      year: 2022,
+      month: 1,
+      day: 21,
+      type: 2,
     },
-    events: [
-      eventLoad
-    ]
+    {
+      year: 2022,
+      month: 4,
+      day: 30,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 5,
+      day: 20,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 6,
+      day: 4,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 8,
+      day: 5,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 10,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 11,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 24,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 11,
+      day: 26,
+      type: 2,
+    },
+    // MX
+    {
+      year: 2022,
+      month: 1,
+      day: 1,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 2,
+      day: 15,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 3,
+      day: 1,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 4,
+      day: 2,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 8,
+      day: 16,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 15,
+      type: 1,
+    },
+  ];
+
+  userInfo: UserData = {
+    id: 0,
+    firstName: '',
+    lastName: '',
   };
 
   constructor(
-    public dialog: MatDialog,
     private userData: UserDataService,
-    private apiService: ApiService,
+    private router: Router,
     private configService: ConfigService,
-    private router: Router
-  ) {
+    private apiService: ApiService
+  ) {}
 
+  async ngOnInit(): Promise<void> {
+    this.monthsBreakFasts = [];
+    await this.getMonthBreakfasts();
 
-  }
+    console.log('yes', this.selectedDay);
 
-  ngOnInit(): void {
+    this.updateSelectedDay(this.selectedDay);
+
     this.userData.ngOnInit();
     if (this.userData.userDataString !== '') {
       let parsedData = JSON.parse(this.userData.userDataString);
       this.userInfo = {
-        id_user: parsedData.id_user,
-        first_name: parsedData.first_name,
-        last_name: parsedData.last_name
-      }
+        id: parsedData.id_user,
+        firstName: parsedData.first_name,
+        lastName: parsedData.last_name,
+      };
+    } else {
+      this.router.navigate(['/login']);
     }
-    else {
-      this.router.navigate(['/login'])
-    }
-    this.loadCalendarInfo();
-    this.options.dayMaxEvents = 4;
-
   }
 
-  loadCalendarInfo() {
-    let calendarEl;
-    var calendar = new Calendar(calendarEl, {
-      timeZone: 'local',
-    });
-    let month: number = calendar.view.currentStart.getMonth() + 1;
-    let year: number = calendar.view.currentStart.getFullYear();
+  async getMonthBreakfasts() {
+    const months = [
+      {
+        year:
+          this.selectedMonth === 0 ? this.selectedYear - 1 : this.selectedYear,
+        month: this.selectedMonth === 0 ? 12 : this.selectedMonth,
+      },
+      {
+        year: this.selectedYear,
+        month: this.selectedMonth + 1,
+      },
+      {
+        year:
+          this.selectedMonth === 11 ? this.selectedYear + 1 : this.selectedYear,
+        month: this.selectedMonth === 11 ? 1 : this.selectedMonth + 2,
+      },
+    ];
 
-    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`
-
-    this.apiService.GetData(apiUrl).pipe(
-      map((res: CalendarUsersByMonth[]) => {
-        res.forEach(usr => {
-          eventLoad.push(
-            {
-              title: 'user',
-              date: usr.date,
-              backgroundColor: 'white',
-              textColor: 'black',
-              borderColor: 'white',
-              extendedProps: {
-                fullName: usr.first_name + " " + usr.last_name,
-                imgUrl: "../../../assets/img/icons8-user-64.png"
-              }
-            }
-          );
-        });
-        this.isLoading = false;
-      })
-    ).subscribe();
+    for (const month of months) {
+      const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month.month}&year=${month.year}`;
+      await this.apiService
+        .GetData(apiUrl)
+        .pipe(
+          map((res: CalendarUsersByMonth[]) => {
+            res.forEach((usr) => {
+              this.monthsBreakFasts.push({
+                date: new Date(usr.date),
+                firstName: usr.first_name,
+                lastName: usr.last_name,
+                userId: usr.id_user,
+              });
+            });
+          })
+        )
+        .toPromise();
+    }
   }
 
-  handleDateClick(info) {
-    const dialogRef = this.dialog.open(DialogMenu, {
-      width: '800px',
-      height: '500px',
-      data: { dateStr: info.dateStr, firstName: this.userInfo.first_name, lastName: this.userInfo.last_name, userId: this.userInfo.id_user }
-    }).afterClosed().subscribe((res) => {
-      this.loadCalendarInfo();
-    }
-    );
+  updateSelectedDay(e) {
+    console.log(e);
+    console.log(this.selectedDay);
+    // Get the breakfasts from monthsBreakfasts
+    const breakfasts = [];
 
+    for (const bf of this.monthsBreakFasts.filter(
+      (bf) =>
+        bf.date.toISOString().slice(0, 10) === e.date.toISOString().slice(0, 10)
+    )) {
+      breakfasts.push(bf);
+    }
+
+    console.log(breakfasts);
+
+    // Change the selectedDay.date
+    this.selectedDay = {
+      date: e.date,
+      breakfasts: breakfasts,
+    };
+  }
+
+  handleMonthChange(plusMinus: number) {
+    if (plusMinus >= 0) {
+      this.selectedYear =
+        this.selectedMonth === 11 ? this.selectedYear + 1 : this.selectedYear;
+      this.selectedMonth =
+        this.selectedMonth === 11 ? 0 : this.selectedMonth + 1;
+    }
+
+    if (plusMinus < 0) {
+      this.selectedYear =
+        this.selectedMonth === 0 ? this.selectedYear - 1 : this.selectedYear;
+      this.selectedMonth =
+        this.selectedMonth === 0 ? 11 : this.selectedMonth - 1;
+    }
+
+    this.ngOnInit();
   }
 }

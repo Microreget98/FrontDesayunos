@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="header">
+    <button mat-mini-fab color="'white'">
+      <p style="margin-bottom: 0px;" [(ngModel)]="bfCount" ngDefaultControl>{{bfCount}}</p>
+    </button>
+  </div>
+  <div class="content">
+    <div class="contentWrapper">
+      <div class="listItem" *ngFor="let bf of breakfasts">
+        <mat-icon class="contIcon" [inline]="true">person</mat-icon>
+        <p class="pItem">{{bf.firstName + " " + bf.lastName}}</p>
+        <button mat-mini-fab color="primary" *ngIf="now <= todayLimitDate && (isAdmin || bf.userId === isUser)"
+          (click)="handleDeleteUser(bf.userId)">
+          <mat-icon [inline]="true">close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
