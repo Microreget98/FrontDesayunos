@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/api.service';
-import { ConfigService } from 'src/app/core/config.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Breakfast } from '../home/models/Breakfast';
-import { CalendarUsersByMonth } from '../home/models/CalendarUsersByMonth';
 import { Day } from '../home/models/Day';
 import { FestiveDay } from '../home/models/FestiveDay';
 import { UserData } from '../home/models/UserData';
@@ -13,7 +17,7 @@ import { UserData } from '../home/models/UserData';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
   // Breakfasts of the past, present and next month
   @Input() monthsBreakFasts: Array<Breakfast> = [];
   @Input() year: number = new Date().getFullYear();
@@ -22,6 +26,8 @@ export class CalendarComponent implements OnInit {
   @Input() userData: UserData;
   @Input() festiveDays: Array<FestiveDay> = [];
 
+  @Output() monthChange = new EventEmitter<number>();
+  @Output() registered = new EventEmitter<boolean>();
   @Output() dayClicked = new EventEmitter<any>();
 
   monthName: string = '';
@@ -29,76 +35,31 @@ export class CalendarComponent implements OnInit {
   dateSpan: Array<Date>;
   days: Array<Day>;
 
-  constructor(
-    private configService: ConfigService,
-    private apiService: ApiService
-  ) {}
+  constructor() {}
 
   async ngOnInit(): Promise<void> {
     this.monthName = new Date(this.year, this.month).toLocaleString('es-MX', {
       month: 'long',
     });
     this.dateSpan = this.getDateSpan(this.month, this.year);
-    this.monthsBreakFasts = [];
-    await this.getMonthBreakfasts();
     this.createDays();
   }
 
-  handleMonthChange(plusMinus: number) {
-    console.log('this month', this.month);
-    console.log('this year', this.year);
-
-    if (plusMinus >= 0) {
-      this.year = this.month === 11 ? this.year + 1 : this.year;
-      this.month = this.month === 11 ? 0 : this.month + 1;
-    }
-
-    if (plusMinus < 0) {
-      this.year = this.month === 0 ? this.year - 1 : this.year;
-      this.month = this.month === 0 ? 11 : this.month - 1;
-    }
-
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('cambié');
     this.ngOnInit();
+  }
+
+  handleMonthChange(plusMinus: number) {
+    this.monthChange.emit(plusMinus);
+  }
+
+  handleRegister() {
+    this.registered.emit(true);
   }
 
   handleDayClick(e: any) {
     this.dayClicked.emit(e);
-  }
-
-  async getMonthBreakfasts() {
-    const months = [
-      {
-        year: this.month === 0 ? this.year - 1 : this.year,
-        month: this.month === 0 ? 12 : this.month,
-      },
-      {
-        year: this.year,
-        month: this.month + 1,
-      },
-      {
-        year: this.month === 11 ? this.year + 1 : this.year,
-        month: this.month === 11 ? 1 : this.month + 2,
-      },
-    ];
-
-    for (const month of months) {
-      const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month.month}&year=${month.year}`;
-      await this.apiService
-        .GetData(apiUrl)
-        .pipe(
-          map((res: CalendarUsersByMonth[]) => {
-            res.forEach((usr) => {
-              this.monthsBreakFasts.push({
-                date: new Date(usr.date),
-                firstName: usr.first_name,
-                lastName: usr.last_name,
-                userId: usr.id_user,
-              });
-            });
-          })
-        )
-        .toPromise();
-    }
   }
 
   createDays() {

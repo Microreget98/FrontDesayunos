@@ -50,7 +50,7 @@ export class DailyListComponent implements OnInit, OnChanges {
     this.isUser = this.userData.getUserId();
     this.bfCount = this.breakfasts.length;
 
-    this.dateStr = this.date.toISOString().slice(0, 10) + ' 06:00:00.000';
+    this.dateStr = this.date.toISOString().slice(0, 10) + ' 00:00:00.000';
 
     this.todayLimitDate = new Date(this.date.getTime());
     this.todayLimitDate.setDate(this.todayLimitDate.getDate() - 1);
@@ -98,9 +98,8 @@ export class DailyListComponent implements OnInit, OnChanges {
             })
           )
           .subscribe((res) => {
-            if (res !== null) {
-              this.deleted.emit(true);
-            }
+            this.deleted.emit(true);
+            console.log('ya se eliminó');
           });
       }
     });

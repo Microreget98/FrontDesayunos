@@ -1,4 +1,5 @@
 <div class="main">
     <app-big-day [date]="date"></app-big-day>
-    <app-daily-list [date]="date" [breakfasts]="breakfasts" [userPersonalData]="userData"></app-daily-list>
+    <app-daily-list [date]="date" [breakfasts]="breakfasts" [userPersonalData]="userData" (deleted)="handleDelete()">
+    </app-daily-list>
 </div>

@@ -83,14 +83,14 @@ export class CalendarDayComponent implements OnInit {
   handleClick() {
     this.clicked.emit({
       date: this.date,
-      breakfasts: this.breakfasts,
     });
   }
 
   handleSaveButton() {
     const postData = {
       id_user: this.userData.id,
-      date: new Date(this.date.getTime()).toISOString().slice(0, -5),
+      date:
+        new Date(this.date.getTime()).toISOString().slice(0, 10) + 'T00:00:00',
       is_active: true,
       was_deleted: false,
     };
