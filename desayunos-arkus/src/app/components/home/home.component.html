@@ -7,7 +7,7 @@
         <app-selected-day [date]="selectedDay.date" [breakfasts]="selectedDay.breakfasts" [userData]="userInfo"
             (deleted)="ngOnInit()">
         </app-selected-day>
-        <app-calendar [year]="selectedYear" [month]="selectedMonth" [userData]="userInfo"
+        <app-calendar [year]="selectedYear" [month]="selectedMonth" [userData]="userInfo" [festiveDays]="festiveDays"
             (dayClicked)="updateSelectedDay($event)" (registered)="ngOnInit()" (monthChange)="handleMonthChange($event)"
             [monthsBreakFasts]="monthsBreakFasts"></app-calendar>
     </div>

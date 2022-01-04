@@ -7,6 +7,7 @@ import { ConfigService } from 'src/app/core/config.service';
 import { ApiService } from 'src/app/core/api.service';
 import { CalendarUsersByMonth } from './models/CalendarUsersByMonth';
 import { map } from 'rxjs/operators';
+import { FestiveDay } from './models/FestiveDay';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,6 +23,107 @@ export class HomeComponent implements OnInit {
     date: new Date(),
     breakfasts: [],
   };
+
+  festiveDays: Array<FestiveDay> = [
+    // USA
+    {
+      year: 2022,
+      month: 0,
+      day: 17,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 1,
+      day: 21,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 4,
+      day: 30,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 5,
+      day: 20,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 6,
+      day: 4,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 8,
+      day: 5,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 9,
+      day: 10,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 11,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 24,
+      type: 2,
+    },
+    {
+      year: 2022,
+      month: 11,
+      day: 26,
+      type: 2,
+    },
+    // MX
+    {
+      year: 2022,
+      month: 1,
+      day: 1,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 2,
+      day: 15,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 3,
+      day: 1,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 4,
+      day: 2,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 8,
+      day: 16,
+      type: 1,
+    },
+    {
+      year: 2022,
+      month: 10,
+      day: 15,
+      type: 1,
+    },
+  ];
 
   userInfo: UserData = {
     id: 0,
