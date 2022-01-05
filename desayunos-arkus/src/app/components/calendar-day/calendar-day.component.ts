@@ -16,6 +16,7 @@ export class CalendarDayComponent implements OnInit {
   @Input() breakfasts: Array<Breakfast> = [];
   @Input() userData: UserData;
   @Input() festiveType: number = 0;
+  @Input() specialEvent: boolean = false;
   @Output() registered = new EventEmitter<boolean>();
   @Output() clicked = new EventEmitter<any>();
 
@@ -28,6 +29,10 @@ export class CalendarDayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.date.toISOString().slice(0, 10) === '2022-01-06') {
+      this.specialEvent = true;
+    }
+
     this.dayNumber = this.date.getDate();
     this.myBreakfasts = this.compressNames(this.breakfasts).reverse();
 
@@ -93,6 +98,7 @@ export class CalendarDayComponent implements OnInit {
         new Date(this.date.getTime()).toISOString().slice(0, 10) + 'T00:00:00',
       is_active: true,
       was_deleted: false,
+      event: false,
     };
 
     this.apiService
@@ -113,6 +119,39 @@ export class CalendarDayComponent implements OnInit {
             timer: 2000,
             icon: 'success',
             text: 'Desayuno registrado 🍳👌',
+          });
+        }
+      });
+  }
+
+  handlePartyMode() {
+    const postData = {
+      id_user: this.userData.id,
+      date:
+        new Date(this.date.getTime()).toISOString().slice(0, 10) + 'T00:00:00',
+      is_active: true,
+      was_deleted: false,
+      event: true,
+    };
+
+    this.apiService
+      .PostData(`${this.configService.config.apiUrl}/api/Calendar`, postData)
+      .pipe(
+        catchError((error): any => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Un error a ocurrido',
+            text: 'Inténtelo nuevamente',
+          });
+        })
+      )
+      .subscribe((res) => {
+        if (res !== null) {
+          this.registered.emit(true);
+          Swal.fire({
+            timer: 2000,
+            icon: 'success',
+            text: 'Panqueque registrado 🍳👌',
           });
         }
       });

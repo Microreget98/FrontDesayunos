@@ -19,50 +19,52 @@ export interface UsersList {
 @Component({
   selector: 'app-vista-de-usuario',
   templateUrl: './vista-de-usuario.component.html',
-  styleUrls: ['./vista-de-usuario.component.scss']
+  styleUrls: ['./vista-de-usuario.component.scss'],
 })
 export class VistaDeUsuarioComponent implements OnInit {
-
-  displayedColumns: string[] = ['select', 'image', 'first_name', 'last_name', 'id_user_type'];
+  displayedColumns: string[] = [
+    'select',
+    'image',
+    'first_name',
+    'last_name',
+    'id_user_type',
+  ];
   dataToDisplay = [];
   dataSource = new MatTableDataSource<UsersList>();
   selection = new SelectionModel<UsersList>(true, []);
   userstype = [
-    {value: 1, display: 'Admin'},
-    {value: 2, display: 'Colaborador'}
+    { value: 1, display: 'Admin' },
+    { value: 2, display: 'Colaborador' },
   ];
 
-  @ViewChild(MatTable) tableUsersList: MatTable<UsersList>
-
+  @ViewChild(MatTable) tableUsersList: MatTable<UsersList>;
 
   constructor(
     private apiService: ApiService,
     private configService: ConfigService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
     // console.log(this.dataSource);
-
   }
 
   loadData() {
-    this.apiService.GetData(`${this.configService.config.apiUrl}/api/users`).subscribe(
-      (response: Array<any>) => {
-        response.forEach((x:UsersList) => {
+    this.apiService
+      .GetData(`${this.configService.config.apiUrl}/api/users`)
+      .subscribe((response: Array<any>) => {
+        response.forEach((x: UsersList) => {
           this.dataToDisplay.push({
             id_user: x.id_user,
             image: 'assets/img/icons8-user-64.png',
             first_name: x.first_name,
             last_name: x.last_name,
-            id_user_type: x.id_user_type
-          })
+            id_user_type: x.id_user_type,
+          });
           this.tableUsersList.renderRows();
-        })
-      }
-    );
-    console.log(this.dataToDisplay);
+        });
+      });
     // this.tableUsersList.renderRows();
   }
 
@@ -99,11 +101,10 @@ export class VistaDeUsuarioComponent implements OnInit {
     const element = this.selection.selected;
   }
 
-  homeReturn(){
-    this.dataToDisplay = []
+  homeReturn() {
+    this.dataToDisplay = [];
     this.router.navigate(['/home']);
   }
-
 }
 
 class UsersDataSource extends DataSource<UsersList> {
@@ -118,7 +119,7 @@ class UsersDataSource extends DataSource<UsersList> {
     return this._dataStream;
   }
 
-  disconnect() { }
+  disconnect() {}
 
   setData(data: UsersList[]) {
     this._dataStream.next(data);

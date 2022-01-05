@@ -3,4 +3,5 @@ export interface Breakfast {
   date: Date;
   firstName: string;
   lastName: string;
+  event: boolean;
 }

@@ -55,11 +55,15 @@ export class DailyListComponent implements OnInit, OnChanges {
     this.todayLimitDate = new Date(this.date.getTime());
     this.todayLimitDate.setDate(this.todayLimitDate.getDate() - 1);
     this.todayLimitDate.setHours(15, 0, 0, 0);
-    console.log(this.todayLimitDate);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.ngOnInit();
+  }
+
+  getCssPartyMode(bf: Breakfast) {
+    if (bf.event) return 'partyModeActivated';
+    return '';
   }
 
   handleDeleteUser(userId: number) {
@@ -99,7 +103,6 @@ export class DailyListComponent implements OnInit, OnChanges {
           )
           .subscribe((res) => {
             this.deleted.emit(true);
-            console.log('ya se eliminó');
           });
       }
     });

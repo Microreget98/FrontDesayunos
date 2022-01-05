@@ -142,8 +142,6 @@ export class HomeComponent implements OnInit {
     this.monthsBreakFasts = [];
     await this.getMonthBreakfasts();
 
-    console.log('yes', this.selectedDay);
-
     this.updateSelectedDay(this.selectedDay);
 
     this.userData.ngOnInit();
@@ -189,6 +187,7 @@ export class HomeComponent implements OnInit {
                 firstName: usr.first_name,
                 lastName: usr.last_name,
                 userId: usr.id_user,
+                event: usr.event,
               });
             });
           })
@@ -198,8 +197,6 @@ export class HomeComponent implements OnInit {
   }
 
   updateSelectedDay(e) {
-    console.log(e);
-    console.log(this.selectedDay);
     // Get the breakfasts from monthsBreakfasts
     const breakfasts = [];
 
@@ -209,8 +206,6 @@ export class HomeComponent implements OnInit {
     )) {
       breakfasts.push(bf);
     }
-
-    console.log(breakfasts);
 
     // Change the selectedDay.date
     this.selectedDay = {

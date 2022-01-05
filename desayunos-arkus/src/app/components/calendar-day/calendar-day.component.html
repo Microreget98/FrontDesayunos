@@ -17,6 +17,12 @@
     <button mat-mini-fab color="primary" (click)="handleSaveButton()" [disabled]="isButtonEnabled()">
       <mat-icon [inline]="true">fastfood</mat-icon>
     </button>
+
+    <button *ngIf="specialEvent" mat-mini-fab color="primary" (click)="handlePartyMode()"
+      [disabled]="isButtonEnabled()">
+      <mat-icon [inline]="true">cake</mat-icon>
+    </button>
+
     <p *ngIf="breakfasts.length > 4" class="footerPlus" [(ngModel)]="breakfasts" ngDefaultControl>+{{breakfasts.length -
       4}}</p>
   </div>
