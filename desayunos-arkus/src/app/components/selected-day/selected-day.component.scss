@@ -1,9 +1,9 @@
 .main {
   display: grid;
   grid-template-columns: auto auto;
+  justify-content: center;
   gap: 0 1em;
   font-size: 16px; // base is 16px
-  grid-template-columns: min-content auto;
 }
 
 @media (max-width: 700px) {

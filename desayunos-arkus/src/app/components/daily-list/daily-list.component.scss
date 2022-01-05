@@ -43,30 +43,26 @@
     overflow-y: auto;
     padding: 1em;
     .contentWrapper {
-      column-count: auto;
-      column-width: 420px;
-      .randomDiv {
+      width: fit-content;
+      height: fit-content;
+      display: grid;
+      gap: 0.5em;
+      .listItem {
         display: grid;
-        gap: 0.5em;
-        height: fit-content;
-        width: fit-content;
-        .listItem {
+        grid-template-columns: max-content max-content auto max-content max-content;
+        align-items: center;
+        gap: 0 0.25em;
+        .pItem {
+          margin: 0;
+        }
+        .deleteButton {
+          grid-column-end: 6;
+          display: flex;
           align-items: center;
-          display: grid;
-          gap: 0 0.25em;
-          grid-template-columns: max-content max-content auto max-content max-content;
-          .pItem {
-            margin: 0;
-          }
-          .deleteButton {
-            align-items: center;
-            display: flex;
-            font-size: 1em;
-            grid-column-end: 6;
-            height: 1.5em;
-            justify-content: center;
-            width: 1.5em;
-          }
+          justify-content: center;
+          width: 1.5em;
+          height: 1.5em;
+          font-size: 1em;
         }
       }
     }
@@ -74,6 +70,6 @@
 }
 
 .partyModeActivated {
-  color: red;
   font-weight: bolder;
+  color: red;
 }

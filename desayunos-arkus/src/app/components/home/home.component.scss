@@ -5,7 +5,6 @@
     "header header header"
     ". content ."
     "footer footer footer";
-  grid-template-columns: 1fr 22fr 1fr;
 }
 .header {
   grid-area: header;
