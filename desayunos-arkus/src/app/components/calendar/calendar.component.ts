@@ -125,8 +125,13 @@ export class CalendarComponent implements OnInit {
     let actualMonth = new Date(year, month + 1, 0)
     let firstDayMonth = new Date(year, month, 1)
     let numberOfDays = firstDayMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
+    firstDayMonth.setDate((firstDayMonth.getDate()+1) - firstDayMonth.getDay())
+    console.log(firstDayMonth);
     console.log(numberOfDays);
-    for (let index = 0; index < numberOfDays / 7; index++) {
+    for (let index = 0; index < numberOfDays; index++) {
+      let keys = new Map([
+        [`${firstDayMonth.getDate()}-${firstDayMonth.getMonth()}`, []]
+      ])
       this.month.weeks.push({ 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] })
     }
     console.log(this.month.weeks);
