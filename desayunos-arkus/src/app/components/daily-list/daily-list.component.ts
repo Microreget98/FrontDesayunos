@@ -35,6 +35,7 @@ export class DailyListComponent implements OnInit, OnChanges {
 
   dateStr: string = '';
   bfCount: number = 0;
+  eventCount: number = 0;
 
   isAdmin: boolean = false; // this.userData.getUserType();
   isUser: number = 0; // this.userData.getUserId();
@@ -48,7 +49,8 @@ export class DailyListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.isAdmin = this.userData.getUserType();
     this.isUser = this.userData.getUserId();
-    this.bfCount = this.breakfasts.length;
+    this.bfCount = this.breakfasts.filter((bf) => !bf.event).length;
+    this.eventCount = this.breakfasts.filter((bf) => bf.event).length;
 
     this.dateStr = this.date.toISOString().slice(0, 10) + ' 00:00:00.000';
 

@@ -19,11 +19,21 @@
     line-height: 1em;
     margin: 0;
     margin-bottom: 0.5em;
-    button {
+    gap: 0.5em;
+    .normalCounter {
       display: flex;
       align-items: center;
       justify-content: center;
       border: solid 1px lightgray;
+      width: 2em;
+      height: 2em;
+      font-size: 1em;
+    }
+    .eventCounter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: solid 1px red;
       width: 2em;
       height: 2em;
       font-size: 1em;

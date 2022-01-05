@@ -135,7 +135,10 @@ export class CalendarDayComponent implements OnInit {
     };
 
     this.apiService
-      .PostData(`${this.configService.config.apiUrl}/api/Calendar`, postData)
+      .PostData(
+        `${this.configService.config.apiUrl}/api/Calendar/party`,
+        postData
+      )
       .pipe(
         catchError((error): any => {
           Swal.fire({

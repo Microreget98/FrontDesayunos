@@ -1,7 +1,10 @@
 <div class="card">
   <div class="header">
-    <button mat-mini-fab color="'white'">
+    <button class="normalCounter" mat-mini-fab color="'white'">
       <p style="margin-bottom: 0px;" [(ngModel)]="bfCount" ngDefaultControl>{{bfCount}}</p>
+    </button>
+    <button *ngIf="eventCount > 0" class="eventCounter" mat-mini-fab color="'white'">
+      <p style="margin-bottom: 0px;" [(ngModel)]="eventCount" ngDefaultControl>{{eventCount}}</p>
     </button>
   </div>
   <div class="content">
