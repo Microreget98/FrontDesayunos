@@ -26,7 +26,7 @@ export class LoginRegistroComponent implements OnInit {
 
   public fLogin: FormGroup;
   public fRegister: FormGroup;
-  
+
   minDate: Date;
   maxDate: Date;
 
@@ -72,7 +72,7 @@ export class LoginRegistroComponent implements OnInit {
     });
     this.confirmPassword.addValidators(matchPass(this.fRegister.get('registerPassword')));
   }
-  
+
   sendLogin(): any {
     let userData: object = {
       email: this.fLogin.get('loginEmail').value,
@@ -90,7 +90,7 @@ export class LoginRegistroComponent implements OnInit {
             title: 'Buen día',
             text: 'Bienvenido',
             showConfirmButton: false,
-            timer : 1500
+            timer: 1500
           })
         }
       },
@@ -115,7 +115,7 @@ export class LoginRegistroComponent implements OnInit {
       dob: this.fRegister.value.dob,
       email: this.fRegister.value.textEmail + this.fRegister.value.registerEmail,
       pass: this.fRegister.value.registerPassword,
-      location: this.fRegister.value.sede,
+      location: this.fRegister.value.lotn,
       is_active: true
 
     }
@@ -124,7 +124,7 @@ export class LoginRegistroComponent implements OnInit {
         //Mensaje existoso al REGISTRARSE 
         Swal.fire({
           title: 'Registrado con éxito',
-          text:"Ahora puedes iniciar sesión",
+          text: "Ahora puedes iniciar sesión",
           icon: 'success',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
@@ -160,7 +160,7 @@ export class LoginRegistroComponent implements OnInit {
     return str
   }
 
-  onSubmit(){
+  onSubmit() {
 
   }
   // inicia campos login
@@ -240,14 +240,14 @@ export class LoginRegistroComponent implements OnInit {
   get confirmPassword() { return this.fRegister.get('confirmPassword'); }
 }
 //#region custom field validatios
-export function matchPass(password): ValidatorFn{
+export function matchPass(password): ValidatorFn {
   return (controlname: AbstractControl): ValidationErrors | null => {
     const confpass = controlname.value;
     const pass = password.value;
-    if (confpass !== pass){
-      return {matching: true};
+    if (confpass !== pass) {
+      return { matching: true };
     }
-    else{
+    else {
       return null;
     }
   }

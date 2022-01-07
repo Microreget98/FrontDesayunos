@@ -30,50 +30,49 @@
     .headerTable {
         margin: 0;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         place-items: center;
-        .day {}
-        .lunes {
-            grid-column: 1/2;
+        .day {
+            grid-column: span 1;
         }
-        .martes {
-            grid-column: 2/3;
-        }
-        .miercoles {
-            grid-column: 3/4;
-        }
-        .jueves {
-            grid-column: 4/5;
-        }
-        .viernes {
-            grid-column: 5/6;
-        }
+        // .lunes {
+        //     grid-column: 1/2;
+        // }
+        // .martes {
+        //     grid-column: 2/3;
+        // }
+        // .miercoles {
+        //     grid-column: 3/4;
+        // }
+        // .jueves {
+        //     grid-column: 4/5;
+        // }
+        // .viernes {
+        //     grid-column: 5/6;
+        // }
     }
     .rowTable {
         margin: 0;
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         place-items: center;
         .day {
-            // background-color: rgba(77, 2, 2, 0.364);
-            // padding: 0;
-            // place-items: center;
-            // border: 1px solid black;
+            grid-column: span 1;
         }
-        .lunes {
-            grid-column: 1/2;
-        }
-        .martes {
-            grid-column: 2/3;
-        }
-        .miercoles {
-            grid-column: 3/4;
-        }
-        .jueves {
-            grid-column: 4/5;
-        }
-        .viernes {
-            grid-column: 5/6;
-        }
+        // .lunes {
+        //     grid-column: 1/2;
+        // }
+        // .martes {
+        //     grid-column: 2/3;
+        // }
+        // .miercoles {
+        //     grid-column: 3/4;
+        // }
+        // .jueves {
+        //     grid-column: 4/5;
+        // }
+        // .viernes {
+        //     grid-column: 5/6;
+        // }
     }
 }

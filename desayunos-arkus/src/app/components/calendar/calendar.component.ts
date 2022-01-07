@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
+import { first } from 'rxjs/operators';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
@@ -115,7 +116,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.ngOnInit();
-    this.buildMonth(2021, 11);
+    this.buildMonth(2022, 1);
 
     // this.prueba(2021, 11);
   }
@@ -125,12 +126,26 @@ export class CalendarComponent implements OnInit {
     let actualMonth = new Date(year, month + 1, 0)
     let firstDayMonth = new Date(year, month, 1)
     let numberOfDays = firstDayMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
-    console.log(numberOfDays);
-    for (let index = 0; index < numberOfDays / 7; index++) {
-      this.month.weeks.push({ 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] })
+    firstDayMonth.setDate(0 - (firstDayMonth.getDay() - 1))
+    let dateStr: string;
+    let j = 0;
+    let obj = {}
+    for (let i = 0; i <= numberOfDays; i++) {
+      if (j != 7) {
+        let additionobj = {}
+        dateStr = firstDayMonth.toISOString().split('T')[0];
+        additionobj[dateStr] = [1, 2]
+        obj = Object.assign(obj, additionobj)
+        firstDayMonth.setDate(firstDayMonth.getDate() + 1);
+        j += 1;
+      }
+      else {
+        j = 0; i -= 1;
+        this.month.weeks.push(obj)
+        obj = {}
+      }
     }
     console.log(this.month.weeks);
-
   }
 
   prueba(year?: number, month?: number) {
