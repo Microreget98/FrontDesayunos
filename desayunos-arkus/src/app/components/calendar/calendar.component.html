@@ -21,14 +21,14 @@
         <div class="day jueves">Jueves</div>
         <div class="day viernes">Viernes</div>
     </div>
-    <!-- <div class="rowTable" *ngFor="let semana of month.weeks"> -->
+    <div class="rowTable" *ngFor="let semana of month.weeks">
         <!-- {{semana}} -->
-        <!-- <div class="day" *ngFor="let days of semana | keyvalue" > -->
+        <div class="day" *ngFor="let days of semana | keyvalue">
             <!-- <p *ngIf="days.value.length > 0">{{days.key}}</p> -->
-            <!-- {{day.key}} -->
-            <!-- <app-dayofmonth [data]="day.value.data"></app-dayofmonth> -->
-        <!-- </div> -->
-    <!-- </div> -->
+            <!-- {{days}} -->
+            <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
+        </div>
+    </div>
     <div class="footer">
         <p>ESTO ES EL FOOTER</p>
     </div>

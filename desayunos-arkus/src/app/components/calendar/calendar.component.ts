@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
+import { first } from 'rxjs/operators';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
@@ -115,27 +116,37 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.ngOnInit();
-    this.buildMonth(2021, 11);
+    this.buildMonth(false, 2022, 1);
 
     // this.prueba(2021, 11);
   }
 
-  buildMonth(year?, month?, day?) {
+  buildMonth(weekends: boolean, year?, month?, day?) {
     // this.month.weeks.push("p")
     let actualMonth = new Date(year, month + 1, 0)
     let firstDayMonth = new Date(year, month, 1)
     let numberOfDays = firstDayMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
-    firstDayMonth.setDate((firstDayMonth.getDate()+1) - firstDayMonth.getDay())
-    console.log(firstDayMonth);
-    console.log(numberOfDays);
-    for (let index = 0; index < numberOfDays; index++) {
-      let keys = new Map([
-        [`${firstDayMonth.getDate()}-${firstDayMonth.getMonth()}`, []]
-      ])
-      this.month.weeks.push({ 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] })
+    firstDayMonth.setDate(0 - (firstDayMonth.getDay() - 1))
+    let dateStr: string;
+    let j = 0;
+    let obj = {}
+    for (let i = 0; i <= numberOfDays; i++) {
+      if ((firstDayMonth.getDay() != 0 && firstDayMonth.getDay() != 6) || !weekends) {
+        let additionobj = {}
+        dateStr = firstDayMonth.toISOString().split('T')[0];
+        additionobj[dateStr] = []
+        obj = Object.assign(obj, additionobj);
+        j += 1;
+      }
+      if (j === 5 || j === 6) {
+        this.month.weeks.push(obj)
+        j = 0; i -= 1;
+        obj = {}
+      }
+      firstDayMonth.setDate(firstDayMonth.getDate() + 1);
     }
     console.log(this.month.weeks);
-
+    this.month.weeks.forEach(x => console.log(x));
   }
 
   prueba(year?: number, month?: number) {

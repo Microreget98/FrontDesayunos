@@ -7,25 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DayofmonthComponent implements OnInit {
 
-  weeks = [
-    {
-      0:[],
-      1:[{}],
-      2:[{}],
-      3:[{}],
-      4:[{}],
-      5:[{}],
-      6:[]
-    }
-  ]
-
-  @Input() data: Array<any>
+  @Input("dayInfo") day: Object
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
-    
+    console.log(this.day['value']);
+    console.log(this.day['key']);
+
   }
 
 }
