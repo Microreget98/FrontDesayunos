@@ -116,12 +116,12 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userDataService.ngOnInit();
-    this.buildMonth(2022, 1);
+    this.buildMonth(false, 2022, 1);
 
     // this.prueba(2021, 11);
   }
 
-  buildMonth(year?, month?, day?) {
+  buildMonth(weekends: boolean, year?, month?, day?) {
     // this.month.weeks.push("p")
     let actualMonth = new Date(year, month + 1, 0)
     let firstDayMonth = new Date(year, month, 1)
@@ -131,21 +131,22 @@ export class CalendarComponent implements OnInit {
     let j = 0;
     let obj = {}
     for (let i = 0; i <= numberOfDays; i++) {
-      if (j != 7) {
+      if ((firstDayMonth.getDay() != 0 && firstDayMonth.getDay() != 6) || !weekends) {
         let additionobj = {}
         dateStr = firstDayMonth.toISOString().split('T')[0];
-        additionobj[dateStr] = [1, 2]
-        obj = Object.assign(obj, additionobj)
-        firstDayMonth.setDate(firstDayMonth.getDate() + 1);
+        additionobj[dateStr] = []
+        obj = Object.assign(obj, additionobj);
         j += 1;
       }
-      else {
-        j = 0; i -= 1;
+      if (j === 5 || j === 6) {
         this.month.weeks.push(obj)
+        j = 0; i -= 1;
         obj = {}
       }
+      firstDayMonth.setDate(firstDayMonth.getDate() + 1);
     }
     console.log(this.month.weeks);
+    this.month.weeks.forEach(x => console.log(x));
   }
 
   prueba(year?: number, month?: number) {

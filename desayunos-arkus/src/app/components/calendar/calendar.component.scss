@@ -27,6 +27,7 @@
     display: grid;
     height: 94.4%;
     grid-template-rows: 50px repeat(6, 1fr) 50px;
+    row-gap: 5px;
     .headerTable {
         margin: 0;
         display: grid;
@@ -56,7 +57,9 @@
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         place-items: center;
+        gap: 5px;
         .day {
+            width: 100%;
             grid-column: span 1;
         }
         // .lunes {

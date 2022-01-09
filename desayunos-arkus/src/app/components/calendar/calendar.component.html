@@ -15,20 +15,18 @@
 </div>
 <div class="calendarTable">
     <div class="headerTable">
-        <div class="day viernes">Domingo</div>
         <div class="day lunes">Lunes</div>
         <div class="day martes">Martes</div>
         <div class="day miercoles">Miercoles</div>
         <div class="day jueves">Jueves</div>
         <div class="day viernes">Viernes</div>
-        <div class="day viernes">Sabado</div>
     </div>
     <div class="rowTable" *ngFor="let semana of month.weeks">
         <!-- {{semana}} -->
-        <div class="day" *ngFor="let days of semana">
+        <div class="day" *ngFor="let days of semana | keyvalue">
             <!-- <p *ngIf="days.value.length > 0">{{days.key}}</p> -->
-            <!-- {{days.value}} -->
-            <app-dayofmonth [day]="days"></app-dayofmonth>
+            <!-- {{days}} -->
+            <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
         </div>
     </div>
     <div class="footer">
