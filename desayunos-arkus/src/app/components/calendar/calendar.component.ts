@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
+import { ConfigService } from 'src/app/core/config.service';
+import { ApiService } from '../../core/api.service';
 import { first } from 'rxjs/operators';
 //TODO
 // props of this component
@@ -15,8 +17,6 @@ export class CalendarComponent implements OnInit {
   lessThan = faLessThan;
   greaterThan = faGreaterThan;
   // data from DB
-  // TODO
-  // order data by date
   mockupofDBresponse = [
     {
       "id_user": 2,
@@ -105,66 +105,90 @@ export class CalendarComponent implements OnInit {
   ]
   // Semanas
 
+  // weekends: boolean = true;
+
+  daysOfWeekend: Array<string> = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+  daysOfWeek: Array<string> = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
+  iteratorOfWeek: Array<string> = []
+
   month = {
     "numberOfMonth": 0,
     weeks: []
   };
 
   constructor(
-    private userDataService: UserDataService
+    private userDataService: UserDataService,
+    private apiService: ApiService,
+    private configService: ConfigService
   ) { }
 
   ngOnInit(): void {
     this.userDataService.ngOnInit();
-    this.buildMonth(false, 2022, 1);
-
-    // this.prueba(2021, 11);
+    this.buildMonth(false, 2022, 0);
+    this.apiCall(1, 2022);
+    // this.monthFill()
   }
 
-  buildMonth(weekends: boolean, year?, month?, day?) {
-    // this.month.weeks.push("p")
+  buildMonth(weekends: boolean, year?, month?) {
+    this.iteratorOfWeek = weekends ? this.daysOfWeekend : this.daysOfWeek;
     let actualMonth = new Date(year, month + 1, 0)
-    let firstDayMonth = new Date(year, month, 1)
-    let numberOfDays = firstDayMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
-    firstDayMonth.setDate(0 - (firstDayMonth.getDay() - 1))
-    let dateStr: string;
-    let j = 0;
-    let obj = {}
-    for (let i = 0; i <= numberOfDays; i++) {
-      if ((firstDayMonth.getDay() != 0 && firstDayMonth.getDay() != 6) || !weekends) {
+    let day0OfMonth = new Date(year, month, 1)
+    let numberOfDaysInMonth = day0OfMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
+    day0OfMonth.setDate(0 - (day0OfMonth.getDay() - 1))
+    let dateInString: string;
+    let obj = {};
+    for (let i = 0; i <= numberOfDaysInMonth; i++) {
+      if ((day0OfMonth.getDay() >= 1 && day0OfMonth.getDay() <= 5) || weekends) {
         let additionobj = {}
-        dateStr = firstDayMonth.toISOString().split('T')[0];
-        additionobj[dateStr] = []
+        dateInString = day0OfMonth.toISOString().split('T')[0];
+        additionobj[dateInString] = []
         obj = Object.assign(obj, additionobj);
-        j += 1;
       }
-      if (j === 5 || j === 6) {
-        this.month.weeks.push(obj)
-        j = 0; i -= 1;
-        obj = {}
+      if ((!weekends && day0OfMonth.getDay() === 5) || (weekends && day0OfMonth.getDay() === 6)) {
+        this.month.weeks.push(obj);
+        obj = {};
       }
-      firstDayMonth.setDate(firstDayMonth.getDate() + 1);
+      day0OfMonth.setDate(day0OfMonth.getDate() + 1);
     }
     console.log(this.month.weeks);
-    this.month.weeks.forEach(x => console.log(x));
   }
 
-  prueba(year?: number, month?: number) {
-    if (year && month) {
-      let date = new Date(year, month, 0);
-      let iterator = 0;
-      this.month["numberOfMonth"] = date.getMonth();
-      this.mockupofDBresponse.forEach(obj => {
-        let day = new Date(obj.date);
-        this.month.weeks[iterator][day.getDay()].push(obj);
-
-        // if (day.getDay() > 5) {
-        //   rangeofDays += 7;
-        //   iterator += 1;
-        // }
-      })
+  monthFill(res) {
+    let cycles = this.month.weeks.length
+    // console.log(this.month.weeks);
+    let cache = {
+      day: "",
+      index: 0
     }
-    console.log(this.month)
+    res.forEach(obj => {
+      let day = obj.date.split('T')[0];
+      if (cache.day === day) {
+        this.month.weeks[cache.index][day].push(obj);
+      }
+      else {
+        for (let index = cache.index; index < cycles; index++) {
+          if (Object.keys(this.month.weeks[index]).some(x => x === day)) {
+            this.month.weeks[index][day].push(obj);
+            cache.index = index
+            cache.day = day
+            break;
+          }
+        }
+      }
+    })
+    console.log(this.month.weeks);
+  }
+
+  apiCall(month?:number, year?:number){
+    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`;
+    this.apiService.GetData(apiUrl).subscribe(
+      (res) => {
+        this.monthFill(res);
+      },
+      (error) => {
+
+      }
+    )
   }
 
   private getWeekNumber(year?: number, month?: number, day?: number) {

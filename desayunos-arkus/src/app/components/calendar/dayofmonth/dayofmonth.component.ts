@@ -12,8 +12,8 @@ export class DayofmonthComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.day['value']);
-    console.log(this.day['key']);
+    // console.log(this.day['value']);
+    // console.log(this.day['key']);
 
   }
 

@@ -15,17 +15,11 @@
 </div>
 <div class="calendarTable">
     <div class="headerTable">
-        <div class="day lunes">Lunes</div>
-        <div class="day martes">Martes</div>
-        <div class="day miercoles">Miercoles</div>
-        <div class="day jueves">Jueves</div>
-        <div class="day viernes">Viernes</div>
+        <div class="day {{days}}" *ngFor="let days of iteratorOfWeek">{{days}}</div>
     </div>
     <div class="rowTable" *ngFor="let semana of month.weeks">
         <!-- {{semana}} -->
         <div class="day" *ngFor="let days of semana | keyvalue">
-            <!-- <p *ngIf="days.value.length > 0">{{days.key}}</p> -->
-            <!-- {{days}} -->
             <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
         </div>
     </div>
