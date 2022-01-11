@@ -57,8 +57,8 @@ export class CalendarDayComponent implements OnInit {
     // Get the limit time to register on this day
     let date = new Date(this.date.getTime());
     date.setDate(date.getDate() - 1);
-    date.setHours(15);
-    date.setMinutes(0, 0, 0);
+    date.setHours(23);
+    date.setMinutes(58, 59, 999);
     return date;
   }
 

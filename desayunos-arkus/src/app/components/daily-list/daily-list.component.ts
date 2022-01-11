@@ -56,7 +56,7 @@ export class DailyListComponent implements OnInit, OnChanges {
 
     this.todayLimitDate = new Date(this.date.getTime());
     this.todayLimitDate.setDate(this.todayLimitDate.getDate() - 1);
-    this.todayLimitDate.setHours(15, 0, 0, 0);
+    this.todayLimitDate.setHours(23, 58, 59, 999);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
