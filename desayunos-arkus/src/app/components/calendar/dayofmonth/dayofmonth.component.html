@@ -1,12 +1,14 @@
-<mat-card>
-    <div class="day">
-        <p>{{day['key']}}</p>
-        <!-- <p>2</p> -->
+<div class="dayContainer">
+  <!-- *ngFor="let user of day['value']"-->
+  <div class="dayData" *ngFor="let user of day['value']">
+    <div class="userContainer">
+      <img
+        alt="User Profile"
+        src="../../../assets/img/icons8-user-64.png"
+        height="10"
+        id="faicon"
+      />
+      <p class="username">{{ user.first_name }}</p>
     </div>
-    <!-- <mat-card > -->
-    <div class="dato" *ngFor="let user of day['value']">
-        <img alt="User Profile" src="../../../assets/img/icons8-user-64.png" height="10" id="faicon">
-        <p id="username">{{user}}</p>
-    </div>
-    <!-- </mat-card> -->
-</mat-card>
+  </div>
+</div>

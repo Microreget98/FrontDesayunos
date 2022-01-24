@@ -42,6 +42,7 @@ import {MatTableModule} from '@angular/material/table';
 import { FotopComponent } from './components/fotop/fotop.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayofmonthComponent } from './components/calendar/dayofmonth/dayofmonth.component';
+import { BigdayComponent } from './components/calendar/bigday/bigday.component';
 
 const appInitializerFn = (config: ConfigService) => {
   return () => {
@@ -66,7 +67,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     VistaDeUsuarioComponent,
     FotopComponent,
     CalendarComponent,
-    DayofmonthComponent
+    DayofmonthComponent,
+    BigdayComponent
   ],
   imports: [
     BrowserModule,

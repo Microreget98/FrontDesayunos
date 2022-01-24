@@ -179,7 +179,7 @@ export class CalendarComponent implements OnInit {
     console.log(this.month.weeks);
   }
 
-  apiCall(month?:number, year?:number){
+  apiCall(month?: number, year?: number) {
     const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`;
     this.apiService.GetData(apiUrl).subscribe(
       (res) => {

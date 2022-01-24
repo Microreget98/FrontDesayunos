@@ -1,29 +1,39 @@
-<div class="header">
+<div class="calendarContainer">
+  <div class="arkusLogo">
+    <img class="logTam"
+      src="https://uploads-ssl.webflow.com/5e589a8b7bb9af87ad968338/613c50e0018116747c3bc5bc_ArkusNexus_MainLogo.svg"
+      height="40px" />
+    <!-- <app-perfil></app-perfil> -->
+  </div>
+  <div class="headerCalendar">
     <div class="navcontrols">
-        <button type="button" title="before" mat-raised-button color="primary" id="monthBefore">
-            <fa-icon [icon]="lessThan"></fa-icon>
-        </button>
-        <button type="button" title="after" mat-raised-button color="primary" id="monthAfter">
-            <fa-icon [icon]="greaterThan"></fa-icon>
-        </button>
-        <button mat-raised-button color="primary" id="today">
-            Today
-        </button>
+      <button type="button" title="before" mat-raised-button color="primary" id="monthBefore">
+        <fa-icon [icon]="lessThan"></fa-icon>
+      </button>
+      <button type="button" title="after" mat-raised-button color="primary" id="monthAfter">
+        <fa-icon [icon]="greaterThan"></fa-icon>
+      </button>
+      <button mat-raised-button color="primary" id="today">Today</button>
     </div>
     <span id="actualMonth">Month</span>
-    <app-perfil></app-perfil>
-</div>
-<div class="calendarTable">
-    <div class="headerTable">
-        <div class="day {{days}}" *ngFor="let days of iteratorOfWeek">{{days}}</div>
+  </div>
+  <div class="calendarTable">
+    <div class="headerTable day {{ days }}" *ngFor="let days of iteratorOfWeek">
+      {{ days }}
     </div>
     <div class="rowTable" *ngFor="let semana of month.weeks">
-        <!-- {{semana}} -->
-        <div class="day" *ngFor="let days of semana | keyvalue">
-            <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
+      <div class="day" *ngFor="let days of semana | keyvalue">
+        <p class="dayNumber">{{ days["key"] }}</p>
+        <div class="dayOfMonth">
+          <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
         </div>
+      </div>
     </div>
-    <div class="footer">
-        <p>ESTO ES EL FOOTER</p>
-    </div>
+  </div>
+  <div class="bigday">
+    <app-bigday></app-bigday>
+  </div>
+  <div class="footer">
+    <p>ESTO ES EL FOOTER</p>
+  </div>
 </div>
