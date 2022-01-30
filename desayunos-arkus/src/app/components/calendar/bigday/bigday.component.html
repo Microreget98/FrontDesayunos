@@ -1,1 +1,13 @@
-<p>bigday works!</p>
+<div class="bigdayContainer">
+    <div class="eventandDayInfo">
+        <p>{{eventsday.day}}</p>
+    </div>
+    <div class="events">
+        <div class="data" *ngFor="let event of eventsday.events">
+            <div class="userContainer">
+                <img alt="User Profile" src="../../../assets/img/icons8-user-64.png" height="10" id="faicon" />
+                <p class="username">{{ event.first_name }}</p>
+            </div>
+        </div>
+    </div>
+</div>

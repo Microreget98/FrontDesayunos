@@ -7,6 +7,19 @@ import { first } from 'rxjs/operators';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
+
+export interface objectDay {
+  day: string,
+  events: Array<user>
+}
+export interface user {
+  id_user: number,
+  first_name: string,
+  last_name: string,
+  date: string,
+  event: boolean
+}
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -111,6 +124,22 @@ export class CalendarComponent implements OnInit {
   daysOfWeek: Array<string> = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
   iteratorOfWeek: Array<string> = []
 
+  //TODO:
+  // Get today, and bind the objects of that day to show
+
+  dayevents: objectDay = {
+    day: "2022-01-22",
+    events: [
+      {
+        date: "2022-01-13T00:00:00",
+        event: false,
+        first_name: "Dante",
+        id_user: 12,
+        last_name: "Barboza"
+      }
+    ]
+  }
+
   month = {
     "numberOfMonth": 0,
     weeks: []
@@ -126,7 +155,16 @@ export class CalendarComponent implements OnInit {
     this.userDataService.ngOnInit();
     this.buildMonth(false, 2022, 0);
     this.apiCall(1, 2022);
+
     // this.monthFill()
+  }
+
+  dayClick(event: any) {
+    let eventInfo: objectDay = {
+      day: event.key,
+      events: event.value
+    }
+    this.dayevents = eventInfo
   }
 
   buildMonth(weekends: boolean, year?, month?) {

@@ -20,10 +20,13 @@
   .calendarTable {
     grid-row: 3/4;
     grid-column: 1/2;
+    margin: 0 5px;
     display: grid;
     min-height: 12vh;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 40px repeat(6, 1fr);
+    row-gap: 5px;
+    column-gap: 5px;
     .rowTable {
       grid-column: 1/-1;
     }
@@ -37,12 +40,27 @@
 .rowTable {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  column-gap: 5px;
   .day {
     grid-column: span 1;
     .dayOfMonth {
       overflow-y: auto;
     }
   }
+}
+
+.headerTable {
+  column-gap: 5px;
+  text-align: center;
+  // place-self: center;
+}
+
+.day {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0 5px;
+  border-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
 }
 
 // .headerCalendar {
