@@ -48,7 +48,7 @@ export class CalendarDayComponent implements OnInit {
     );
 
     if (isAlreadyRegistered) return true;
-    if (this.festiveType !== 0) return true;
+    //if (this.festiveType !== 0) return true;
     if (now >= todayLimit) return true;
     return false;
   }
@@ -62,11 +62,11 @@ export class CalendarDayComponent implements OnInit {
     return date;
   }
 
-  getCssFestClass(festiveType: number) {
+  /*getCssFestClass(festiveType: number) {
     if (festiveType === 1) return 'mexican-festive';
     if (festiveType === 2) return 'american-festive';
     return '';
-  }
+  }*/
 
   getCssPastDay() {
     if (this.date < new Date()) return 'cardPastDay';
