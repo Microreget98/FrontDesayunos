@@ -8,11 +8,29 @@
         border-radius: 5px;
         grid-row: 1/2;
         padding: 5px;
+        font-size: x-large;
     }
     .events {
         border: solid 1px rgba(0, 0, 0, 0.5);
         border-radius: 5px;
         grid-row: 2/3;
         padding: 5px;
+    }
+}
+
+.userContainer {
+    display: flex;
+    margin: 5px;
+    font-size: 1.1em;
+    img {
+        max-height: 2vh;
+        height: 1.7vh;
+        min-height: 1.5vh;
+        align-self: center;
+    }
+    .username{
+        margin: 0;
+        margin-left: 5px;
+        align-items: center;
     }
 }

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
 import { ConfigService } from 'src/app/core/config.service';
 import { ApiService } from '../../core/api.service';
-import { first } from 'rxjs/operators';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
@@ -25,99 +24,12 @@ export interface user {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterContentInit {
   //ICONS
   lessThan = faLessThan;
   greaterThan = faGreaterThan;
-  // data from DB
-  mockupofDBresponse = [
-    {
-      "id_user": 2,
-      "first_name": "Angel Servando",
-      "last_name": "Quiñones Garcia",
-      "date": "2021-11-11T00:00:00"
-    },
-    {
-      "id_user": 10,
-      "first_name": "Angel Servando",
-      "last_name": "Quiñones Garcia",
-      "date": "2021-11-16T00:00:00"
-    },
-    {
-      "id_user": 2,
-      "first_name": "Angel Servando",
-      "last_name": "Quiñones Garcia",
-      "date": "2021-11-17T00:00:00"
-    },
-    {
-      "id_user": 2,
-      "first_name": "Angel Servando",
-      "last_name": "Quiñones Garcia",
-      "date": "2021-11-19T00:00:00"
-    },
-    {
-      "id_user": 18,
-      "first_name": "Francisco",
-      "last_name": "Albear",
-      "date": "2021-11-22T00:00:00"
-    },
-    {
-      "id_user": 29,
-      "first_name": "Juanito",
-      "last_name": "Mata",
-      "date": "2021-11-24T00:00:00"
-    },
-    {
-      "id_user": 25,
-      "first_name": "usuario",
-      "last_name": "dos qa",
-      "date": "2021-11-29T00:00:00"
-    },
-    {
-      "id_user": 24,
-      "first_name": "usuario",
-      "last_name": "tres QA",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 27,
-      "first_name": "usuario qa",
-      "last_name": "cuatro",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 28,
-      "first_name": "Miguel An",
-      "last_name": "Florentino San",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 12,
-      "first_name": "Alexis",
-      "last_name": "Mata",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 35,
-      "first_name": "Mike",
-      "last_name": "Florentino",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 26,
-      "first_name": "usuario ",
-      "last_name": "uno",
-      "date": "2021-11-30T00:00:00"
-    },
-    {
-      "id_user": 21,
-      "first_name": "Angel Servando",
-      "last_name": "Quinones Garcia",
-      "date": "2021-11-30T00:00:00"
-    }
-  ]
   // Semanas
-
+  lifecycledata = []
   // weekends: boolean = true;
 
   daysOfWeekend: Array<string> = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
@@ -128,15 +40,9 @@ export class CalendarComponent implements OnInit {
   // Get today, and bind the objects of that day to show
 
   dayevents: objectDay = {
-    day: "2022-01-22",
+    day: new Date().toISOString().split("T")[0],
     events: [
-      {
-        date: "2022-01-13T00:00:00",
-        event: false,
-        first_name: "Dante",
-        id_user: 12,
-        last_name: "Barboza"
-      }
+
     ]
   }
 
@@ -154,10 +60,25 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.userDataService.ngOnInit();
     this.buildMonth(false, 2022, 0);
-    this.apiCall(1, 2022);
 
     // this.monthFill()
   }
+
+  // ngAfterViewChecked(): void {
+  //   let temp1 = { ...this.month }
+  //   this.lifecycledata.push({ "ViewChecked": {...this.month} })
+  //   console.log("After view Checked", this.lifecycledata);
+  // }
+
+  ngAfterContentInit(): void {
+    this.apiCall(1, 2022);
+  }
+
+  // ngAfterContentChecked(): void {
+  //   let temp3 = { ...this.month }
+  //   this.lifecycledata.push({ "ContentChecked": {...this.month} })
+  //   console.log("After content checked", this.lifecycledata);
+  // }
 
   dayClick(event: any) {
     let eventInfo: objectDay = {
@@ -188,7 +109,6 @@ export class CalendarComponent implements OnInit {
       }
       day0OfMonth.setDate(day0OfMonth.getDate() + 1);
     }
-    console.log(this.month.weeks);
   }
 
   monthFill(res) {

@@ -23,7 +23,7 @@
     </div>
     <div class="rowTable" *ngFor="let semana of month.weeks">
       <div class="day" (click)="dayClick(days)" *ngFor="let days of semana | keyvalue">
-        <p class="dayNumber">{{ days["key"] }}</p>
+        <p class="dayNumber">{{ days["key"].toString().split("-")[1] + " - " + + days["key"].toString().split("-")[2] }}</p>
         <div class="dayOfMonth">
           <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
         </div>

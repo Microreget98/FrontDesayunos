@@ -20,11 +20,11 @@
   .calendarTable {
     grid-row: 3/4;
     grid-column: 1/2;
-    margin: 0 5px;
+    margin: 0 10px;
     display: grid;
     min-height: 12vh;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 40px repeat(6, 1fr);
+    grid-template-rows: 30px repeat(6, 1fr);
     row-gap: 5px;
     column-gap: 5px;
     .rowTable {
@@ -43,6 +43,9 @@
   column-gap: 5px;
   .day {
     grid-column: span 1;
+    .dayNumber{
+        margin: 0;
+    }
     .dayOfMonth {
       overflow-y: auto;
     }
@@ -52,7 +55,6 @@
 .headerTable {
   column-gap: 5px;
   text-align: center;
-  // place-self: center;
 }
 
 .day {
@@ -63,58 +65,6 @@
   padding: 5px;
 }
 
-// .headerCalendar {
-//   display: grid;
-//   grid-template-columns: repeat(3, 1fr);
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-//   button {
-//     max-width: 10px;
-//     margin: 0 2px;
-//   }
-//   #actualMonth {
-//     font-size: x-large;
-//     justify-self: center;
-//     align-self: center;
-//   }
-//   .navcontrols {
-//     justify-items: start;
-//   }
-// }
-// .calendarTable {
-//   //TODO
-//   // Fix the space of the footer
-//   display: grid;
-//   grid-template-rows: 50px repeat(6, 1fr) 5vh;
-//   grid-gap: 5px;
-//   height: 100%;
-//   .headerTable {
-//     margin: 0;
-//     grid-template-columns: repeat(7, 1fr);
-//     display: grid;
-//     place-items: center;
-//     .day {
-//       grid-column: span 1;
-//     }
-//   }
-//   .rowTable {
-//     margin: 0;
-//     display: grid;
-//     grid-template-columns: repeat(7, 1fr);
-//     .day {
-//       display: grid;
-//       grid-template-rows: minmax(15px, 20px) auto;
-//       width: 100%;
-//       min-height: 5vh;
-//       max-height: 13vh;
-//       grid-column: span 1;
-//       .dayNumber {
-//         font-size: 0.9em;
-//         margin: 0;
-//       }
-//       .dayOfMonth {
-//         overflow-y: auto;
-//       }
-//     }
-//   }
-// }
+.day:hover{
+    cursor: pointer;
+}
