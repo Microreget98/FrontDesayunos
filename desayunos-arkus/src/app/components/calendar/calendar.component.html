@@ -25,9 +25,15 @@
       <div class="day" (click)="dayClick(days)" *ngFor="let days of semana | keyvalue">
         <p class="dayNumber">{{ days["key"].toString().split("-")[1] + " - " + + days["key"].toString().split("-")[2] }}</p>
         <div class="dayOfMonth">
-          <app-dayofmonth [dayInfo]="days"></app-dayofmonth>
+          <app-dayofmonth [dayData]="days.value" [dayNumber]="days.key"></app-dayofmonth>
         </div>
       </div>
+      <!-- <div class="day" (click)="dayClick(days)" *ngFor="let days of semana">
+        <p class="dayNumber">{{ days }}</p>
+        <div class="dayOfMonth">
+          <app-dayofmonth [dayData]="days['value']" [dayNumber]="days['key']"></app-dayofmonth>
+        </div>
+      </div> -->
     </div>
   </div>
   <div class="bigday">

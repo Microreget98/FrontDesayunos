@@ -1,23 +1,25 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Subject } from 'rxjs';
+
+export interface User{
+  first_name: string,
+  last_name:string,
+  id_user:number,
+  date: string,
+  event: boolean
+}
 
 @Component({
   selector: 'app-dayofmonth',
   templateUrl: './dayofmonth.component.html',
   styleUrls: ['./dayofmonth.component.scss']
 })
-export class DayofmonthComponent implements OnInit, OnChanges, AfterViewInit {
+export class DayofmonthComponent implements OnInit, OnChanges, DoCheck {
 
-  @Input("dayInfo") 
-  get day():Object { return this._day}
-  set day(day: Object){
-    this._day = day
-  };
+  @Input("dayData") dayData;
+  @Input("dayNumber") dayNumber: any;
 
-  private _day: Object;
-
-  previewOfDay: Array<any> = []
-  dayAllData: Array<any> = []
-  dayNumber: string
+  dayPreview: User[] = []
 
   constructor() { }
 
@@ -26,21 +28,23 @@ export class DayofmonthComponent implements OnInit, OnChanges, AfterViewInit {
     // this.temporalFunction(changes.day.currentValue);
   }
 
-  ngAfterViewInit(): void {
+  ngDoCheck(): void {
     // console.log("AfterContentChecked");
-    // this.temporalFunction();
+    this.temporalFunction();
   }
 
-  async temporalFunction(changes?) {
-    console.log(this._day)
-    this.dayAllData = this._day["value"];
-    this.dayNumber = this._day["key"];
-    let previewData = [await this.dayAllData[0], await this.dayAllData[1], await this.dayAllData[2]]
-    console.log(this.dayNumber, { ...previewData }, this.dayAllData);
+  temporalFunction() {
+    // console.log(this.dayData)
+    if(this.dayData.length>=1){
+      this.dayPreview = [...this.dayData]
+      if(this.dayPreview.length>=3) this.dayPreview.length = 3
+      // console.log(this.dayPreview[0])
+      console.log("check")
+    }
   }
 
   ngOnInit(): void {
-    this.temporalFunction()
+    // this.temporalFunction()
     // console.log("On init");
   }
 

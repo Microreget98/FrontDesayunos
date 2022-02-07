@@ -3,6 +3,7 @@ import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
 import { ConfigService } from 'src/app/core/config.service';
 import { ApiService } from '../../core/api.service';
+import { from, Subject } from 'rxjs';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
@@ -24,7 +25,7 @@ export interface user {
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnInit, AfterContentInit {
+export class CalendarComponent implements OnInit {
   //ICONS
   lessThan = faLessThan;
   greaterThan = faGreaterThan;
@@ -60,25 +61,10 @@ export class CalendarComponent implements OnInit, AfterContentInit {
   ngOnInit(): void {
     this.userDataService.ngOnInit();
     this.buildMonth(false, 2022, 0);
+    this.apiCall(2022, 0)
 
     // this.monthFill()
   }
-
-  // ngAfterViewChecked(): void {
-  //   let temp1 = { ...this.month }
-  //   this.lifecycledata.push({ "ViewChecked": {...this.month} })
-  //   console.log("After view Checked", this.lifecycledata);
-  // }
-
-  ngAfterContentInit(): void {
-    this.apiCall(1, 2022);
-  }
-
-  // ngAfterContentChecked(): void {
-  //   let temp3 = { ...this.month }
-  //   this.lifecycledata.push({ "ContentChecked": {...this.month} })
-  //   console.log("After content checked", this.lifecycledata);
-  // }
 
   dayClick(event: any) {
     let eventInfo: objectDay = {
@@ -96,6 +82,7 @@ export class CalendarComponent implements OnInit, AfterContentInit {
     day0OfMonth.setDate(0 - (day0OfMonth.getDay() - 1))
     let dateInString: string;
     let obj = {};
+    let observer = new Subject<Object>()
     for (let i = 0; i <= numberOfDaysInMonth; i++) {
       if ((day0OfMonth.getDay() >= 1 && day0OfMonth.getDay() <= 5) || weekends) {
         let additionobj = {}
@@ -111,14 +98,13 @@ export class CalendarComponent implements OnInit, AfterContentInit {
     }
   }
 
-  monthFill(res) {
+  monthFill(res:user[]) {
     let cycles = this.month.weeks.length
-    // console.log(this.month.weeks);
     let cache = {
       day: "",
       index: 0
     }
-    res.forEach(obj => {
+    res.forEach((obj: user) => {
       let day = obj.date.split('T')[0];
       if (cache.day === day) {
         this.month.weeks[cache.index][day].push(obj);
@@ -137,10 +123,10 @@ export class CalendarComponent implements OnInit, AfterContentInit {
     console.log(this.month.weeks);
   }
 
-  apiCall(month?: number, year?: number) {
-    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month}&year=${year}`;
+  apiCall(year?: number, month?: number) {
+    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month+1}&year=${year}`;
     this.apiService.GetData(apiUrl).subscribe(
-      (res) => {
+      (res:user[]) => {
         this.monthFill(res);
       },
       (error) => {
