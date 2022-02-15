@@ -15,25 +15,19 @@
       </button>
       <button mat-raised-button color="primary" id="today">Today</button>
     </div>
-    <span id="actualMonth">Month</span>
+    <span id="actualMonth">
+      <h2>{{ monthName }}</h2>
+    </span>
   </div>
   <div class="calendarTable">
     <div class="headerTable day {{ days }}" *ngFor="let days of iteratorOfWeek">
       {{ days }}
     </div>
-    <div class="rowTable" *ngFor="let semana of month.weeks">
-      <div class="day" (click)="dayClick(days)" *ngFor="let days of semana | keyvalue">
-        <p class="dayNumber">{{ days["key"].toString().split("-")[1] + " - " + + days["key"].toString().split("-")[2] }}</p>
-        <div class="dayOfMonth">
-          <app-dayofmonth [dayData]="days.value" [dayNumber]="days.key"></app-dayofmonth>
-        </div>
+    <div class="day" (click)="dayClick(day)" *ngFor="let day of daysInMonth">
+      <p class="dayNumber">{{ day.split("-")[1] + " - " + + day.split("-")[2] }}</p>
+      <div class="dayOfMonth">
+        <app-dayofmonth [dayData]="month[day]" [dayNumber]="day"></app-dayofmonth>
       </div>
-      <!-- <div class="day" (click)="dayClick(days)" *ngFor="let days of semana">
-        <p class="dayNumber">{{ days }}</p>
-        <div class="dayOfMonth">
-          <app-dayofmonth [dayData]="days['value']" [dayNumber]="days['key']"></app-dayofmonth>
-        </div>
-      </div> -->
     </div>
   </div>
   <div class="bigday">

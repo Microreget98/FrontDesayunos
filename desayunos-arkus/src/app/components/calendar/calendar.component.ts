@@ -4,20 +4,14 @@ import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
 import { ConfigService } from 'src/app/core/config.service';
 import { ApiService } from '../../core/api.service';
 import { from, Subject } from 'rxjs';
+import { User } from './models/UserModel';
 //TODO
 // props of this component
 //  weekends: true -> { 0:[], 1: [], 2: [], 3: [], 4: [], 5: [], 6:[] } or false -> { 1: [], 2: [], 3: [], 4: [], 5: [] }
 
 export interface objectDay {
   day: string,
-  events: Array<user>
-}
-export interface user {
-  id_user: number,
-  first_name: string,
-  last_name: string,
-  date: string,
-  event: boolean
+  events: Array<User>
 }
 
 @Component({
@@ -42,15 +36,12 @@ export class CalendarComponent implements OnInit {
 
   dayevents: objectDay = {
     day: new Date().toISOString().split("T")[0],
-    events: [
-
-    ]
+    events: []
   }
 
-  month = {
-    "numberOfMonth": 0,
-    weeks: []
-  };
+  month = {};
+  monthName = new Date().toLocaleDateString('es-MX', {month: 'long'});
+  daysInMonth = []
 
   constructor(
     private userDataService: UserDataService,
@@ -59,6 +50,7 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.monthName)
     this.userDataService.ngOnInit();
     this.buildMonth(false, 2022, 0);
     this.apiCall(2022, 0)
@@ -68,8 +60,8 @@ export class CalendarComponent implements OnInit {
 
   dayClick(event: any) {
     let eventInfo: objectDay = {
-      day: event.key,
-      events: event.value
+      day: event,
+      events: this.month[event]
     }
     this.dayevents = eventInfo
   }
@@ -81,53 +73,23 @@ export class CalendarComponent implements OnInit {
     let numberOfDaysInMonth = day0OfMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
     day0OfMonth.setDate(0 - (day0OfMonth.getDay() - 1))
     let dateInString: string;
-    let obj = {};
-    let observer = new Subject<Object>()
     for (let i = 0; i <= numberOfDaysInMonth; i++) {
-      if ((day0OfMonth.getDay() >= 1 && day0OfMonth.getDay() <= 5) || weekends) {
-        let additionobj = {}
+      if (!(day0OfMonth.getDay() === 0 || day0OfMonth.getDay() === 6)) {
         dateInString = day0OfMonth.toISOString().split('T')[0];
-        additionobj[dateInString] = []
-        obj = Object.assign(obj, additionobj);
-      }
-      if ((!weekends && day0OfMonth.getDay() === 5) || (weekends && day0OfMonth.getDay() === 6)) {
-        this.month.weeks.push(obj);
-        obj = {};
+        Object.assign(this.month, { [dateInString]: [] });
       }
       day0OfMonth.setDate(day0OfMonth.getDate() + 1);
     }
-  }
-
-  monthFill(res:user[]) {
-    let cycles = this.month.weeks.length
-    let cache = {
-      day: "",
-      index: 0
-    }
-    res.forEach((obj: user) => {
-      let day = obj.date.split('T')[0];
-      if (cache.day === day) {
-        this.month.weeks[cache.index][day].push(obj);
-      }
-      else {
-        for (let index = cache.index; index < cycles; index++) {
-          if (Object.keys(this.month.weeks[index]).some(x => x === day)) {
-            this.month.weeks[index][day].push(obj);
-            cache.index = index
-            cache.day = day
-            break;
-          }
-        }
-      }
-    })
-    console.log(this.month.weeks);
+    this.daysInMonth = Object.keys(this.month);
   }
 
   apiCall(year?: number, month?: number) {
-    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month+1}&year=${year}`;
+    const apiUrl = `${this.configService.config.apiUrl}/api/Calendar/GetRegisterUsersByMonth?month=${month + 1}&year=${year}`;
     this.apiService.GetData(apiUrl).subscribe(
-      (res:user[]) => {
-        this.monthFill(res);
+      (res: User[]) => {
+        res.forEach((register) => {
+          this.month[register.date.split('T')[0]].push(register)
+        })
       },
       (error) => {
 
