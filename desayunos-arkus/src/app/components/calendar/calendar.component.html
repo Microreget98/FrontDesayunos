@@ -7,10 +7,10 @@
   </div>
   <div class="headerCalendar">
     <div class="navcontrols">
-      <button type="button" title="before" mat-raised-button color="primary" id="monthBefore">
+      <button (click)="changePreviousMonth()" type="button" title="before" mat-raised-button color="primary" id="monthBefore">
         <fa-icon [icon]="lessThan"></fa-icon>
       </button>
-      <button type="button" title="after" mat-raised-button color="primary" id="monthAfter">
+      <button (click)="changeNextMonth()" type="button" title="after" mat-raised-button color="primary" id="monthAfter">
         <fa-icon [icon]="greaterThan"></fa-icon>
       </button>
       <button mat-raised-button color="primary" id="today">Today</button>

@@ -14,7 +14,7 @@ export interface User{
   templateUrl: './dayofmonth.component.html',
   styleUrls: ['./dayofmonth.component.scss']
 })
-export class DayofmonthComponent implements OnInit, OnChanges, DoCheck {
+export class DayofmonthComponent implements OnInit, DoCheck {
 
   @Input("dayData") dayData;
   @Input("dayNumber") dayNumber: any;
@@ -23,23 +23,14 @@ export class DayofmonthComponent implements OnInit, OnChanges, DoCheck {
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // console.log("onchanges")
-    // this.temporalFunction(changes.day.currentValue);
-  }
-
   ngDoCheck(): void {
-    // console.log("AfterContentChecked");
     this.temporalFunction();
   }
 
   temporalFunction() {
-    // console.log(this.dayData)
     if(this.dayData.length>=1){
       this.dayPreview = [...this.dayData]
       if(this.dayPreview.length>=3) this.dayPreview.length = 3
-      // console.log(this.dayPreview[0])
-      console.log("check")
     }
   }
 

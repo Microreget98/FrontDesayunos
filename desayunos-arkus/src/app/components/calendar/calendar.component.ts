@@ -31,17 +31,17 @@ export class CalendarComponent implements OnInit {
   daysOfWeek: Array<string> = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
   iteratorOfWeek: Array<string> = []
 
-  //TODO:
-  // Get today, and bind the objects of that day to show
-
   dayevents: objectDay = {
     day: new Date().toISOString().split("T")[0],
     events: []
   }
 
   month = {};
+  daysInMonth = [];
   monthName = new Date().toLocaleDateString('es-MX', {month: 'long'});
-  daysInMonth = []
+  today = new Date();
+  nextMonth = {};
+  previousMonth = {};
 
   constructor(
     private userDataService: UserDataService,
@@ -50,12 +50,25 @@ export class CalendarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.monthName)
     this.userDataService.ngOnInit();
-    this.buildMonth(false, 2022, 0);
-    this.apiCall(2022, 0)
+    this.buildMonth(false, this.today.getFullYear(), this.today.getMonth());
+    this.apiCall(this.today.getFullYear(), this.today.getMonth())
+    console.log(this.month)
+  }
 
-    // this.monthFill()
+  changeNextMonth(){
+    let nextMonthToRender: Date = this.today;
+    this.nextMonth = {...this.month}
+    this.buildMonth(false, nextMonthToRender.getFullYear(), nextMonthToRender.getMonth()+1)
+    this.apiCall(nextMonthToRender.getFullYear(), nextMonthToRender.getMonth()+1)
+    console.log(this.month)
+  }
+
+  changePreviousMonth(){
+    let previousMonthToRender: Date = this.today;
+    this.previousMonth = {...this.month}
+    this.buildMonth(false, previousMonthToRender.getFullYear(), previousMonthToRender.getMonth()-1)
+    this.apiCall(previousMonthToRender.getFullYear(), previousMonthToRender.getMonth()-1)
   }
 
   dayClick(event: any) {
