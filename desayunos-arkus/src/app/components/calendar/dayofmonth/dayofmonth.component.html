@@ -6,4 +6,7 @@
       <p class="username">{{ user.first_name }}</p>
     </div>
   </div>
+  <div class="numberOfRegisters">
+    <p *ngIf="numberOfRegisters != 0"> + {{ numberOfRegisters }} Colaborador</p>
+  </div>
 </div>

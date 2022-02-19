@@ -1,10 +1,10 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 
-export interface User{
+export interface User {
   first_name: string,
-  last_name:string,
-  id_user:number,
+  last_name: string,
+  id_user: number,
   date: string,
   event: boolean
 }
@@ -20,6 +20,7 @@ export class DayofmonthComponent implements OnInit, DoCheck {
   @Input("dayNumber") dayNumber: any;
 
   dayPreview: User[] = []
+  numberOfRegisters: number = 0;
 
   constructor() { }
 
@@ -28,10 +29,15 @@ export class DayofmonthComponent implements OnInit, DoCheck {
   }
 
   temporalFunction() {
-    if(this.dayData.length>=1){
+    if (this.dayData.length >= 1) {
       this.dayPreview = [...this.dayData]
-      if(this.dayPreview.length>=3) this.dayPreview.length = 3
+      if (this.dayPreview.length >= 3) {
+        this.dayPreview.length = 3
+        this.numberOfRegisters = this.dayData.length - 3
+      }
+      // if (this.dayData.length != 3 && this.dayData.length > 3) this.numberOfRegisters = this.dayData.length - 3;
     }
+
   }
 
   ngOnInit(): void {

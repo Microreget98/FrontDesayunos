@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../login-registro/user-data.service';
 import { faLessThan, faGreaterThan } from "@fortawesome/free-solid-svg-icons"
 import { ConfigService } from 'src/app/core/config.service';

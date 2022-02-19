@@ -35,6 +35,10 @@
     grid-column: 2/-1;
     grid-row: 3/4;
   }
+  .background{
+    display: grid;
+    grid-row: 4/-1;
+  }
 }
 
 .rowTable {
@@ -57,14 +61,42 @@
   text-align: center;
 }
 
+.dayName{
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0 5px;
+  border-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.549);
+}
+
 .day {
   border-width: 1px;
   border-style: solid;
   border-radius: 0 5px;
   border-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
+  background-color: rgba(255, 255, 255, 0.549);
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 }
 
 .day:hover{
-    cursor: pointer;
+  cursor: pointer;
+  transition: width 0.1s, height 0.1s, background-color .25s;
+  transition-timing-function: linear;
+  z-index: 3;
+  background-color: white;
+  width: 110%;
+  height: 120%;
+  place-self: center;
+}
+
+.background{
+  display: inline;
+  position: fixed;
+  vertical-align: bottom;
+  // top: 500px;
+  z-index: -1;
 }

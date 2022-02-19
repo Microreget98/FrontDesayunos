@@ -1,3 +1,4 @@
+<!-- <div class="background"> -->
 <div class="calendarContainer">
   <div class="arkusLogo">
     <img class="logTam"
@@ -7,7 +8,8 @@
   </div>
   <div class="headerCalendar">
     <div class="navcontrols">
-      <button (click)="changePreviousMonth()" type="button" title="before" mat-raised-button color="primary" id="monthBefore">
+      <button (click)="changePreviousMonth()" type="button" title="before" mat-raised-button color="primary"
+        id="monthBefore">
         <fa-icon [icon]="lessThan"></fa-icon>
       </button>
       <button (click)="changeNextMonth()" type="button" title="after" mat-raised-button color="primary" id="monthAfter">
@@ -20,7 +22,7 @@
     </span>
   </div>
   <div class="calendarTable">
-    <div class="headerTable day {{ days }}" *ngFor="let days of iteratorOfWeek">
+    <div class="headerTable dayName {{ days }}" *ngFor="let days of iteratorOfWeek">
       {{ days }}
     </div>
     <div class="day" (click)="dayClick(day)" *ngFor="let day of daysInMonth">
@@ -36,4 +38,16 @@
   <div class="footer">
     <p>ESTO ES EL FOOTER</p>
   </div>
+  <svg id="svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg"
+    class="background" alignment-baseline="bottom">
+    <path
+      d="M 0,600 C 0,600 0,200 0,200 C 105.0909090909091,172.36363636363637 210.1818181818182,144.72727272727275 293,128 C 375.8181818181818,111.27272727272727 436.36363636363626,105.45454545454544 524,133 C 611.6363636363637,160.54545454545456 726.3636363636364,221.45454545454544 835,232 C 943.6363636363636,242.54545454545456 1046.1818181818182,202.72727272727275 1146,189 C 1245.8181818181818,175.27272727272725 1342.909090909091,187.63636363636363 1440,200 C 1440,200 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="#ff000088" class="background1">
+    </path>
+    <path
+      d="M 0,600 C 0,600 0,400 0,400 C 116.14354066985646,360.5263157894737 232.28708133971293,321.0526315789474 340,344 C 447.7129186602871,366.9473684210526 546.9952153110047,452.3157894736842 626,462 C 705.0047846889953,471.6842105263158 763.732057416268,405.68421052631584 841,396 C 918.267942583732,386.31578947368416 1014.0765550239234,432.9473684210526 1117,443 C 1219.9234449760766,453.0526315789474 1329.9617224880383,426.5263157894737 1440,400 C 1440,400 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="#ff0000ff" class="background2">
+    </path>
+  </svg>
 </div>
+<!-- </div> -->
