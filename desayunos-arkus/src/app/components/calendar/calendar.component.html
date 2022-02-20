@@ -15,7 +15,7 @@
       <button (click)="changeNextMonth()" type="button" title="after" mat-raised-button color="primary" id="monthAfter">
         <fa-icon [icon]="greaterThan"></fa-icon>
       </button>
-      <button mat-raised-button color="primary" id="today">Today</button>
+      <button mat-raised-button color="primary" id="today" (click)="changeTodayMonth()">Today</button>
     </div>
     <span id="actualMonth">
       <h2>{{ monthName }}</h2>
@@ -26,7 +26,7 @@
       {{ days }}
     </div>
     <div class="day" (click)="dayClick(day)" *ngFor="let day of daysInMonth">
-      <p class="dayNumber">{{ day.split("-")[1] + " - " + + day.split("-")[2] }}</p>
+      <p class="dayNumber">{{ day.split("-")[2] }}</p>
       <div class="dayOfMonth">
         <app-dayofmonth [dayData]="month[day]" [dayNumber]="day"></app-dayofmonth>
       </div>
@@ -39,15 +39,50 @@
     <p>ESTO ES EL FOOTER</p>
   </div>
   <svg id="svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg"
-    class="background" alignment-baseline="bottom">
+    class="transition duration-300 ease-in-out delay-150 background">
+    <defs>
+      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="5%" stop-color="#ff000088"></stop>
+        <stop offset="95%" stop-color="#12142d88"></stop>
+      </linearGradient>
+    </defs>
     <path
-      d="M 0,600 C 0,600 0,200 0,200 C 105.0909090909091,172.36363636363637 210.1818181818182,144.72727272727275 293,128 C 375.8181818181818,111.27272727272727 436.36363636363626,105.45454545454544 524,133 C 611.6363636363637,160.54545454545456 726.3636363636364,221.45454545454544 835,232 C 943.6363636363636,242.54545454545456 1046.1818181818182,202.72727272727275 1146,189 C 1245.8181818181818,175.27272727272725 1342.909090909091,187.63636363636363 1440,200 C 1440,200 1440,600 1440,600 Z"
-      stroke="none" stroke-width="0" fill="#ff000088" class="background1">
-    </path>
+      d="M 0,600 C 0,600 0,200 0,200 C 80.56666666666666,210.17435897435897 161.13333333333333,220.34871794871793 235,211 C 308.8666666666667,201.65128205128207 376.0333333333332,172.77948717948718 465,154 C 553.9666666666668,135.22051282051282 664.7333333333333,126.53333333333333 746,135 C 827.2666666666667,143.46666666666667 879.0333333333333,169.0871794871795 953,183 C 1026.9666666666667,196.9128205128205 1123.1333333333334,199.11794871794874 1208,200 C 1292.8666666666666,200.88205128205126 1366.4333333333334,200.44102564102565 1440,200 C 1440,200 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="url(#gradient)"
+      class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+    <defs>
+      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="5%" stop-color="#ff0000ff"></stop>
+        <stop offset="95%" stop-color="#12142dff"></stop>
+      </linearGradient>
+    </defs>
     <path
-      d="M 0,600 C 0,600 0,400 0,400 C 116.14354066985646,360.5263157894737 232.28708133971293,321.0526315789474 340,344 C 447.7129186602871,366.9473684210526 546.9952153110047,452.3157894736842 626,462 C 705.0047846889953,471.6842105263158 763.732057416268,405.68421052631584 841,396 C 918.267942583732,386.31578947368416 1014.0765550239234,432.9473684210526 1117,443 C 1219.9234449760766,453.0526315789474 1329.9617224880383,426.5263157894737 1440,400 C 1440,400 1440,600 1440,600 Z"
-      stroke="none" stroke-width="0" fill="#ff0000ff" class="background2">
-    </path>
+      d="M 0,600 C 0,600 0,400 0,400 C 78.94102564102565,381.1820512820513 157.8820512820513,362.3641025641026 230,359 C 302.1179487179487,355.6358974358974 367.41282051282053,367.72564102564104 445,391 C 522.5871794871795,414.27435897435896 612.4666666666667,448.7333333333333 698,437 C 783.5333333333333,425.2666666666667 864.7205128205128,367.3410256410256 950,342 C 1035.2794871794872,316.6589743589744 1124.6512820512821,323.9025641025641 1207,339 C 1289.3487179487179,354.0974358974359 1364.674358974359,377.0487179487179 1440,400 C 1440,400 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="url(#gradient)"
+      class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
   </svg>
+  <!-- <svg id="svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg"
+    class="transition duration-300 ease-in-out delay-150 background">
+    <defs>
+      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="5%" stop-color="#ff000088"></stop>
+        <stop offset="95%" stop-color="#12142d88"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      d="M 0,600 C 0,600 0,200 0,200 C 77.5,232.09230769230768 155,264.18461538461537 248,270 C 341,275.81538461538463 449.5,255.35384615384615 519,237 C 588.5,218.64615384615385 619,202.4 698,195 C 777,187.6 904.5,189.04615384615383 993,203 C 1081.5,216.95384615384617 1131,243.4153846153846 1199,245 C 1267,246.5846153846154 1353.5,223.2923076923077 1440,200 C 1440,200 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="url(#gradient)"
+      class="transition-all duration-300 ease-in-out delay-150 path-0"></path>
+    <defs>
+      <linearGradient id="gradient" x1="50%" y1="0%" x2="50%" y2="100%">
+        <stop offset="5%" stop-color="#ff0000ff"></stop>
+        <stop offset="95%" stop-color="#12142dff"></stop>
+      </linearGradient>
+    </defs>
+    <path
+      d="M 0,600 C 0,600 0,400 0,400 C 65.45641025641024,430.3461538461538 130.91282051282047,460.6923076923077 213,453 C 295.0871794871795,445.3076923076923 393.8051282051282,399.5769230769231 489,394 C 584.1948717948718,388.4230769230769 675.8666666666668,423 749,411 C 822.1333333333332,399 876.728205128205,340.4230769230769 955,351 C 1033.271794871795,361.5769230769231 1135.2205128205128,441.30769230769226 1220,461 C 1304.7794871794872,480.69230769230774 1372.3897435897436,440.34615384615387 1440,400 C 1440,400 1440,600 1440,600 Z"
+      stroke="none" stroke-width="0" fill="url(#gradient)"
+      class="transition-all duration-300 ease-in-out delay-150 path-1"></path>
+  </svg> -->
 </div>
 <!-- </div> -->

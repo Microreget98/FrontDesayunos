@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 export interface objectDay {
-  day: string,
+  day: string | Date,
   events: Array<user>
 }
 export interface user {
@@ -21,14 +21,107 @@ export interface user {
 export class BigdayComponent implements OnInit, OnChanges {
 
   @Input("eventInfo") eventsday: objectDay
+  dayText: string
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.eventsday.day = new Date(this.eventsday.day)
+    this.dayText = this.eventsday.day.toLocaleDateString('es-MX', {day: '2-digit', month: 'long'})
   }
 
   ngOnInit(): void {
+    // this.eventsday = testData
     // console.log(this.eventsday)
   }
 
 }
+// export const testData: objectDay = {
+//   day: "2022-02-01",
+//   events: [
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     },
+//     {
+//       date: "2022-02-01",
+//       event: false,
+//       first_name: "Angel",
+//       last_name: "Quinones",
+//       id_user: 2
+//     }
+//   ]
+// }

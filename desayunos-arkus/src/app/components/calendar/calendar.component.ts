@@ -38,10 +38,10 @@ export class CalendarComponent implements OnInit {
 
   month = {};
   daysInMonth = [];
-  monthName = new Date().toLocaleDateString('es-MX', {month: 'long'});
+  monthName = new Date().toLocaleDateString('es-MX', {month: 'long', year: 'numeric'});
   today = new Date();
-  nextMonth = {};
-  previousMonth = {};
+  monthNumber = this.today.getMonth();
+  monthToRender: Date = new Date();
 
   constructor(
     private userDataService: UserDataService,
@@ -53,40 +53,51 @@ export class CalendarComponent implements OnInit {
     this.userDataService.ngOnInit();
     this.buildMonth(false, this.today.getFullYear(), this.today.getMonth());
     this.apiCall(this.today.getFullYear(), this.today.getMonth())
-    console.log(this.month)
   }
 
+  //TODO
+  // Logic to change safely months and years
   changeNextMonth(){
-    let nextMonthToRender: Date = this.today;
-    this.nextMonth = {...this.month}
-    this.buildMonth(false, nextMonthToRender.getFullYear(), nextMonthToRender.getMonth()+1)
-    this.apiCall(nextMonthToRender.getFullYear(), nextMonthToRender.getMonth()+1)
+    this.monthNumber += 1;
+    this.monthToRender.setMonth(this.monthNumber);
+    this.monthName = this.monthToRender.toLocaleDateString('es-MX', {month: 'long', year: 'numeric'})
+    this.buildMonth(false, this.monthToRender.getFullYear(), this.monthToRender.getMonth())
+    this.apiCall(this.monthToRender.getFullYear(), this.monthToRender.getMonth())
     console.log(this.month)
   }
-
+  
   changePreviousMonth(){
-    let previousMonthToRender: Date = this.today;
-    this.previousMonth = {...this.month}
-    this.buildMonth(false, previousMonthToRender.getFullYear(), previousMonthToRender.getMonth()-1)
-    this.apiCall(previousMonthToRender.getFullYear(), previousMonthToRender.getMonth()-1)
+    this.monthNumber -= 1;
+    this.monthToRender.setMonth(this.monthNumber);
+    this.monthName = this.monthToRender.toLocaleDateString('es-MX', {month: 'long', year: 'numeric'})
+    this.buildMonth(false, this.monthToRender.getFullYear(), this.monthToRender.getMonth())
+    this.apiCall(this.monthToRender.getFullYear(), this.monthToRender.getMonth())
+  }
+  
+  changeTodayMonth(){
+    this.monthNumber = this.today.getMonth();
+    this.monthToRender.setMonth(this.monthNumber);
+    this.monthName = this.monthToRender.toLocaleDateString('es-MX', {month: 'long', year: 'numeric'})
+    this.buildMonth(false, this.monthToRender.getFullYear(), this.monthToRender.getMonth())
+    this.apiCall(this.monthToRender.getFullYear(), this.monthToRender.getMonth())
   }
 
-  dayClick(event: any) {
+  dayClick(event: string) {
     let eventInfo: objectDay = {
-      day: event,
+      day: event + "T00:00:00",
       events: this.month[event]
     }
     this.dayevents = eventInfo
   }
 
   buildMonth(weekends: boolean, year?, month?) {
+    this.month = {};
+    this.daysInMonth = [];
     this.iteratorOfWeek = weekends ? this.daysOfWeekend : this.daysOfWeek;
-    let actualMonth = new Date(year, month + 1, 0)
     let day0OfMonth = new Date(year, month, 1)
-    let numberOfDaysInMonth = day0OfMonth.getDay() + actualMonth.getDate() + (6 - actualMonth.getDay())
     day0OfMonth.setDate(0 - (day0OfMonth.getDay() - 1))
     let dateInString: string;
-    for (let i = 0; i <= numberOfDaysInMonth; i++) {
+    for (let i = 0; i <= 42; i++) {
       if (!(day0OfMonth.getDay() === 0 || day0OfMonth.getDay() === 6)) {
         dateInString = day0OfMonth.toISOString().split('T')[0];
         Object.assign(this.month, { [dateInString]: [] });
